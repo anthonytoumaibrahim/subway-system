@@ -20,6 +20,6 @@ class Station extends Model
 
     public function facilities()
     {
-        // return $this->hasMany();
+        return $this->hasMany(Facility::class);
     }
 }
