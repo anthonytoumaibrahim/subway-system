@@ -1,0 +1,24 @@
+.flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.font-bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-center {
+  text-align: center;
+}
+.text-end {
+  text-align: end;
+}
+.underline {
+  text-decoration: underline;
+}
