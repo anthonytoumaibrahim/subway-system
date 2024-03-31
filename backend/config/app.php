@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Subway System'),
+    'name' => env('APP_NAME', 'MetroHub'),
 
     /*
     |--------------------------------------------------------------------------
