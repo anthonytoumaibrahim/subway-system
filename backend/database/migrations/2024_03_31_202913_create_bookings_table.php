@@ -16,11 +16,10 @@ return new class extends Migration
             $table->dateTime("create_date");
             $table->dateTime("expire_date");
             $table->unsignedBigInteger("user_id");
-            $table->forein("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
             $table->unsignedBigInteger("station_id");
-            $table->forein("station_id")->references("id")->on("stations");
-            $table->station_id();
-            
+            $table->foreign("station_id")->references("id")->on("stations")->cascadeOnDelete();
+            $table->timestamps();
         });
 
     }
