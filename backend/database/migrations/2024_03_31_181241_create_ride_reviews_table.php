@@ -16,9 +16,9 @@ return new class extends Migration
             $table->integer("rating");
             $table->text("text");
             $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger("ride_id");
-            $table->foreign("ride_id")->references("id")->on("rides");
+            $table->foreign("ride_id")->references("id")->on("rides")->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
