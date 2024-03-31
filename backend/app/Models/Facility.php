@@ -10,6 +10,6 @@ class Facility extends Model
     use HasFactory;
     public function station()
     {
-        // return $this->belongsTo(Station::class);
+        return $this->belongsTo(Station::class);
     }
 }

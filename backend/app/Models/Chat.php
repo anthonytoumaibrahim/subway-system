@@ -17,11 +17,11 @@ class Chat extends Model
 
     public function sender()
     {
-        return $this->hasOne(User::class, 'id', 'sender');
+        return $this->belongsTo(User::class, 'id', 'sender');
     }
 
     public function receiver()
     {
-        return $this->hasOne(User::class, 'id', 'receiver');
+        return $this->belongsTo(User::class, 'id', 'receiver');
     }
 }

@@ -69,24 +69,44 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
+
     public function role()
     {
         return $this->hasOne(Role::class);
     }
 
-    public function coinRequests()
+    public function coinRequestsSent()
     {
         return $this->hasMany(CoinRequest::class);
     }
 
-    public function chats()
+    public function coinRequestsReceived()
     {
-        return $this->hasMany(Chat::class);
+        return $this->hasMany(CoinRequest::class, 'admin_id');
     }
 
-    public function stations()
+    public function chatsSent()
     {
-        return $this->hasMany(Station::class);
+        return $this->hasMany(Chat::class, 'sender');
+    }
+
+    public function chatsReceived()
+    {
+        return $this->hasMany(Chat::class, 'receiver');
+    }
+
+    public function station()
+    {
+        return $this->hasOne(Station::class, 'manager_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }
