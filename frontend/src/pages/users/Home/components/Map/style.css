@@ -1,0 +1,42 @@
+.map-container{
+  border-right:  1px solid black;
+  border-left:  1px solid black;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.map-wrapper{
+  padding: 20px;
+  border-radius: 10px;
+
+}
+
+.map-search-wrapper{
+  position: absolute;
+  top: 55px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 1;
+}
+
+.map-search > input{
+  padding: 6px 10px 6px 35px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #5050505d;
+  color: white;
+}
+
+.map-search{
+  position: relative;
+ 
+}
+
+.search-icon{
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+
+}
