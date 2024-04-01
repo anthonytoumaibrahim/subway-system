@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Http\Request;
@@ -16,7 +17,5 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 });
 
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
-    Route::get('/get', function () {
-        return response()->json(['hello world']);
-    });
+    Route::get('/get-statistics', [AdminController::class, 'getStatistics']);
 });
