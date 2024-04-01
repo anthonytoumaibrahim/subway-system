@@ -1,4 +1,6 @@
 import '../Rides';
+import '../Chats';
+// import '../Reviews';
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -6,13 +8,13 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar=()=>{
     const navigate = useNavigate();
     const handleRidesClick = () => {
-        navigate("../Rides"); 
+        navigate("/Rides"); 
     }
     const handleChatsClick = () => {
-        navigate("./Chats"); 
+        navigate("/Chats"); 
     }
     const handleReveiwsClick =()=>{
-        navigate("../Reviews")
+        navigate("/Reviews")
     }
 
 
