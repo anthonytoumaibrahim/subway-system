@@ -5,20 +5,44 @@ import Signup from '../Signup'
 import "./style.css"
 
 const Header = () => {
-  
+  const resetCredentials = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  }
 
+  const location = useLocation()
+  const [error, setError] = useState({status:false, field: ""})
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isLogin, setIsLogin] = useState(false)
+  const [credentials, setcredentials] = useState(resetCredentials)
+  const [isSignup, setIsSignup] = useState(false)
+
+ 
   return (
     <div className='flex align-center space-between header bg-dark-gray-col'>
-      <Signup
+      {isSignup && (<Signup
+      isSignup={isSignup}
+      setIsSignup={setIsSignup}
       error={error}
-
-      />
-      <Login
+      errorMessage={errorMessage}
+      handleInputChange={handleInputChange}
+      handleSwitch={handleSwitch}
+      />)}
+      {isLogin && (<Login
+      isLogin={isLogin}
+      setIsLogin={setIsLogin}
+      error={error}
+      errorMessage={errorMessage}
+      handleInputChange={handleInputChange}
+      handleSwitch={handleSwitch}
+      />)}
       
-      />
-      <h1 className='logo font-bold white'>Metro<span className='logo text-primary'>Hub</span></h1>
-      <nav className='flex header-nav'>
 
+      <h1 className='logo font-bold white'>Metro<span className='logo text-primary'>Hub</span></h1>
+
+      <nav className='flex header-nav'>
         <Link 
         to="/" 
         className={`${location.pathname === "/" ? "active" : ""}`}
@@ -39,10 +63,12 @@ const Header = () => {
         className={`${location.pathname === "/chat" ? "active" : ""}`}
         >Chat</Link>
       </nav>
+
       <div className='flex bold register-btns'>
-        <button className='reg-btn bg-primary font-bold white' onClick={handlerRegistration}>Login</button>
-        <button className='reg-btn signup-btn text-primary font-bold' onClick={handlerRegistration}>Signup</button>
+        <button className='reg-btn bg-primary font-bold white' onClick={handleLoginClick}>Login</button>
+        <button className='reg-btn signup-btn text-primary font-bold' onClick={handleSignupClick}>Signup</button>
       </div>
+
     </div>
   )
 }

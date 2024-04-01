@@ -20,3 +20,9 @@
 .error-div{
   width: 100%;
 }
+
+.reg-switch:hover{
+  opacity: 0.9;
+  
+  cursor: pointer;
+}
