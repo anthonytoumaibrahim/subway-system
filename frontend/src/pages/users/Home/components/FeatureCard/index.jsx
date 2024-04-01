@@ -1,9 +1,12 @@
 import React from 'react'
+import "./style.css"
 
-const FeatureCard = ({icon}) => {
+const FeatureCard = ({icon, heading, text}) => {
   return (
-    <div>
-      <img src={icon} alt="" />
+    <div className='flex column center  feature-wrapper  bg-dark-gray-col'>
+      <img className='icon' src={icon} alt="icon" />
+      <h5>{heading}</h5>
+      <p>{text}</p>
     </div>
   )
 }
