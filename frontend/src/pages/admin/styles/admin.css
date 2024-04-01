@@ -1,0 +1,27 @@
+:root {
+  --gray-col: #3c3c3c;
+  --dark-gray-col: #1f1f1f;
+}
+
+body {
+  background-color: var(--gray-col);
+  color: #ffffff;
+}
+
+.admin-layout {
+  display: flex;
+}
+
+.admin-button {
+  font-weight: bold;
+  padding: 10px 48px;
+  border-radius: 5px;
+  text-decoration: none !important;
+}
+.admin-button-primary {
+  color: #ffffff;
+  background-color: var(--primary-col);
+}
+.admin-button-primary:hover {
+  opacity: 0.75;
+}
