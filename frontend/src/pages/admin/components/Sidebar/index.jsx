@@ -16,7 +16,7 @@ const Sidebar = forwardRef((props, ref) => {
         src={close_icon}
         alt=""
         className="close-button"
-        onClick={() => (ref.current.style.display = "none")}
+        onClick={() => ref.current.style.removeProperty("display")}
       />
 
       <div className="intro">

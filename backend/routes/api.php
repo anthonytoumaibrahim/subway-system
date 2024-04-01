@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AdminAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/auth')->middleware('api')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::prefix('/admin')->middleware(['auth:api', AdminAuth::class])->group(function () {
+    Route::get('/get', function () {
+        return response()->json(['hello world']);
+    });
 });
