@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import Login from '../Login'
 import Signup from '../Signup'
@@ -18,8 +18,6 @@ const Header = () => {
     password: false
   }
 
-  const regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-
   const location = useLocation()
   const [error, setError] = useState({status:false, fields: []})
   const [errorMessage, setErrorMessage] = useState('incorrect')
@@ -27,7 +25,9 @@ const Header = () => {
   const [credentials, setcredentials] = useState(initialCredentials)
   const [isSignup, setIsSignup] = useState(false)
 
-  console.log(credentials)
+
+  useEffect(() => {resetErrors()}, [credentials])
+  
 
   const handleInputChange = (value, field) => {
     console.log (field , value)
@@ -65,24 +65,44 @@ const Header = () => {
 
   const checkEmptyFields = () => {
     const {username, email, password, confirmPassword} = credentials
-    if(email || password || (isSignup? username || confirmPassword : false)){
-        setError({...error, all: true})
-        setErrorMessage("Fill requered fields.")
-        return
-      }
-      if(!regex.test(email)){
-        setError({...error, email: true})
-        setErrorMessage("Invalid Email.")
-        return
-      }
+    const regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+    if(isLogin){
+      if(!email || !password){
+          setError({...error, all: true})
+          setErrorMessage("Fill required fields.")
+          return true
+        }
+    }else if(isSignup){
+      if(!email || !password || !username || !confirmPassword){
+          setError({...error, all: true})
+          setErrorMessage("Fill required fields.")
+          return true
+        }
+    }
+
+    if(!regex.test(email)){
+      setError({...error, email: true})
+      setErrorMessage("Invalid Email.")
+      return true
+    }
+    if (isSignup){
       if(password !== confirmPassword){
         setError({...error, password: true})
         setErrorMessage("passwords does not match.")
+        return true
       }
-  }
+    }
+    return false
+  } 
   
   const validateRegistration = () => {
-
+    const empty  = checkEmptyFields()
+    if (empty){
+      console.log("i am empty")
+    }else{
+      console.log("i am not emty")
+      
+    }
   }
 
 
@@ -95,6 +115,7 @@ const Header = () => {
       errorMessage={errorMessage}
       handleInputChange={handleInputChange}
       handleSwitch={handleSwitch}
+      validateRegistration={validateRegistration}
       />)}
       {isLogin && (<Login
       isLogin={isLogin}
@@ -103,6 +124,7 @@ const Header = () => {
       errorMessage={errorMessage}
       handleInputChange={handleInputChange}
       handleSwitch={handleSwitch}
+      validateRegistration={validateRegistration}
       />)}
       
 

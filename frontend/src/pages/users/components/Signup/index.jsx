@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '../RegisterInput'
 import "./style.css"
 
-const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSignup, handleSwitch}) => {
+const Signup = ({ validateRegistration, setIsSignup, error, errorMessage, handleInputChange, handleSignup, handleSwitch}) => {
   return (
     <div id='popup-container' className='flex center popup-container' onMouseDown={(e) => {if(e.target.id === 'popup-container'){setIsSignup(false)}}
     }>
@@ -15,6 +15,7 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
         label={"Username"}
         handleInputChange={handleInputChange}
         field={"usename"}
+        error={error.all ? true : false}
         />
 
         <Input
@@ -22,6 +23,7 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
         label={"Email"}
         handleInputChange={handleInputChange}
         field={"email"}
+        error={error.all || error.email ? true : false}
         />
 
         <Input
@@ -29,6 +31,7 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
         label={"Password"}
         handleInputChange={handleInputChange}
         field={"password"}
+        error={error.all || error.password ? true : false}
         />
 
         <div className='error-div'>
@@ -37,6 +40,7 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
           label={"Confirm Password"}
           handleInputChange={handleInputChange}
           field={"confirmPassword"}
+          error={error.all || error.password ? true : false}
           />
           
           <p 
@@ -48,7 +52,7 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
 
         <button 
         className='login-btn bg-primary font-bold white' 
-        onClick={handleSignup}
+        onClick={validateRegistration}
         >Signup</button>
 
         <p 

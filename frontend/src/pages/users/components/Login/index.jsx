@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '../RegisterInput'
 import "./style.css"
 
-const Login = ({ setIsLogin, error, errorMessage, handleInputChange, handleSwitch }) => {
+const Login = ({ validateRegistration, setIsLogin, error, errorMessage, handleInputChange, handleSwitch }) => {
   return (
     <div 
     id='popup-container' 
@@ -20,6 +20,7 @@ const Login = ({ setIsLogin, error, errorMessage, handleInputChange, handleSwitc
       label={"Email"}
       handleInputChange={handleInputChange}
       field={"email"}
+      error={error.all || error.email ? true : false}
       />
 
       <div className='error-div'>
@@ -29,6 +30,7 @@ const Login = ({ setIsLogin, error, errorMessage, handleInputChange, handleSwitc
         label={"Password"}
         handleInputChange={handleInputChange}
         field={"password"}
+        error={error.all || error.password ? true : false}
         />
 
         <p 
@@ -39,6 +41,7 @@ const Login = ({ setIsLogin, error, errorMessage, handleInputChange, handleSwitc
 
       <button 
       className='login-btn bg-primary font-bold white'
+      onClick={validateRegistration}
       >Login</button>
 
       <p 
