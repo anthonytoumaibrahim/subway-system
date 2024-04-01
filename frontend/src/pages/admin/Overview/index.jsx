@@ -6,7 +6,6 @@ import "../styles/admin.css";
 import "./styles.css";
 
 // Components
-import Sidebar from "../components/Sidebar";
 import Statistic from "../components/Statistic";
 
 // Icons
@@ -66,37 +65,34 @@ const Overview = () => {
   );
 
   return (
-    <main className="admin-layout">
-      <Sidebar />
-      <section className="container">
-        <div className="overview-container">
-          <div className="charts">
-            <Chart
-              options={{
-                data,
-                primaryAxis,
-                secondaryAxes,
-              }}
-            />
-          </div>
-
-          <div className="statistics">
-            <Statistic title="Branches" icon={branches_icon}>
-              15
-            </Statistic>
-            <Statistic title="Users" icon={users_icon}>
-              267
-            </Statistic>
-            <Statistic title="Rides" icon={subway_icon}>
-              2098
-            </Statistic>
-            <Statistic title="Total Revenue" icon={coins_icon}>
-              9,000
-            </Statistic>
-          </div>
+    <>
+      <div className="overview-container">
+        <div className="charts">
+          <Chart
+            options={{
+              data,
+              primaryAxis,
+              secondaryAxes,
+            }}
+          />
         </div>
-      </section>
-    </main>
+
+        <div className="statistics">
+          <Statistic title="Branches" icon={branches_icon}>
+            15
+          </Statistic>
+          <Statistic title="Users" icon={users_icon}>
+            267
+          </Statistic>
+          <Statistic title="Rides" icon={subway_icon}>
+            2098
+          </Statistic>
+          <Statistic title="Total Revenue" icon={coins_icon}>
+            9,000
+          </Statistic>
+        </div>
+      </div>
+    </>
   );
 };
 

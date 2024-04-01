@@ -1,0 +1,10 @@
+.managers-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+}
+.managers-form .form-inputs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
