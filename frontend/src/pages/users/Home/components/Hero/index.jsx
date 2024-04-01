@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <div className='flex align-center hero-container user-container'>
       <img className='metro-image' src={metro} alt="metro" />
-      <div className='flex column space-around hero-text'>
+      <div className='flex column space-evenly hero-text'>
         <h1>Uncover Urban Excitement:
           Welcome to Your
           Gateway to the City.
