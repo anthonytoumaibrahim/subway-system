@@ -34,7 +34,7 @@ const Login = ({ validateRegistration, setIsLogin, error, errorMessage, handleIn
         />
 
         <p 
-        className={`error-col ${error.status? "" : "invisible"} `}
+        className={`error-col ${error? "" : "invisible"} `}
         >{`${errorMessage}`}</p>
 
       </div>
@@ -45,7 +45,7 @@ const Login = ({ validateRegistration, setIsLogin, error, errorMessage, handleIn
       >Login</button>
 
       <p 
-      className='white'
+      className={'white'}
       >Don't have an account?
         <span className='reg-switch text-primary font-bold'
         onClick={handleSwitch}

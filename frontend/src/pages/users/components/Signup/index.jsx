@@ -45,7 +45,7 @@ const Signup = ({ validateRegistration, setIsSignup, error, errorMessage, handle
           
           <p 
 
-          className={`error-col `}
+          className={`error-col ${error ? "" : "invisible"}`}
           >{`${errorMessage}`}</p>
 
         </div>

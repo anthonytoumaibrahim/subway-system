@@ -76,6 +76,14 @@ a:hover {
   padding-right: 26px;
 }
 
+.user-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 80px;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .container {

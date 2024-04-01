@@ -19,7 +19,7 @@ const Header = () => {
   }
 
   const location = useLocation()
-  const [error, setError] = useState({status:false, fields: []})
+  const [error, setError] = useState(initailtErrors)
   const [errorMessage, setErrorMessage] = useState('incorrect')
   const [isLogin, setIsLogin] = useState(false)
   const [credentials, setcredentials] = useState(initialCredentials)
@@ -83,7 +83,7 @@ const Header = () => {
       setErrorMessage("Invalid Email.")
       return true
     }
-    if (isSignup && password !== confirmPassword) {
+    if (isSignup && (password !== confirmPassword)) {
       setError({...error, password: true})
       setErrorMessage("Passwords do not match.")
       return true

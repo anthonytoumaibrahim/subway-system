@@ -1,7 +1,6 @@
 // React stuff
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 // Styles
 import "./styles/main.css";
 import "./styles/colors.css";
@@ -13,7 +12,6 @@ import Home from "./pages/users/Home";
 import MyRides from "./pages/users/MyRides";
 import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
-
 
 // Pages
 import Overview from "./pages/admin/Overview";
