@@ -10,12 +10,21 @@
   color: #d9d9d9;
   font-size: 1.25rem;
   text-decoration: none;
-  border: 3px solid rgba(0, 0, 0, 0);
-  transition: border-bottom .2s ease;
+  border-bottom:  3px solid rgba(0, 0, 0, 0);
+
+
 }
 
 .header-nav > a:hover{
-  border-bottom: 3px solid var(--primary-col);
+  border-bottom: 2px solid var(--primary-col);
+}
+
+.header-nav > a:not(.active){
+  transition: border-bottom .2s ease;
+}
+
+.header-nav > .active{
+  border-bottom: 3px solid var(--primary-col) !important;
 }
 
 .header{
