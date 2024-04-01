@@ -19,7 +19,24 @@ const Header = () => {
   const [credentials, setcredentials] = useState(resetCredentials)
   const [isSignup, setIsSignup] = useState(false)
 
- 
+
+  const handleSwitch = () => {
+    if(isLogin){
+      setIsLogin(false)
+      setIsSignup(true)
+    
+    }else if(isSignup){
+      setIsLogin(true)
+      setIsSignup(false)
+
+    }
+
+    setError(false)
+    resetCredentials()
+    
+  }
+
+
   return (
     <div className='flex align-center space-between header bg-dark-gray-col'>
       {isSignup && (<Signup
