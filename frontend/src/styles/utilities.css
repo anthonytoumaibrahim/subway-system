@@ -88,3 +88,11 @@
 .gap-10{
   gap: 10px;
 }
+
+.hidden{
+  display: none;
+}
+
+.invisible{
+  visibility: hidden;
+}
