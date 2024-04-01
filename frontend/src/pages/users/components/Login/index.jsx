@@ -16,19 +16,19 @@ const Login = ({ setIsLogin, error, errorMessage, handleInputChange, handleSwitc
       <h1 className='white'>Login</h1>
 
       <Input
-      id={1}
-      placeholder={"JohnDoe"}
-      label={"Username"}
+      placeholder={"john@hmail.com"}
+      label={"Email"}
       handleInputChange={handleInputChange}
+      field={"email"}
       />
 
       <div className='error-div'>
 
         <Input
-        id={2}
         placeholder={"*******"}
         label={"Password"}
         handleInputChange={handleInputChange}
+        field={"password"}
         />
 
         <p 

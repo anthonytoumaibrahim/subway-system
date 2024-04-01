@@ -11,40 +11,32 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
         <h1 className='white'>Signup</h1>
 
         <Input
-        id={1}
         placeholder={"JohnDoe"}
         label={"Username"}
-        handleInputChange={(e) => (
-          handleInputChange({username: e.target.value})
-          )}
+        handleInputChange={handleInputChange}
+        field={"usename"}
         />
 
         <Input
-        id={1}
         placeholder={"john@gmail.com"}
         label={"Email"}
-        handleInputChange={(e) => (
-          handleInputChange({email: e.target.value})
-          )}
+        handleInputChange={handleInputChange}
+        field={"email"}
         />
 
         <Input
-        id={1}
         placeholder={"*******"}
         label={"Password"}
-        handleInputChange={(e) => (
-          handleInputChange({password: e.target.value})
-          )}
+        handleInputChange={handleInputChange}
+        field={"password"}
         />
 
         <div className='error-div'>
           <Input
-          id={2}
           placeholder={"*******"}
           label={"Confirm Password"}
-          handleInputChange={(e) => (
-            handleInputChange({confirmPassword: e.target.value})
-            )}
+          handleInputChange={handleInputChange}
+          field={"confirmPassword"}
           />
           
           <p 

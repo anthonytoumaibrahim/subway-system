@@ -12,6 +12,8 @@ const Header = () => {
     confirmPassword: ""
   }
 
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const location = useLocation()
   const [error, setError] = useState({status:false, field: ""})
   const [errorMessage, setErrorMessage] = useState('')
@@ -19,6 +21,17 @@ const Header = () => {
   const [credentials, setcredentials] = useState(resetCredentials)
   const [isSignup, setIsSignup] = useState(false)
 
+  console.log(credentials)
+
+  const handleInputChange = (value, field) => {
+    console.log (field , value)
+    setcredentials({...credentials, [field]: value })
+    
+  }
+
+  const resetCredentialts = () => {
+    setcredentials({...resetCredentials})
+  }
 
   const handleSwitch = () => {
     if(isLogin){
@@ -32,10 +45,18 @@ const Header = () => {
     }
 
     setError(false)
-    resetCredentials()
+    resetCredentialts()
     
   }
 
+  const handleLoginClick = () => {
+    setIsLogin(true)
+  }
+
+  const handleSignupClick = () => {
+    setIsSignup(true)
+  }
+ 
 
   return (
     <div className='flex align-center space-between header bg-dark-gray-col'>
