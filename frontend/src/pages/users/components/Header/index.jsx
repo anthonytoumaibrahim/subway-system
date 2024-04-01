@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import Login from "../Login";
 import Signup from "../Signup";
 import "./style.css";
@@ -8,7 +8,15 @@ import "./style.css";
 import { sendRequest } from "../../../../core/tools/remote/request";
 import { requestMethods } from "../../../../core/enums/requestMethods";
 
+// Context
+import { AuthContext } from "../../../../core/contexts/AuthContext";
+
+// Utilities
+import { setLocalUser } from "../../../../core/tools/local/user";
+
 const Header = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
   const initialCredentials = {
     username: "",
     email: "",
@@ -116,7 +124,37 @@ const Header = () => {
       ...credentials,
     })
       .then((response) => {
-        console.log(response);
+        const { status } = response.data;
+        if (status === "success") {
+          const token = response.data.authorization.token;
+          const { id, username, email, bank, image_url, location, role_id } =
+            response.data.user;
+          const userObject = {
+            id: id,
+            username: username,
+            email: email,
+            bank: bank,
+            image_url: image_url,
+            location: location,
+            role: role_id,
+            token: token,
+          };
+          setUser(userObject);
+          setLocalUser(userObject);
+          // Redirect if admin or manager
+          switch (role_id) {
+            case 2:
+              navigate("/manager");
+              break;
+            case 3:
+              navigate("/admin");
+              break;
+            default:
+          }
+          // Hide login/signup
+          setIsLogin(false);
+          setIsSignup(false);
+        }
       })
       .catch((error) => {
         const { errors, message } = error.response.data;
