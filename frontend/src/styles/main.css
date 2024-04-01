@@ -3,6 +3,9 @@
 :root {
   --primary-col: #66b896;
 
+  --gray-col: #3c3c3c;
+  --dark-gray-col: #272727;
+
   --error-col: #dc2626;
   --error-light-col: #fee2e2;
 
