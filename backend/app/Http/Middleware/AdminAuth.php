@@ -23,7 +23,7 @@ class AdminAuth
             return response()->json([
                 'error' => true,
                 'message' => 'Unauthenticated.'
-            ]);
+            ], 401);
         }
         return $next($request);
     }

@@ -15,7 +15,7 @@ Route::prefix('/auth')->middleware('api')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::prefix('/admin')->middleware(['auth:api', AdminAuth::class])->group(function () {
+Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
     Route::get('/get', function () {
         return response()->json(['hello world']);
     });
