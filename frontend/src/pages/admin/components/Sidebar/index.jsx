@@ -1,13 +1,24 @@
 // React stuff
+import { forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 // Styles
 import "./styles.css";
 
-const Sidebar = () => {
+// Icons
+import close_icon from "../../../../assets/icons/admin-icons/close.svg";
+
+const Sidebar = forwardRef((props, ref) => {
   const location = useLocation();
   return (
-    <aside className="admin-aside">
+    <aside className="admin-aside slideInLeft" id="admin-sidebar" ref={ref}>
+      <img
+        src={close_icon}
+        alt=""
+        className="close-button"
+        onClick={() => (ref.current.style.display = "none")}
+      />
+
       <div className="intro">
         <h1 className="text-primary">MetroHub</h1>
         <p>Hello, Admin!</p>
@@ -43,6 +54,6 @@ const Sidebar = () => {
       </nav>
     </aside>
   );
-};
+});
 
 export default Sidebar;

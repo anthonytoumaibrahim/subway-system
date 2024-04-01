@@ -5,6 +5,7 @@ const Modal = ({ title = "", children, handleClose = () => {} }) => {
   return (
     <div className="modal">
       <div className="overlay" onClick={handleClose}></div>
+      
       <div className="content">
         <h1 className="title">{title}</h1>
         {children}

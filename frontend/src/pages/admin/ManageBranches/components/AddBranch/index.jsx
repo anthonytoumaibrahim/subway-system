@@ -2,7 +2,10 @@
 import { useState } from "react";
 
 // Icons
-import location_icon from "../../../../../assets/icons/admin-icons/location.svg";
+import map_icon from "../../../../../assets/icons/admin-icons/map.svg";
+
+// Styles
+import "./styles.css";
 
 // Components
 import Modal from "../../../components/Modal";
@@ -57,7 +60,7 @@ const AddBranch = () => {
               }
             />
             <img
-              src={location_icon}
+              src={map_icon}
               alt=""
               className="location-selector"
               onClick={() => setShowMap(!showMap)}
@@ -77,7 +80,12 @@ const AddBranch = () => {
             />
           </div>
         </div>
-        <button className="admin-button">Upload Image</button>
+        <div className="upload-wrapper">
+          <label htmlFor="upload_image" className="admin-button">
+            Upload Image
+          </label>
+          <input type="file" id="upload_image" />
+        </div>
         <button className="admin-button admin-button-primary">Add</button>
       </form>
 

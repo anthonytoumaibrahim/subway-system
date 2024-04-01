@@ -14,7 +14,9 @@ body {
 .admin-layout .container {
   margin-top: 40px;
 }
+
 .admin-button {
+  background-color: #858585;
   font-weight: bold;
   padding: 10px 48px;
   border-radius: 5px;
@@ -38,6 +40,7 @@ body {
   outline: none;
   color: #ffffff;
 }
-.admin-input:hover, .admin-input:focus {
+.admin-input:hover,
+.admin-input:focus {
   box-shadow: 0 0 0 2px var(--primary-col);
 }
