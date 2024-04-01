@@ -2,11 +2,10 @@
 import { useMemo } from "react";
 
 // Styles
-import "../styles/admin.css";
 import "./styles.css";
 
 // Components
-import Statistic from "../components/Statistic";
+import Statistic from "./components/Statistic";
 
 // Icons
 import branches_icon from "../../../assets/icons/admin-icons/branches.svg";

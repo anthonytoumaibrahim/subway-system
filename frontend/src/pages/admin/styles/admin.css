@@ -35,4 +35,9 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: none;
+  outline: none;
+  color: #ffffff;
+}
+.admin-input:hover, .admin-input:focus {
+  box-shadow: 0 0 0 2px var(--primary-col);
 }
