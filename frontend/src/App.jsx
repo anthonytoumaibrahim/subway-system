@@ -15,6 +15,14 @@ import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
 
 
+// Pages
+import Overview from "./pages/admin/Overview";
+import ManageBranches from "./pages/admin/ManageBranches";
+import CoinRequests from "./pages/admin/CoinRequests";
+
+// Layouts
+import AdminLayout from "./pages/admin/AdminLayout";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,6 +32,11 @@ const App = () => {
           <Route path="my-rides" element={<MyRides/>} />
           <Route path="coins" element={<Coins/>} />
           <Route path="chat" element={<Chat/>} />
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="" element={<Overview />} />
+          <Route path="manage-branches" element={<ManageBranches />} />
+          <Route path="coin-requests" element={<CoinRequests />} />
         </Route>
       </Routes>
     </BrowserRouter>
