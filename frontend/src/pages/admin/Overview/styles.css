@@ -1,0 +1,11 @@
+.overview-container {
+  display: flex;
+}
+.overview-container .charts {
+  width: 60%;
+}
+.overview-container .statistics {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
