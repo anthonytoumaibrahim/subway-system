@@ -1,5 +1,5 @@
 // React stuff
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 // Styles
 import "./styles.css";
@@ -16,7 +16,17 @@ import subway_icon from "../../../assets/icons/admin-icons/subway.svg";
 // Charts
 import { Chart } from "react-charts";
 
+// Request
+import { sendRequest } from "../../../core/tools/remote/request";
+import { requestMethods } from "../../../core/enums/requestMethods";
+
 const Overview = () => {
+  const [statistics, setStatistics] = useState({
+    users_count: 0,
+    branches_count: 0,
+    rides_count: 0,
+    revenue_count: 0,
+  });
   const data = [
     {
       label: "Series 1",
@@ -63,6 +73,24 @@ const Overview = () => {
     []
   );
 
+  // Get statistics from API on load
+  const getStatistics = () => {
+    sendRequest(requestMethods.GET, "/admin/get-statistics")
+      .then((response) => {
+        const data = response.data;
+        const { users_count, branches_count, rides_count, revenue_count } =
+          data;
+        setStatistics({
+          users_count: users_count ?? 0,
+          branches_count: branches_count ?? 0,
+          rides_count: rides_count ?? 0,
+          revenue_count: revenue_count ?? 0,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => getStatistics(), []);
+
   return (
     <>
       <div className="overview-container">
@@ -78,16 +106,16 @@ const Overview = () => {
 
         <div className="statistics">
           <Statistic title="Branches" icon={branches_icon}>
-            15
+            {statistics.branches_count}
           </Statistic>
           <Statistic title="Users" icon={users_icon}>
-            267
+            {statistics.users_count}
           </Statistic>
           <Statistic title="Rides" icon={subway_icon}>
-            2098
+            {statistics.rides_count}
           </Statistic>
           <Statistic title="Total Revenue" icon={coins_icon}>
-            9,000
+            {statistics.revenue_count}
           </Statistic>
         </div>
       </div>

@@ -1,0 +1,18 @@
+.coin-request {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--dark-gray-col);
+  border-radius: 10px;
+  padding: 20px;
+}
+.coin-request .details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.coin-request .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
