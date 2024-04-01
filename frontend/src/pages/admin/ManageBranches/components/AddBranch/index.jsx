@@ -5,6 +5,7 @@ import { useState } from "react";
 import location_icon from "../../../../../assets/icons/admin-icons/location.svg";
 
 // Components
+import Modal from "../../../components/Modal";
 import AdminMap from "../AdminMap";
 
 const AddBranch = () => {
@@ -81,15 +82,17 @@ const AddBranch = () => {
       </form>
 
       {showMap && (
-        <AdminMap
-          markerLatLong={[branchInfo.lat, branchInfo.long]}
-          updateCoords={(coords) =>
-            handleBranchInfoUpdate({
-              lat: coords[0],
-              long: coords[1],
-            })
-          }
-        />
+        <Modal title="Select Location" handleClose={() => setShowMap(false)}>
+          <AdminMap
+            markerLatLong={[branchInfo.lat, branchInfo.long]}
+            updateCoords={(coords) =>
+              handleBranchInfoUpdate({
+                lat: coords[0],
+                long: coords[1],
+              })
+            }
+          />
+        </Modal>
       )}
     </>
   );

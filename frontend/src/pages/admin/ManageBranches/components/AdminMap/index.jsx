@@ -1,6 +1,3 @@
-// React stuff
-import { useState } from "react";
-
 // Use location hook
 import { useGeolocation } from "@uidotdev/usehooks";
 
@@ -11,7 +8,7 @@ import { maptiler } from "pigeon-maps/providers";
 
 const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "outdoor-v2");
 
-const AdminMap = ({ updateCoords = () => {}, markerLatLong = null }) => {
+const AdminMap = ({ updateCoords = () => {}, markerLatLong = [0, 0] }) => {
   const locationState = useGeolocation();
 
   return (
@@ -19,8 +16,13 @@ const AdminMap = ({ updateCoords = () => {}, markerLatLong = null }) => {
       {locationState.error && <p>Please enable your location to determine</p>}
       <Map
         provider={maptilerProvider}
-        height={300}
-        center={[locationState.latitude, locationState.longitude]}
+        width={720}
+        height={640}
+        center={
+          markerLatLong[0] === ""
+            ? [locationState.latitude, locationState.longitude]
+            : markerLatLong
+        }
         zoom={12}
         onClick={(event) => updateCoords(event.latLng)}
       >
