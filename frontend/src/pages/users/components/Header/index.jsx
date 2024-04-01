@@ -5,20 +5,26 @@ import Signup from '../Signup'
 import "./style.css"
 
 const Header = () => {
-  const resetCredentials = {
+  const initialCredentials = {
     username: "",
     email: "",
     password: "",
     confirmPassword: ""
   }
 
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const initailtErrors = {
+    all: false,
+    email: false,
+    password: false
+  }
+
+  const regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
 
   const location = useLocation()
-  const [error, setError] = useState({status:false, field: ""})
-  const [errorMessage, setErrorMessage] = useState('')
+  const [error, setError] = useState({status:false, fields: []})
+  const [errorMessage, setErrorMessage] = useState('incorrect')
   const [isLogin, setIsLogin] = useState(false)
-  const [credentials, setcredentials] = useState(resetCredentials)
+  const [credentials, setcredentials] = useState(initialCredentials)
   const [isSignup, setIsSignup] = useState(false)
 
   console.log(credentials)
@@ -29,24 +35,24 @@ const Header = () => {
     
   }
 
-  const resetCredentialts = () => {
-    setcredentials({...resetCredentials})
+  const resetCredentials = () => {
+    setcredentials({...initialCredentials})
+  }
+
+  const resetErrors = () => {
+    setError({...initailtErrors})
   }
 
   const handleSwitch = () => {
     if(isLogin){
       setIsLogin(false)
       setIsSignup(true)
-    
     }else if(isSignup){
       setIsLogin(true)
       setIsSignup(false)
-
     }
-
-    setError(false)
-    resetCredentialts()
-    
+    resetErrors()
+    resetCredentials()
   }
 
   const handleLoginClick = () => {
@@ -56,7 +62,29 @@ const Header = () => {
   const handleSignupClick = () => {
     setIsSignup(true)
   }
- 
+
+  const checkEmptyFields = () => {
+    const {username, email, password, confirmPassword} = credentials
+    if(email || password || (isSignup? username || confirmPassword : false)){
+        setError({...error, all: true})
+        setErrorMessage("Fill requered fields.")
+        return
+      }
+      if(!regex.test(email)){
+        setError({...error, email: true})
+        setErrorMessage("Invalid Email.")
+        return
+      }
+      if(password !== confirmPassword){
+        setError({...error, password: true})
+        setErrorMessage("passwords does not match.")
+      }
+  }
+  
+  const validateRegistration = () => {
+
+  }
+
 
   return (
     <div className='flex align-center space-between header bg-dark-gray-col'>

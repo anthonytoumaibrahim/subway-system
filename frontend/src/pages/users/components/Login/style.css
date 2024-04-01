@@ -14,7 +14,8 @@
   border-radius: 10px;
   width: 25%;
   min-width: fit-content;
-  max-width: 350px;
+  min-width: 350px;
+  max-width: 400px;
 }
 
 .error-div{
@@ -23,6 +24,6 @@
 
 .reg-switch:hover{
   opacity: 0.9;
-  
+
   cursor: pointer;
 }

@@ -40,7 +40,8 @@ const Signup = ({ setIsSignup, error, errorMessage, handleInputChange, handleSig
           />
           
           <p 
-          className={`error-col ${error.status? "" : "invisible"} `}
+
+          className={`error-col `}
           >{`${errorMessage}`}</p>
 
         </div>
