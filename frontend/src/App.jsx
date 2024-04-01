@@ -7,7 +7,7 @@ import "./styles/colors.css";
 import "./styles/utilities.css";
 import "./Pages/Manager";
 import Manager from "./Pages/Manager";
-
+import './Pages/Manager/manager.css'
 
 const App = () => {
   return (

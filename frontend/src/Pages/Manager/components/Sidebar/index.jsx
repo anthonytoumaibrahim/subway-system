@@ -1,19 +1,19 @@
-import './manager.css';
+import '../Rides';
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import "./components/Rides/Rides";
+
 
 const Sidebar=()=>{
     const navigate = useNavigate();
     const handleRidesClick = () => {
-        navigate("./Rides"); 
+        navigate("../Rides"); 
     }
-    // const handleChatsClick = () => {
-    //     navigate("./Chats"); 
-    // }
-    // const handleReveiwsClick =()=>{
-    //     navigate("./Reviews")
-    // }
+    const handleChatsClick = () => {
+        navigate("./Chats"); 
+    }
+    const handleReveiwsClick =()=>{
+        navigate("../Reviews")
+    }
 
 
 
@@ -26,8 +26,8 @@ const Sidebar=()=>{
                 <div className='nav-list flex column space-between white gap-20'>
                     <p className='bg-primary'>Station Info</p>
                     <p onClick={handleRidesClick}>Rides</p>
-                    {/* <p onClick={handleChatsClick}>Chats</p>
-                    <p onClick={handleReveiwsClick}>Reveiws</p> */}
+                    <p onClick={handleChatsClick}>Chats</p>
+                    <p onClick={handleReveiwsClick}>Reveiws</p>
                 </div>
             </div>
             <button className='logout bg-primary white '>Logout</button>

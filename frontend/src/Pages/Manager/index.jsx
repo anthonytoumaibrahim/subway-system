@@ -11,6 +11,7 @@ const Manager = () =>{
    return(
     <>
         <Sidebar/>
+        <h1>Station info</h1>
     
     </>
    )
