@@ -66,18 +66,16 @@ const Header = () => {
   const checkEmptyFields = () => {
     const {username, email, password, confirmPassword} = credentials
     const regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-    if(isLogin){
-      if(!email || !password){
-          setError({...error, all: true})
-          setErrorMessage("Fill required fields.")
-          return true
-        }
-    }else if(isSignup){
-      if(!email || !password || !username || !confirmPassword){
-          setError({...error, all: true})
-          setErrorMessage("Fill required fields.")
-          return true
-        }
+    if (isLogin && (!email || !password)) {
+      setError({...error, all: true})
+      setErrorMessage("Fill required fields.")
+      return true
+    }
+  
+    if (isSignup && (!email || !password || !username || !confirmPassword)) {
+      setError({...error, all: true})
+      setErrorMessage("Fill required fields.")
+      return true
     }
 
     if(!regex.test(email)){
@@ -85,12 +83,10 @@ const Header = () => {
       setErrorMessage("Invalid Email.")
       return true
     }
-    if (isSignup){
-      if(password !== confirmPassword){
-        setError({...error, password: true})
-        setErrorMessage("passwords does not match.")
-        return true
-      }
+    if (isSignup && password !== confirmPassword) {
+      setError({...error, password: true})
+      setErrorMessage("Passwords do not match.")
+      return true
     }
     return false
   } 
