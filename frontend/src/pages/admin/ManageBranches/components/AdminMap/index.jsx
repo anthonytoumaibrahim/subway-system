@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // Use location hook
 import { useGeolocation } from "@uidotdev/usehooks";
 
@@ -10,10 +12,16 @@ const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "outdoor-v2");
 
 const AdminMap = ({ updateCoords = () => {}, markerLatLong = [0, 0] }) => {
   const locationState = useGeolocation();
-
   return (
     <>
-      {locationState.error && <p>Please enable your location to determine</p>}
+      {locationState.loading && (
+        <p>Please wait, loading geolocation information...</p>
+      )}
+      {locationState.error && (
+        <p className="font-bold text-error">
+          Please allow access to your location to get the best results.
+        </p>
+      )}
       <Map
         provider={maptilerProvider}
         width={720}
