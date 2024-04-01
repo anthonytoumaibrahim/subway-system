@@ -4,3 +4,10 @@
 .text-primary {
   color: var(--primary-col);
 }
+.bg-secondary{
+  background-color:#272727;
+}
+
+.white{
+  color: #FFFF;
+}

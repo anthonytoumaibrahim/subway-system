@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/main.css";
 import "./styles/colors.css";
 import "./styles/utilities.css";
+import "./Pages/Manager";
+import Manager from "./Pages/Manager";
+
 
 const App = () => {
   return (
@@ -12,9 +15,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<>Landing Page</>} />
 
-        <Route path="/managers">
-          <Route path="" />
-        </Route>
+        <Route path="/manager" element={<Manager/>}/>
+          
+        
       </Routes>
     </BrowserRouter>
   );
