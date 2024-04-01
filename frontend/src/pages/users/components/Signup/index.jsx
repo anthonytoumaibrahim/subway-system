@@ -26,6 +26,7 @@ const Signup = ({
         <h1 className="white">Signup</h1>
 
         <Input
+          id="username"
           placeholder={"JohnDoe"}
           label={"Username"}
           handleInputChange={handleInputChange}
@@ -35,6 +36,7 @@ const Signup = ({
         />
 
         <Input
+          id="email"
           placeholder={"john@gmail.com"}
           label={"Email"}
           handleInputChange={handleInputChange}
@@ -44,6 +46,7 @@ const Signup = ({
         />
 
         <Input
+          id="password"
           placeholder={"*******"}
           label={"Password"}
           handleInputChange={handleInputChange}
@@ -54,6 +57,7 @@ const Signup = ({
 
         <div className="error-div">
           <Input
+            id="confirm_password"
             placeholder={"*******"}
             label={"Confirm Password"}
             handleInputChange={handleInputChange}
@@ -73,7 +77,7 @@ const Signup = ({
         </button>
 
         <p className="white">
-          Already have an account?
+          Already have an account?{" "}
           <span
             className="reg-switch text-primary font-bold"
             onClick={handleSwitch}

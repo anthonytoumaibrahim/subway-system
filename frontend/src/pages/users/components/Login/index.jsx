@@ -25,6 +25,7 @@ const Login = ({
         <h1 className="white">Login</h1>
 
         <Input
+          id="email"
           placeholder={"john@hmail.com"}
           label={"Email"}
           handleInputChange={handleInputChange}
@@ -35,6 +36,7 @@ const Login = ({
 
         <div className="error-div">
           <Input
+            id="password"
             placeholder={"*******"}
             label={"Password"}
             handleInputChange={handleInputChange}

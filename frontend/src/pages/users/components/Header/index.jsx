@@ -4,6 +4,10 @@ import Login from "../Login";
 import Signup from "../Signup";
 import "./style.css";
 
+// Request
+import { sendRequest } from "../../../../core/tools/remote/request";
+import { requestMethods } from "../../../../core/enums/requestMethods";
+
 const Header = () => {
   const initialCredentials = {
     username: "",
@@ -103,7 +107,21 @@ const Header = () => {
       return;
     }
 
-    console.log("Everything works");
+    auth();
+  };
+
+  const auth = () => {
+    const authUrl = `/auth/${isLogin ? "login" : "register"}`;
+    sendRequest(requestMethods.POST, authUrl, {
+      ...credentials,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        const { errors, message } = error.response.data;
+        setErrorMessage(message ?? "Sorry, something went wrong.");
+      });
   };
 
   return (
