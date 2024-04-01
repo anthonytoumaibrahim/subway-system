@@ -1,0 +1,22 @@
+.popup-container{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6) ;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.popup-wrapper{
+  padding: 40px 20px;
+  gap: 1rem;
+  border-radius: 10px;
+  width: 25%;
+  min-width: fit-content;
+  max-width: 350px;
+}
+
+.error-div{
+  width: 100%;
+}

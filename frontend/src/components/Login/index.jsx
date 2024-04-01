@@ -20,7 +20,7 @@ const Login = () => {
           label={"Password"}
           // handleInputChange={handleInputChange}
           />
-          <p className=' error-col'>error msg</p>
+          <p className=' error-col invisible'>error msg</p>
         </div>
         <button className='login-btn bg-primary font-bold white'>Login</button>
         <p className='white'>Don't have an account? <span className='text-primary'>Signup</span></p>
