@@ -4,6 +4,8 @@ import Login from "../Login";
 import Signup from "../Signup";
 import "./style.css";
 
+import { useUser } from "../../../../core/hooks/useUser";
+
 // Request
 import { sendRequest } from "../../../../core/tools/remote/request";
 import { requestMethods } from "../../../../core/enums/requestMethods";
@@ -17,6 +19,7 @@ import { setLocalUser } from "../../../../core/tools/local/user";
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
+  const { isLoggedIn } = useUser();
   const initialCredentials = {
     username: "",
     email: "",
@@ -221,18 +224,24 @@ const Header = () => {
       </nav>
 
       <div className="flex bold register-btns">
-        <button
-          className="reg-btn bg-primary font-bold white"
-          onClick={handleLoginClick}
-        >
-          Login
-        </button>
-        <button
-          className="reg-btn signup-btn text-primary font-bold"
-          onClick={handleSignupClick}
-        >
-          Signup
-        </button>
+        {isLoggedIn ? (
+          ""
+        ) : (
+          <>
+            <button
+              className="reg-btn bg-primary font-bold white"
+              onClick={handleLoginClick}
+            >
+              Login
+            </button>
+            <button
+              className="reg-btn signup-btn text-primary font-bold"
+              onClick={handleSignupClick}
+            >
+              Signup
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
