@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Features from './components/Features'
 import UserMap from './components/Map'
 import Guidline from './components/Guidlines'
+import Reviews from './components/Reviews'
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <div className='separator-div'></div>
       <UserMap/>
       <Guidline/>
+      <Reviews/>
 
     </div>
   )
