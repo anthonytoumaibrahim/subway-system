@@ -24,7 +24,6 @@ const AdminMap = ({ updateCoords = () => {}, markerLatLong = [0, 0] }) => {
       )}
       <Map
         provider={maptilerProvider}
-        width={720}
         height={640}
         center={
           markerLatLong[0] === ""
