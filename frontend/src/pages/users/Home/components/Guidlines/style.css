@@ -1,0 +1,20 @@
+.guidline-container{
+  background: url("../../../../../assets/images/home/guidline_bg.png");
+  color: var(--dark-gray-col);
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
+
+.guidline-container > h1{
+  margin-bottom: 50px;
+}
+
+.guidline-points{
+  gap: 35px;
+}
+
+.guidline-points > p{
+  margin-left: 20px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}

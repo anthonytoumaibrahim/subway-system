@@ -3,6 +3,9 @@
 :root {
   --primary-col: #66b896;
 
+  --gray-col: #3c3c3c;
+  --dark-gray-col: #272727;
+
   --error-col: #dc2626;
   --error-light-col: #fee2e2;
 
@@ -71,6 +74,14 @@ a:hover {
   margin-right: auto;
   padding-left: 26px;
   padding-right: 26px;
+}
+
+.user-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 80px;
 }
 
 /* Responsiveness */
