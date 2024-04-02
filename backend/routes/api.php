@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,5 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
     Route::get('/get-statistics', [AdminController::class, 'getStatistics']);
 });
+
+Route::get('/get-stations', [UserController::class, 'getStations']);
