@@ -12,7 +12,7 @@ const Footer = () => {
         <h1>Metro<span className='text-primary'>Hub</span></h1>
         <p>copyright©2024 </p>
       </div>
-      <div className='flex column'>
+      <div className='flex center column'>
         <h1>Follow US</h1>
         <div className='flex brands-wrapper'>
           <img src={youtube} alt="youtube" />
