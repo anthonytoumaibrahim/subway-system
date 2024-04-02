@@ -13,6 +13,8 @@ const UserMap = () => {
   const stations = ["haz" ,"saida" , "beirut", "chtaura"]
   console.log(clickedLocation)
 
+  
+
   return (
     <div className='map-container user-container'>
       <div className='map-search-wrapper'>
