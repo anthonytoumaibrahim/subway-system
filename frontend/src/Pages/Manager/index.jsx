@@ -14,7 +14,7 @@ const Manager = () =>{
         <div className='station-info-section flex column gap-50'>
             <h4 className='station-name text-center text-primary'>Station name</h4>
 
-            <table class="station-table white">
+            <table className="station-table white">
             <thead>
             <tr>
               <th>Opening time</th>
