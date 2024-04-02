@@ -32,13 +32,6 @@ import { getLocalUser } from "./core/tools/local/user";
 const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
-    id: localUser ? localUser.id : 0,
-    username: localUser.name ?? "",
-    email: localUser.email ?? "",
-    bank: localUser.bank ?? 0,
-    image_url: localUser.image_url ?? "",
-    location: localUser.location ?? "",
-    role_id: localUser.role ?? 1,
     token: localUser.token ?? "",
   });
 

@@ -130,16 +130,8 @@ const Header = () => {
         const { status } = response.data;
         if (status === "success") {
           const token = response.data.authorization.token;
-          const { id, username, email, bank, image_url, location, role_id } =
-            response.data.user;
+          const { role_id } = response.data.user;
           const userObject = {
-            id: id,
-            username: username,
-            email: email,
-            bank: bank,
-            image_url: image_url,
-            location: location,
-            role: role_id,
             token: token,
           };
           setUser(userObject);

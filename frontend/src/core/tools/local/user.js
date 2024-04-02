@@ -1,21 +1,5 @@
-const setLocalUser = ({
-  id,
-  username = "",
-  email = "",
-  bank = 0,
-  image_url,
-  location,
-  role = 0,
-  token,
-}) => {
+const setLocalUser = ({ token }) => {
   localStorage.user = JSON.stringify({
-    id: id,
-    username: username,
-    email: email,
-    bank: bank,
-    image_url: image_url,
-    location: location,
-    role_id: role,
     token: token,
   });
 };
