@@ -22,3 +22,5 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->grou
 });
 
 Route::get('/get-stations', [UserController::class, 'getStations']);
+
+Route::get("/user-rides",[ UserController::class, "getUserRides"]);
