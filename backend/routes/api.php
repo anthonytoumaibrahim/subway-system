@@ -18,4 +18,5 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
     Route::get('/get-statistics', [AdminController::class, 'getStatistics']);
+    Route::get('/get-stations', [AdminController::class, 'getStations']);
 });
