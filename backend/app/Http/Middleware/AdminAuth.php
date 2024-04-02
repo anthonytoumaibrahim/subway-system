@@ -22,7 +22,7 @@ class AdminAuth
         if ($role !== "admin") {
             return response()->json([
                 'error' => true,
-                'message' => 'Unauthenticated.'
+                'message' => 'Unauthorized.'
             ], 401);
         }
         return $next($request);

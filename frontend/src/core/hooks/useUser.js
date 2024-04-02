@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export const useUser = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  const isLoggedIn = user.id ? true : false;
+  const isLoggedIn = user.token ? true : false;
 
   return { user, isLoggedIn };
 };
