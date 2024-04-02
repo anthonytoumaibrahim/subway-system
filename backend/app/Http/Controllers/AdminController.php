@@ -22,4 +22,19 @@ class AdminController extends Controller
             'revenue_count' => $revenue_count
         ]);
     }
+
+    public function getStations()
+    {
+        $stations = Station::get();
+        return response()->json([
+            'stations' => $stations
+        ]);
+    }
+
+    public function createStation(Request $request)
+    {
+        $validated = $request->validate([
+            "name" => "required"
+        ]);
+    }
 }
