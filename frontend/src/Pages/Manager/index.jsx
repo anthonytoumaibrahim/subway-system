@@ -1,6 +1,6 @@
 import './manager.css';
 import React from "react";
-import "./components/Rides";
+import "./components/Rides/Rides";
 import Sidebar from './components/Sidebar';
 import './station.css';
 

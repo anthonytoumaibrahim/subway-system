@@ -1,4 +1,4 @@
-import '../Rides';
+import '../Rides/Rides';
 import '../Chats';
 // import '../Reviews';
 import React from "react";
