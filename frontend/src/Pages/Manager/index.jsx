@@ -1,10 +1,9 @@
 import './manager.css';
 import React from "react";
-import "./components/Rides/Rides";
+import "./components/Rides";
 import Sidebar from './components/Sidebar';
 import './station.css';
-
-
+import { useState } from 'react';
 
 const Manager = () =>{
    return(

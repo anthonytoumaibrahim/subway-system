@@ -28,6 +28,7 @@ import ProtectedRoute from "./core/routes/ProtectedRoute";
 
 // Tools
 import { getLocalUser } from "./core/tools/local/user";
+import Manager from "./Pages/Manager";
 
 const App = () => {
   const localUser = getLocalUser();
@@ -57,6 +58,8 @@ const App = () => {
             <Route path="manage-branches" element={<ManageBranches />} />
             <Route path="coin-requests" element={<CoinRequests />} />
           </Route>
+
+          <Route path="/manager" element={<Manager/>}/>
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
