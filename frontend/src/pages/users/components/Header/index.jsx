@@ -1,160 +1,242 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
-import Login from '../Login'
-import Signup from '../Signup'
-import "./style.css"
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import Login from "../Login";
+import Signup from "../Signup";
+import "./style.css";
+
+import { useUser } from "../../../../core/hooks/useUser";
+
+// Request
+import { sendRequest } from "../../../../core/tools/remote/request";
+import { requestMethods } from "../../../../core/enums/requestMethods";
+
+// Context
+import { AuthContext } from "../../../../core/contexts/AuthContext";
+
+// Utilities
+import { setLocalUser } from "../../../../core/tools/local/user";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
+  const { isLoggedIn } = useUser();
   const initialCredentials = {
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
-  }
+    confirmPassword: "",
+  };
 
   const initailtErrors = {
     all: false,
     email: false,
-    password: false
-  }
+    password: false,
+    username: false,
+  };
 
-  const location = useLocation()
-  const [error, setError] = useState(initailtErrors)
-  const [errorMessage, setErrorMessage] = useState('incorrect')
-  const [isLogin, setIsLogin] = useState(false)
-  const [credentials, setcredentials] = useState(initialCredentials)
-  const [isSignup, setIsSignup] = useState(false)
+  const location = useLocation();
+  const [error, setError] = useState(initailtErrors);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [credentials, setcredentials] = useState(initialCredentials);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
 
-
-  useEffect(() => {resetErrors()}, [credentials])
-  
+  useEffect(() => {
+    resetErrors();
+  }, [credentials]);
 
   const handleInputChange = (value, field) => {
-    console.log (field , value)
-    setcredentials({...credentials, [field]: value })
-    
-  }
+    setcredentials({ ...credentials, [field]: value });
+  };
 
   const resetCredentials = () => {
-    setcredentials({...initialCredentials})
-  }
+    setcredentials({ ...initialCredentials });
+  };
 
   const resetErrors = () => {
-    setError({...initailtErrors})
-  }
+    setError({ ...initailtErrors });
+  };
 
   const handleSwitch = () => {
-    if(isLogin){
-      setIsLogin(false)
-      setIsSignup(true)
-    }else if(isSignup){
-      setIsLogin(true)
-      setIsSignup(false)
+    if (isLogin) {
+      setIsLogin(false);
+      setIsSignup(true);
+    } else if (isSignup) {
+      setIsLogin(true);
+      setIsSignup(false);
     }
-    resetErrors()
-    resetCredentials()
-  }
+    setErrorMessage(null);
+    resetErrors();
+    resetCredentials();
+  };
 
   const handleLoginClick = () => {
-    setIsLogin(true)
-  }
+    setIsLogin(true);
+  };
 
   const handleSignupClick = () => {
-    setIsSignup(true)
-  }
+    setIsSignup(true);
+  };
 
-  const checkEmptyFields = () => {
-    const {username, email, password, confirmPassword} = credentials
-    const regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-    if (isLogin && (!email || !password)) {
-      setError({...error, all: true})
-      setErrorMessage("Fill required fields.")
-      return true
-    }
-  
-    if (isSignup && (!email || !password || !username || !confirmPassword)) {
-      setError({...error, all: true})
-      setErrorMessage("Fill required fields.")
-      return true
-    }
-
-    if(!regex.test(email)){
-      setError({...error, email: true})
-      setErrorMessage("Invalid Email.")
-      return true
-    }
-    if (isSignup && (password !== confirmPassword)) {
-      setError({...error, password: true})
-      setErrorMessage("Passwords do not match.")
-      return true
-    }
-    return false
-  } 
-  
   const validateRegistration = () => {
-    const empty  = checkEmptyFields()
-    if (empty){
-      console.log("i am empty")
-    }else{
-      console.log("i am not emty")
-      
+    setErrorMessage(null);
+    setError(initailtErrors);
+    const { username, email, password, confirmPassword } = credentials;
+    // Sign up Validation
+    if (isSignup) {
+      if (username.trim().length < 6) {
+        setError({ ...error, username: true });
+        setErrorMessage(
+          "Please make sure your username is at least 6 characters long."
+        );
+        return;
+      }
+      if (password !== confirmPassword) {
+        setError({ ...error, password: true });
+        setErrorMessage("Passwords does not match.");
+        return;
+      }
     }
-  }
+    // Validate email
+    if (
+      !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(email)
+    ) {
+      setError({
+        ...error,
+        email: true,
+      });
+      setErrorMessage("Invalid Email.");
+      return;
+    }
+    // Validate password
+    if (password.length < 8) {
+      setError({
+        ...error,
+        password: true,
+      });
+      setErrorMessage("Password must be at least 8 characters long.");
+      return;
+    }
 
+    auth();
+  };
+
+  const auth = () => {
+    const authUrl = `/auth/${isLogin ? "login" : "register"}`;
+    sendRequest(requestMethods.POST, authUrl, {
+      ...credentials,
+    })
+      .then((response) => {
+        const { status } = response.data;
+        if (status === "success") {
+          const token = response.data.authorization.token;
+          const { role_id } = response.data.user;
+          const userObject = {
+            token: token,
+          };
+          setUser(userObject);
+          setLocalUser(userObject);
+          // Redirect if admin or manager
+          switch (role_id) {
+            case 2:
+              navigate("/manager");
+              break;
+            case 3:
+              navigate("/admin");
+              break;
+            default:
+          }
+          // Hide login/signup
+          setIsLogin(false);
+          setIsSignup(false);
+        }
+      })
+      .catch((error) => {
+        const { errors, message } = error.response.data;
+        setErrorMessage(message ?? "Sorry, something went wrong.");
+      });
+  };
 
   return (
-    <div className='flex align-center space-between header bg-dark-gray-col'>
-      {isSignup && (<Signup
-      isSignup={isSignup}
-      setIsSignup={setIsSignup}
-      error={error}
-      errorMessage={errorMessage}
-      handleInputChange={handleInputChange}
-      handleSwitch={handleSwitch}
-      validateRegistration={validateRegistration}
-      />)}
-      {isLogin && (<Login
-      isLogin={isLogin}
-      setIsLogin={setIsLogin}
-      error={error}
-      errorMessage={errorMessage}
-      handleInputChange={handleInputChange}
-      handleSwitch={handleSwitch}
-      validateRegistration={validateRegistration}
-      />)}
-      
+    <div className="flex align-center space-between header bg-dark-gray-col">
+      {isSignup && (
+        <Signup
+          credentials={credentials}
+          isSignup={isSignup}
+          setIsSignup={setIsSignup}
+          error={error}
+          errorMessage={errorMessage}
+          handleInputChange={handleInputChange}
+          handleSwitch={handleSwitch}
+          validateRegistration={validateRegistration}
+        />
+      )}
+      {isLogin && (
+        <Login
+          credentials={credentials}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          error={error}
+          errorMessage={errorMessage}
+          handleInputChange={handleInputChange}
+          handleSwitch={handleSwitch}
+          validateRegistration={validateRegistration}
+        />
+      )}
 
-      <h1 className='logo font-bold white'>Metro<span className='logo text-primary'>Hub</span></h1>
+      <h1 className="logo font-bold white">
+        Metro<span className="logo text-primary">Hub</span>
+      </h1>
 
-      <nav className='flex header-nav'>
-        <Link 
-        to="/" 
-        className={`${location.pathname === "/" ? "active" : ""}`}
-        >Home</Link>
+      <nav className="flex header-nav">
+        <Link to="/" className={`${location.pathname === "/" ? "active" : ""}`}>
+          Home
+        </Link>
 
-        <Link 
-        to="/my-rides"
-        className={`${location.pathname === "/my-rides" ? "active" : ""}`}
-        >My Rides</Link>
+        <Link
+          to="/my-rides"
+          className={`${location.pathname === "/my-rides" ? "active" : ""}`}
+        >
+          My Rides
+        </Link>
 
-        <Link 
-        to="/coins"
-        className={`${location.pathname === "/coins" ? "active" : ""}`}
-        >Coins</Link>
+        <Link
+          to="/coins"
+          className={`${location.pathname === "/coins" ? "active" : ""}`}
+        >
+          Coins
+        </Link>
 
-        <Link 
-        to="/chat"
-        className={`${location.pathname === "/chat" ? "active" : ""}`}
-        >Chat</Link>
+        <Link
+          to="/chat"
+          className={`${location.pathname === "/chat" ? "active" : ""}`}
+        >
+          Chat
+        </Link>
       </nav>
 
-      <div className='flex bold register-btns'>
-        <button className='reg-btn bg-primary font-bold white' onClick={handleLoginClick}>Login</button>
-        <button className='reg-btn signup-btn text-primary font-bold' onClick={handleSignupClick}>Signup</button>
+      <div className="flex bold register-btns">
+        {isLoggedIn ? (
+          ""
+        ) : (
+          <>
+            <button
+              className="reg-btn bg-primary font-bold white"
+              onClick={handleLoginClick}
+            >
+              Login
+            </button>
+            <button
+              className="reg-btn signup-btn text-primary font-bold"
+              onClick={handleSignupClick}
+            >
+              Signup
+            </button>
+          </>
+        )}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
