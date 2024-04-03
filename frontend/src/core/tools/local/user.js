@@ -1,6 +1,7 @@
-const setLocalUser = ({ token }) => {
+const setLocalUser = ({ token, avatar = null }) => {
   localStorage.user = JSON.stringify({
     token: token,
+    avatar: avatar,
   });
 };
 const getLocalUser = () => {

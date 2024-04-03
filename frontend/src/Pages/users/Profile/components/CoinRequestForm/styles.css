@@ -10,6 +10,7 @@
   border-radius: 5px;
   outline: none;
   color: #ffffff;
+  width: 100%;
 }
 .coin-form form .reg-btn {
   padding: 10px;

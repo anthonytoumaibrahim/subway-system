@@ -45,3 +45,17 @@
   object-fit: cover;
   object-position: center;
 }
+
+@media (max-width: 1024px) {
+  .user-coin-container {
+    flex-direction: column;
+  }
+  .coin-requests {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .coin-info {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
