@@ -27,4 +27,13 @@ class UserController extends Controller
         ], 200);
 
     }
+
+    public function getStationRides(Request $req)
+    {
+        $stationRides = Ride::with("arrivalStation:id,name")->where("departure_station_id", $req -> id)->get();
+        return response()->json([
+            "status" => "success",
+            "stationRides" => $stationRides   
+        ]);
+    }
 }

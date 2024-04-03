@@ -1,11 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
 import "./style.css"
-
-import Button from '../../../components/Button'
+import StationRide from "../components/StationRide"
+import { sendRequest } from '../../../core/tools/remote/request'
+import { useParams } from 'react-router-dom'
 import stationImage from "../../../assets/images/home/stationImage.png"
+import { requestMethods } from '../../../core/enums/requestMethods'
 const Station = () => {
   const [isPass, setIsPass] = useState(false)
+  let {id} = useParams()
+
+  console.log(id)
+  // sendRequest(requestMethods.GET)
 
   return (
     <div className=' flex column single-station-container user-container'>
@@ -29,74 +35,28 @@ const Station = () => {
       </div>
 
       <div className='flex column rides-wrapper'>
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
+      ()
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        price={45}
+        isPass={isPass}/>
 
-          <p>destination</p>
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        price={45}
+        isPass={isPass}/>
 
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
-
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
-
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
-
-          <p>destination</p>
-
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
-
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
-
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
-
-          <p>destination</p>
-
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
-
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        price={45}
+        isPass={isPass}/>
+       
       </div>
     </div>
   )

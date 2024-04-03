@@ -91,7 +91,7 @@ const UserMap = () => {
             className='outer-marker' 
             anchor={[latitude, longtitude]} 
             width={50} color="#d9d9d9" 
-            onClick={() => navigate("/station")}>
+            onClick={() => navigate(`/station/${id}`)}>
               <p className='marker-text'>{`${name}`}</p>
               <Marker width={50} color="#66b896"/>
             </Marker>

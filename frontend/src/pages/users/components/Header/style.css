@@ -25,8 +25,8 @@
   border-bottom: 3px solid var(--primary-col) !important;
 }
 
-.header {
-  padding: 20px 80px;
+.header{
+  padding: 30px 80px;
 }
 
 .reg-btn {
@@ -53,11 +53,18 @@
   background-color: transparent;
 }
 
-.profile-image {
-  border-radius: 100px;
+.profile-image{
+  border-radius: 35px;
+  position: absolute;
+  left: -100px;
 }
 
 .profile-image:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.profile-logout{
+  gap: 30px;
+  position: relative;
 }

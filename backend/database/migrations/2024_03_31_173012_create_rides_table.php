@@ -14,8 +14,8 @@ return new class extends Migration
             $table->dateTime("departure_date");
             $table->dateTime("arrival_date");
             $table->integer("price");
-            $table->unsignedBigInteger("deprture_station_id");
-            $table->foreign("deprture_station_id")->references("id")->on("stations")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger("departure_station_id");
+            $table->foreign("departure_station_id")->references("id")->on("stations")->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger("arrival_station_id");
             $table->foreign("arrival_station_id")->references("id")->on("stations")->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

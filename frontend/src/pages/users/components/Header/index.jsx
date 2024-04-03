@@ -20,6 +20,8 @@ import profileImage from "../../../../assets/images/header/profileImage.jpg";
 
 // Toastify
 import { toast } from "react-toastify";
+import Button from "../../../../components/Button";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -223,14 +225,16 @@ const Header = () => {
 
       <div className="flex bold register-btns">
         {isLoggedIn ? (
-          <Link to="/profile">
-            <img
-              className="profile-image"
-              width={50}
-              src={profileImage}
-              alt="profile"
-            />
-          </Link>
+          <div className="flex center profile-logout">
+            <img 
+            className="profile-image"
+            width={70}
+            src={profileImage} 
+            alt="profile" />
+
+            <Button
+            name={"Logout"}/>
+          </div>
         ) : (
           <>
             <button
