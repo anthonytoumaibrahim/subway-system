@@ -78,6 +78,7 @@ const App = () => {
           </Route>
 
           <Route path="/manager" element={<Manager/>}/>
+          
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
