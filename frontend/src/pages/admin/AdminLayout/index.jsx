@@ -16,21 +16,19 @@ const AdminLayout = () => {
   const sidebarRef = useRef(null);
 
   return (
-    <>
-      <main className="admin-layout">
-        <button className="sidebar-hamburger">
-          <img
-            src={sidebar_hamburger}
-            alt="Toggle Sidebar"
-            onClick={() => (sidebarRef.current.style.display = "flex")}
-          />
-        </button>
-        <Sidebar ref={sidebarRef} />
-        <section className="container">
-          <Outlet />
-        </section>
-      </main>
-    </>
+    <main className="admin-layout">
+      <button className="sidebar-hamburger">
+        <img
+          src={sidebar_hamburger}
+          alt="Toggle Sidebar"
+          onClick={() => (sidebarRef.current.style.display = "flex")}
+        />
+      </button>
+      <Sidebar ref={sidebarRef} />
+      <section className="container">
+        <Outlet />
+      </section>
+    </main>
   );
 };
 

@@ -37,6 +37,8 @@ class StationSeeder extends Seeder
             "status" => "active",
             "longtitude" => 35.2100835053628,
             "latitude" => 33.26608751357015,
+            "latitude" => 33.85529828408344,
+            "longtitude" => 35.53719215453546,
             "manager_id" => 2
         ]);
     }

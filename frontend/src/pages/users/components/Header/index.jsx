@@ -18,6 +18,9 @@ import { setLocalUser } from "../../../../core/tools/local/user";
 
 import profileImage from "../../../../assets/images/header/profileImage.jpg"
 
+// Toastify
+import { toast } from "react-toastify";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -132,6 +135,7 @@ const Header = () => {
       .then((response) => {
         const { status } = response.data;
         if (status === "success") {
+          toast.success("You have been logged in successfully.");
           const token = response.data.authorization.token;
           const { role_id } = response.data.user;
           const userObject = {
