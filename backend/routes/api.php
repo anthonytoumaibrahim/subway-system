@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\ManagerAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->cont
     Route::post('/create-station', 'createStation');
     Route::post('/delete-station', 'deleteStation');
     Route::post('/activate-station', 'activateStation');
+});
+
+Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->group(function(){
+    Route::get('/get-stationInfo',[AdminController::class,'getStationInfo']);
 });
 
 Route::get('/get-stations', [UserController::class, 'getStations']);

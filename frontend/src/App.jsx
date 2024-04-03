@@ -29,6 +29,7 @@ import ProtectedRoute from "./core/routes/ProtectedRoute";
 
 // Tools
 import { getLocalUser } from "./core/tools/local/user";
+import Manager from "./pages/Manager";
 
 // Toastify
 import { ToastContainer } from "react-toastify";
@@ -75,6 +76,8 @@ const App = () => {
             <Route path="manage-branches" element={<ManageBranches />} />
             <Route path="coin-requests" element={<CoinRequests />} />
           </Route>
+
+          <Route path="/manager" element={<Manager/>}/>
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
