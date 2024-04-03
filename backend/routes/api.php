@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\ManagerAuth;
 use Illuminate\Http\Request;
@@ -17,9 +18,17 @@ Route::prefix('/auth')->middleware('api')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
-    Route::get('/get-statistics', [AdminController::class, 'getStatistics']);
+Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->controller(AdminController::class)->group(function () {
+    Route::get('/get-statistics', 'getStatistics');
+    Route::get('/get-stations', 'getStations');
+    Route::post('/create-station', 'createStation');
+    Route::post('/delete-station', 'deleteStation');
+    Route::post('/activate-station', 'activateStation');
 });
+
+Route::get('/get-stations', [UserController::class, 'getStations']);
+
+Route::get("/user-rides", [UserController::class, "getUserRides"]);
 
 Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->group(function(){
     Route::get('/get-stationInfo',[AdminController::class,'getStationInfo']);
