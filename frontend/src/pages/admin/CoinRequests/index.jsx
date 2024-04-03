@@ -1,5 +1,5 @@
 // React stuff
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import CoinRequest from "./components/CoinRequest";
@@ -7,39 +7,64 @@ import CoinRequest from "./components/CoinRequest";
 // Styles
 import "./styles.css";
 
+import { sendRequest } from "../../../core/tools/remote/request";
+import { toast } from "react-toastify";
+
 const CoinRequests = () => {
-  const [requests, setRequests] = useState([
-    {
-      id: 1,
-      username: "Test1",
-      amount: 22,
-      bank: 1092,
-    },
-    {
-      id: 2,
-      username: "Test2",
-      amount: 333,
-      bank: 11,
-    },
-    {
-      id: 3,
-      username: "Test3",
-      amount: 10000,
-      bank: 8888,
-    },
-  ]);
+  const [requests, setRequests] = useState([]);
+
+  const getCoinRequests = () => {
+    sendRequest("GET", "/admin/get-coin-requests")
+      .then((response) => {
+        const { success, coin_requests } = response.data;
+        if (success === true) {
+          setRequests(coin_requests);
+          return;
+        }
+        toast.error("Sorry, couldn't get coin requests.");
+      })
+      .catch((error) => {
+        toast.error("Sorry, something went wrong.");
+      });
+  };
+
+  const updateCoinRequest = (id, status = "accept") => {
+    sendRequest("POST", "/admin/update-coin-request", {
+      request_id: id,
+      status: status,
+    })
+      .then((response) => {
+        const { success, message } = response.data;
+        if (success === true) {
+          setRequests(requests.filter((request) => request.id !== id));
+          return toast.success(message);
+        }
+        toast.error(message);
+      })
+      .catch((error) => {
+        toast.error(
+          "Sorry, something went wrong. Couldn't update coin request."
+        );
+      });
+  };
+
+  useEffect(() => {
+    getCoinRequests();
+  }, []);
   return (
     <>
       <h1>Coin Requests</h1>
       <div className="coin-requests">
+        {requests.length === 0 && <p>No coin requests to show.</p>}
         {requests.map((request) => {
-          const { id, username, amount, bank } = request;
+          const { id, amount, user } = request;
           return (
             <CoinRequest
               key={id}
-              username={username}
+              username={user.username}
               amount={amount}
-              bank={bank}
+              bank={user.bank}
+              handleRequest={(status) => updateCoinRequest(id, status)}
             />
           );
         })}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvitationMail;
+use App\Models\CoinRequest;
 use App\Models\Invitation;
 use App\Models\Ride;
 use App\Models\Station;
@@ -118,5 +119,46 @@ class AdminController extends Controller
         return [
             "success" => false
         ];
+    }
+
+    public function getCoinRequests()
+    {
+        $coin_requests = CoinRequest::with('user')->where("status", "sent")->get();
+        return response()->json([
+            'success' => true,
+            'coin_requests' => $coin_requests
+        ]);
+    }
+
+    public function updateCoinRequest(Request $request)
+    {
+        $request_id = $request->request_id;
+        $status = $request->status;
+        $coin_request = CoinRequest::with('user')->find($request_id);
+        if ($coin_request) {
+            // Accept
+            if ($status === "accept") {
+                $coin_request->updateOrFail([
+                    "status" => "accepted"
+                ]);
+                // Add balance to user
+                $user_bank = $coin_request->user->bank;
+                $coin_request->user->updateOrFail([
+                    "bank" => $user_bank + $coin_request->amount
+                ]);
+            } else {
+                $coin_request->updateOrFail([
+                    "status" => "declined"
+                ]);
+            }
+            return response()->json([
+                'success' => true,
+                'message' => $status === "accept" ? "Coin Request accepted successfully." : "Coin Request denied successfully."
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Could not find coin request ID.'
+        ]);
     }
 }

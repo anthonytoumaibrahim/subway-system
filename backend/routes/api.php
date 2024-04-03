@@ -23,6 +23,8 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->cont
     Route::post('/create-station', 'createStation');
     Route::post('/delete-station', 'deleteStation');
     Route::post('/activate-station', 'activateStation');
+    Route::get('/get-coin-requests', 'getCoinRequests');
+    Route::post('/update-coin-request', 'updateCoinRequest');
 });
 
 Route::get('/get-stations', [UserController::class, 'getStations']);
