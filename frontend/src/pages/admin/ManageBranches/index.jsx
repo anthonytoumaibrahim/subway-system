@@ -28,10 +28,41 @@ const ManageBranches = () => {
         const { success } = response.data;
         if (success === true) {
           setStations(stations.filter((station) => station.id !== id));
+        } else {
+          setError("Couldn't delete station.");
         }
       })
       .catch((error) => {
-        setError("Couldn't delete station.");
+        setError("Sorry, something went wrong...");
+        console.log(error);
+      });
+  };
+
+  const handleActivate = (id, status) => {
+    setError(null);
+    sendRequest("POST", "/admin/activate-station", {
+      station_id: id,
+      status: status,
+    })
+      .then((response) => {
+        const { success } = response.data;
+        if (success === true) {
+          setStations(
+            stations.map((station) =>
+              station.id === id
+                ? {
+                    ...station,
+                    status: status,
+                  }
+                : station
+            )
+          );
+        } else {
+          setError("Couldn't update station.");
+        }
+      })
+      .catch((error) => {
+        setError("Sorry, something went wrong...");
         console.log(error);
       });
   };
@@ -72,7 +103,16 @@ const ManageBranches = () => {
                   <button onClick={() => handleDelete(id)}>Remove</button>
                 </td>
                 <td>
-                  <button>Deactivate</button>
+                  <button
+                    onClick={() =>
+                      handleActivate(
+                        id,
+                        status === "active" ? "not_active" : "active"
+                      )
+                    }
+                  >
+                    {status === "active" ? "Deactivate" : "Activate"}
+                  </button>
                 </td>
               </tr>
             );

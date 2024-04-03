@@ -22,6 +22,7 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->cont
     Route::get('/get-stations', 'getStations');
     Route::post('/create-station', 'createStation');
     Route::post('/delete-station', 'deleteStation');
+    Route::post('/activate-station', 'activateStation');
 });
 
 Route::get('/get-stations', [UserController::class, 'getStations']);

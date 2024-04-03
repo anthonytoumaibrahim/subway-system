@@ -87,6 +87,24 @@ class AdminController extends Controller
         ];
     }
 
+    public function activateStation(Request $request)
+    {
+        $id = $request->station_id;
+        $status = $request->status;
+        $station = Station::find($id);
+        if ($station) {
+            $station->updateOrFail([
+                "status" => $status
+            ]);
+            return [
+                "success" => true
+            ];
+        }
+        return [
+            "success" => false
+        ];
+    }
+
     public function deleteStation(Request $request)
     {
         $id = $request->station_id;
