@@ -1,7 +1,7 @@
 import React from "react";
-import '../manager.css';
+import "../../manager.css"
 import Sidebar from '../Sidebar';
-import '../station.css';
+import '../../station.css';
 
 const Rides = () => {
    return ( 

@@ -28,7 +28,7 @@ import ProtectedRoute from "./core/routes/ProtectedRoute";
 
 // Tools
 import { getLocalUser } from "./core/tools/local/user";
-import Manager from "./Pages/Manager";
+import Manager from "./pages/Manager";
 
 const App = () => {
   const localUser = getLocalUser();
