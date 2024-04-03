@@ -16,6 +16,7 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group(function () {
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
+    Route::post('/send-coin-request', 'sendCoinRequest');
 });
 
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->controller(AdminController::class)->group(function () {

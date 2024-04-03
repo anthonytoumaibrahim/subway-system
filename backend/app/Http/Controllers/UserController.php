@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoinRequest;
 use App\Models\Ride;
 use App\Models\Station;
 use App\Models\User;
@@ -43,6 +44,29 @@ class UserController extends Controller
             'success' => true,
             'image' => $db_path
         ]);
+    }
+
+    public function sendCoinRequest(Request $request)
+    {
+        $request->validate([
+            "amount" => "required|integer"
+        ]);
+        // Does user have pending request?
+        $lastRequest = CoinRequest::where("user_id", Auth::id())->where("status", "sent")->first();
+        if ($lastRequest) {
+            return [
+                'success' => false,
+                'message' => 'You already have a pending coin request. Please try again later.'
+            ];
+        }
+
+        $coinRequest = new CoinRequest();
+        $coinRequest->amount = $request->amount;
+        $coinRequest->user_id = Auth::id();
+        $coinRequest->saveOrFail();
+        return [
+            'success' => true
+        ];
     }
 
     public function getStations()

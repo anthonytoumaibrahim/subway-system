@@ -17,6 +17,7 @@ const Profile = () => {
     email: "",
     image_url: "",
     bank: 0,
+    last_coin_request: {}
   });
 
   const getProfile = () => {
