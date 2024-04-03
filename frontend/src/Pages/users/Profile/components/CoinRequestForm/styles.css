@@ -1,0 +1,17 @@
+.coin-form form {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+.coin-form .coin-request-input {
+  background-color: #363636;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  color: #ffffff;
+}
+.coin-form form .reg-btn {
+  padding: 10px;
+  font-size: 1rem;
+}
