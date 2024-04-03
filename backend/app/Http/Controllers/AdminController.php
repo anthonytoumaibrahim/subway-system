@@ -37,6 +37,13 @@ class AdminController extends Controller
 
     public function createStation(Request $request)
     {
+        $request->validate([
+            "name" => "required",
+            "email" => "required|email",
+            "latitude" => "required",
+            "longtitude" => "required",
+            "image" => "required"
+        ]);
         $name = $request->input("name");
         $email = $request->input("email");
         $lat = $request->input("latitude");
@@ -44,30 +51,39 @@ class AdminController extends Controller
 
         $image_file = $request->file("image");
 
-        // Storage image
-        $fileName = $image_file->getClientOriginalName() . "." . $image_file->getClientOriginalExtension();
+        // Store image
+        $fileName = time() . "." . $image_file->getClientOriginalExtension();
         $path = "/stations/";
         Storage::disk('public')->putFileAs($path, $image_file, $fileName);
+
+        // Check if manager already exists
+        $manager = User::where("email", $email)->first();
 
         $station = new Station();
         $station->name = $name;
         $station->image = config("app.url") . "/storage" . $path . $fileName;
         $station->latitude = $lat;
         $station->longtitude = $long;
+        if ($manager) {
+            $station->manager_id = $manager->id;
+        }
         $station->saveOrFail();
 
         // Put manager email in invitations table
-        $invitation = new Invitation();
-        $invitation->email = $email;
-        $invitation->station_id = $station->id;
-        $invitation->saveOrFail();
-        
-        // Send email
-        Mail::to($email)->send(new InvitationMail());
+        if (!$manager) {
+            $invitation = new Invitation();
+            $invitation->email = $email;
+            $invitation->station_id = $station->id;
+            $invitation->saveOrFail();
+
+            // Send email
+            Mail::to($email)->send(new InvitationMail());
+        }
 
         return [
             'success' => true,
-            'message' => 'Station saved successfully.'
+            'message' => 'Station saved successfully.',
+            'station' => $station->with('manager')->find($station->id)
         ];
     }
 }
