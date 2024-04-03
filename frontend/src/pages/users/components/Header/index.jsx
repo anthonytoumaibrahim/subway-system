@@ -16,11 +16,10 @@ import { AuthContext } from "../../../../core/contexts/AuthContext";
 // Utilities
 import { setLocalUser } from "../../../../core/tools/local/user";
 
-import profileImage from "../../../../assets/images/header/profileImage.jpg"
+import profileImage from "../../../../assets/images/header/profileImage.jpg";
 
 // Toastify
 import { toast } from "react-toastify";
-
 
 const Header = () => {
   const navigate = useNavigate();
@@ -224,11 +223,14 @@ const Header = () => {
 
       <div className="flex bold register-btns">
         {isLoggedIn ? (
-          <img 
-          className="profile-image"
-          width={50}
-          src={profileImage} 
-          alt="profile" />
+          <Link to="/profile">
+            <img
+              className="profile-image"
+              width={50}
+              src={profileImage}
+              alt="profile"
+            />
+          </Link>
         ) : (
           <>
             <button

@@ -1,0 +1,15 @@
+.user-coin-container {
+  gap: 20px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.coin-requests {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}

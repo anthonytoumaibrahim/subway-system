@@ -123,7 +123,7 @@ class AdminController extends Controller
 
     public function getCoinRequests()
     {
-        $coin_requests = CoinRequest::with('user')->where("status", "sent")->get();
+        $coin_requests = CoinRequest::with('user:id,bank')->where("status", "sent")->get();
         return response()->json([
             'success' => true,
             'coin_requests' => $coin_requests
