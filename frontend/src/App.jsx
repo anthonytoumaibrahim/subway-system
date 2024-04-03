@@ -29,6 +29,10 @@ import ProtectedRoute from "./core/routes/ProtectedRoute";
 // Tools
 import { getLocalUser } from "./core/tools/local/user";
 
+// Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
@@ -38,6 +42,18 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Routes>
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />

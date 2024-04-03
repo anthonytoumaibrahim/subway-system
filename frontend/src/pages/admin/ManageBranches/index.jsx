@@ -8,19 +8,24 @@ import "./styles.css";
 // Components
 import AddBranch from "./components/AddBranch";
 
+// Toastify
+import { toast } from "react-toastify";
+
 const ManageBranches = () => {
   const [stations, setStations] = useState([]);
-  const [error, setError] = useState(null);
 
   const getStations = () => {
-    sendRequest("GET", "/admin/get-stations").then((response) => {
-      const { stations } = response.data;
-      setStations(stations);
-    });
+    sendRequest("GET", "/admin/get-stations")
+      .then((response) => {
+        const { stations } = response.data;
+        setStations(stations);
+      })
+      .catch((error) => {
+        toast.error("Sorry, something went wrong, couldn't fetch stations.");
+      });
   };
 
   const handleDelete = (id) => {
-    setError(null);
     sendRequest("POST", "/admin/delete-station", {
       station_id: id,
     })
@@ -28,18 +33,17 @@ const ManageBranches = () => {
         const { success } = response.data;
         if (success === true) {
           setStations(stations.filter((station) => station.id !== id));
+          toast.success("Station deleted successfully.");
         } else {
-          setError("Couldn't delete station.");
+          toast.error("Couldn't delete station.");
         }
       })
       .catch((error) => {
-        setError("Sorry, something went wrong...");
-        console.log(error);
+        toast.error("Sorry, something went wrong...");
       });
   };
 
   const handleActivate = (id, status) => {
-    setError(null);
     sendRequest("POST", "/admin/activate-station", {
       station_id: id,
       status: status,
@@ -58,12 +62,11 @@ const ManageBranches = () => {
             )
           );
         } else {
-          setError("Couldn't update station.");
+          toast.error("Couldn't update station.");
         }
       })
       .catch((error) => {
-        setError("Sorry, something went wrong...");
-        console.log(error);
+        toast.error("Sorry, something went wrong...");
       });
   };
 
@@ -76,7 +79,6 @@ const ManageBranches = () => {
       <AddBranch
         updateStations={(station) => setStations([...stations, station])}
       />
-      {error && <p className="error-col">{error}</p>}
       <table className="stations-table">
         <thead>
           <tr>
@@ -100,10 +102,16 @@ const ManageBranches = () => {
                 </td>
                 <td>{manager?.username ?? "Not signed up yet"}</td>
                 <td>
-                  <button onClick={() => handleDelete(id)}>Remove</button>
+                  <button
+                    onClick={() => handleDelete(id)}
+                    className="admin-button action-button action-button-delete"
+                  >
+                    Remove
+                  </button>
                 </td>
                 <td>
                   <button
+                    className="admin-button action-button"
                     onClick={() =>
                       handleActivate(
                         id,
