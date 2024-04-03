@@ -61,10 +61,12 @@ class AuthController extends Controller
         $user->saveOrFail();
 
         // Update manager ID in station
-        $station = Station::find($invitation->station_id);
-        $station->update([
-            "manager_id" => $user->id
-        ]);
+        if ($invitation) {
+            $station = Station::find($invitation->station_id);
+            $station->update([
+                "manager_id" => $user->id
+            ]);
+        }
 
         $token = Auth::login($user);
         return response()->json([
