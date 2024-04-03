@@ -14,14 +14,16 @@ import { requestMethods } from "../../../../core/enums/requestMethods";
 import { AuthContext } from "../../../../core/contexts/AuthContext";
 
 // Utilities
-import { setLocalUser } from "../../../../core/tools/local/user";
+import {
+  removeLocalUser,
+  setLocalUser,
+} from "../../../../core/tools/local/user";
 
 import profileImage from "../../../../assets/images/header/profileImage.jpg";
 
 // Toastify
 import { toast } from "react-toastify";
 import Button from "../../../../components/Button";
-
 
 const Header = () => {
   const navigate = useNavigate();
@@ -165,6 +167,14 @@ const Header = () => {
       });
   };
 
+  const logout = () => {
+    removeLocalUser();
+    setUser({
+      token: "",
+    });
+    navigate("/");
+  };
+
   return (
     <div className="flex align-center space-between header bg-dark-gray-col">
       {isSignup && (
@@ -226,14 +236,16 @@ const Header = () => {
       <div className="flex bold register-btns">
         {isLoggedIn ? (
           <div className="flex center profile-logout">
-            <img 
-            className="profile-image"
-            width={70}
-            src={profileImage} 
-            alt="profile" />
+            <Link to="/profile" className="profile-image-link">
+              <img
+                className="profile-image"
+                width={70}
+                src={profileImage}
+                alt="profile"
+              />
+            </Link>
 
-            <Button
-            name={"Logout"}/>
+            <Button name={"Logout"} handleClick={logout} />
           </div>
         ) : (
           <>
