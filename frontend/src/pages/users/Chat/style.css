@@ -1,0 +1,65 @@
+.chat {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.chat-users,
+.chat-messages {
+  background-color: #303030;
+  padding: 20px;
+  border-radius: 10px;
+}
+.chat-users {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.chat-users .card {
+  background-color: #1d1d1d;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+.chat-users .card-active {
+  background-color: var(--primary-col);
+}
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.chat-messages .message {
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.chat-messages .message .time {
+  font-size: 0.75rem;
+}
+.chat-messages .sent-message {
+  background-color: #414141;
+  margin-right: auto;
+  max-width: 70%;
+}
+.chat-messages .received-message {
+  background-color: #1d1d1d;
+  margin-left: auto;
+  max-width: 70%;
+}
+.chat-messages .date {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #4e4e4e;
+  margin: auto;
+}
+
+@media (max-width: 1024px) {
+  .chat {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

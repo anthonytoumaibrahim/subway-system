@@ -83,7 +83,7 @@ class UserController extends Controller
     }
 
     public function getUserRides()
-    {   
+    {
         // $id = Auth::id();
         // $ride_id = Booking::with();
     }
@@ -91,7 +91,8 @@ class UserController extends Controller
     public function getStationRides(Request $req)
     {
         $station = Station::findOrFail($req->id);
-        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req -> id], ["departure_date", ">=", Carbon::now()->toDateTimeString()]])->orderBy("departure_date", "DESC")->get();
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req->id], ["departure_date", ">=", $date]])->orderBy("departure_date", "DESC")->get();
         return response()->json([
             "status" => "success",
             "station" => ["name" => $station->name, "image" => $station->image],
