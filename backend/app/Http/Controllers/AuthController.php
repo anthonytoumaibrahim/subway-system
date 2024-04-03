@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitation;
+use App\Models\Station;
 use App\Models\User;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
@@ -45,10 +47,23 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        // Set user role to manager if they have been invited
+        $role_id = 1;
+        $invitation = Invitation::where("email", $request->email)->first();
+        if ($invitation) {
+            $role_id = 2;
+        }
+        $user = new User();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role_id = $role_id;
+        $user->saveOrFail();
+
+        // Update manager ID in station
+        $station = Station::find($invitation->station_id);
+        $station->update([
+            "manager_id" => $user->id
         ]);
 
         $token = Auth::login($user);
