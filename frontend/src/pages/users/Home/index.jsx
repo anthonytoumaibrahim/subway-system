@@ -18,7 +18,6 @@ const Home = () => {
       <UserMap/>
       <Guidline/>
       {/* <Reviews/> */}
-      <Footer/>
     </div>
   )
 }
