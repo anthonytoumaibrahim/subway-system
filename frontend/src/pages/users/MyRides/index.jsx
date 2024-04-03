@@ -21,7 +21,7 @@ const MyRides = () => {
           </div>
           <div>
             <Button
-            name={"review"}
+            name={"Add Review"}
             />
           </div>
      
@@ -39,7 +39,7 @@ const MyRides = () => {
           </div>
           <div>
             <Button
-            name={"review"}
+            name={"Add Review"}
             />
           </div>
      

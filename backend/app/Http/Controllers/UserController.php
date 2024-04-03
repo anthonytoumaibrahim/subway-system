@@ -82,10 +82,25 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getUserRides()
-    {   
-        // $id = Auth::id();
-        // $ride_id = Booking::with();
+    public function getUserBookedRides(Request $req)
+    {
+        $user = User::findOrFail($req->id);
+        
+        // Retrieve all bookings for the user
+        $bookings = $user->bookings()->with('ride.departureStation')->get();
+        
+        // Extract ride details with departure station
+        $rides = $bookings->map(function ($booking) {
+            return [
+                'ride' => $booking->ride,
+                'departure_station' => $booking->ride->departureStation
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'rides' => $rides
+        ]);
     }
 
     public function getStationRides(Request $req)

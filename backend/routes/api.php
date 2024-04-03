@@ -38,3 +38,5 @@ Route::get('/get-stations', [UserController::class, 'getStations']);
 Route::get("/user-rides", [UserController::class, "getUserRides"]);
 
 Route::get("/station-rides", [UserController::class, "getStationRides"]);
+
+Route::get("/user-rides", [UserController::class, "getUserBookedRides"]);
