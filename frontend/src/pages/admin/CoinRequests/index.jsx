@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 const CoinRequests = () => {
   const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getCoinRequests = () => {
     sendRequest("GET", "/admin/get-coin-requests")
@@ -25,7 +26,8 @@ const CoinRequests = () => {
       })
       .catch((error) => {
         toast.error("Sorry, something went wrong.");
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   const updateCoinRequest = (id, status = "accept") => {
@@ -55,7 +57,8 @@ const CoinRequests = () => {
     <>
       <h1>Coin Requests</h1>
       <div className="coin-requests">
-        {requests.length === 0 && <p>No coin requests to show.</p>}
+        {loading && <p>Please wait, loading...</p>}
+        {requests.length === 0 && !loading && <p>No coin requests to show.</p>}
         {requests.map((request) => {
           const { id, amount, user } = request;
           return (

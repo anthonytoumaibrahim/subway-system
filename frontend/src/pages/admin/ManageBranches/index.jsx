@@ -79,54 +79,56 @@ const ManageBranches = () => {
       <AddBranch
         updateStations={(station) => setStations([...stations, station])}
       />
-      <table className="stations-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Location</th>
-            <th>Manager</th>
-            <th>Remove</th>
-            <th>Deactivate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stations.map((station) => {
-            const { id, name, status, longtitude, latitude, manager } = station;
-            return (
-              <tr key={id}>
-                <td>{name}</td>
-                <td>{status}</td>
-                <td>
-                  {latitude}, {longtitude}
-                </td>
-                <td>{manager?.username ?? "Not signed up yet"}</td>
-                <td>
-                  <button
-                    onClick={() => handleDelete(id)}
-                    className="admin-button action-button action-button-delete"
-                  >
-                    Remove
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="admin-button action-button"
-                    onClick={() =>
-                      handleActivate(
-                        id,
-                        status === "active" ? "not_active" : "active"
-                      )
-                    }
-                  >
-                    {status === "active" ? "Deactivate" : "Activate"}
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="table-container">
+        <table className="stations-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Manager</th>
+              <th>Remove</th>
+              <th>Deactivate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stations.map((station) => {
+              const { id, name, status, longtitude, latitude, manager } = station;
+              return (
+                <tr key={id}>
+                  <td>{name}</td>
+                  <td>{status}</td>
+                  <td>
+                    {latitude}, {longtitude}
+                  </td>
+                  <td>{manager?.username ?? "Not signed up yet"}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(id)}
+                      className="admin-button action-button action-button-delete"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="admin-button action-button"
+                      onClick={() =>
+                        handleActivate(
+                          id,
+                          status === "active" ? "not_active" : "active"
+                        )
+                      }
+                    >
+                      {status === "active" ? "Deactivate" : "Activate"}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
