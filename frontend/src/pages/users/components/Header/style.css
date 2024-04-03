@@ -17,11 +17,11 @@
   border-bottom: 2px solid var(--primary-col);
 }
 
-.header-nav > a:not(.active) {
+.header-nav > a:not(.header-active) {
   transition: border-bottom 0.2s ease;
 }
 
-.header-nav > .active {
+.header-nav > .header-active {
   border-bottom: 3px solid var(--primary-col) !important;
 }
 

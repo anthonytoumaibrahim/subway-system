@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Ride;
 use App\Models\Station;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -19,13 +22,12 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getUserRides(Request $req)
-    {
-        $userRides = Ride::where('user_id', $req->id);
-        return response()->json([
-            'status'=>"sucsess",
-            'userRides'=>$userRides
-        ], 200);
+    public function getUserRides()
+    {   
+        // $id = Auth::id();
+        // $ride_id = Booking::with();
+
+     
 
     }
 
