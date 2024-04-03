@@ -5,7 +5,7 @@ import Features from './components/Features'
 import UserMap from './components/Map'
 import Guidline from './components/Guidlines'
 import Reviews from './components/Reviews'
-import Footer from '../components/Footer'
+
 
 
 const Home = () => {
@@ -18,7 +18,6 @@ const Home = () => {
       <UserMap/>
       <Guidline/>
       {/* <Reviews/> */}
-      <Footer/>
     </div>
   )
 }

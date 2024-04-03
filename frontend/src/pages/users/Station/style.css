@@ -1,0 +1,52 @@
+.single-station-container{
+  border-left: 1px solid black; 
+  border-right: 1px solid black; 
+}
+
+.station-info > h1 {
+  margin-bottom: 25px;
+}
+
+.single-station-image{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.purshace-btn{
+  align-self: flex-end;
+  width: 100%;
+}
+
+.purchase-btn-wrapper{
+  min-width: max-content;
+}
+
+.ride-wrapper{
+  padding: 10px;
+  border-radius: 10px;
+
+}
+
+.rides-wrapper{
+  gap: 10px;
+}
+
+.ticket-type-btn{
+  padding: 7px 20px;
+  font-size: 1.5rem;
+  min-width: 8rem;
+  border: none;
+  outline: none;
+}
+
+.tickets-btn{
+  border-radius: 5px 0 0 5px;
+}
+
+.pass-btn{
+  border-radius:  0 5px 5px 0;
+}
+
+.ticket-type-switch{
+  margin-bottom: 15px;
+}

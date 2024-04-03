@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('status')->default('active');
             $table->double('longtitude')->nullable();
             $table->double('latitude')->nullable();
+            $table->time('opening')->nullable();
+            $table->time('closing')->nullable();
             $table->unsignedBigInteger('manager_id')->nullable();
             $table->timestamps();
 
