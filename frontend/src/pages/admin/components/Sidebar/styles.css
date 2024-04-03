@@ -55,6 +55,7 @@
   background: none;
   cursor: pointer;
   margin: 20px;
+  flex-shrink: 0;
 }
 .sidebar-hamburger img {
   width: 100%;
@@ -73,5 +74,15 @@
     top: 0;
     left: 0;
     z-index: 2;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar-hamburger {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .admin-layout {
+    padding-top: 40px;
   }
 }

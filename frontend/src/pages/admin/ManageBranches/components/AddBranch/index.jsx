@@ -31,18 +31,18 @@ const AddBranch = ({ updateStations = () => {} }) => {
   const buttonRef = useRef(null);
 
   const handleBranchInfoUpdate = ({
-    name = null,
-    email = null,
-    lat = null,
-    long = null,
-    image = null,
+    name = undefined,
+    email = undefined,
+    lat = undefined,
+    long = undefined,
+    image = undefined,
   }) => {
     setBranchInfo({
-      name: name ? name : branchInfo.name,
-      email: email ? email : branchInfo.email,
-      lat: lat ? lat : branchInfo.lat,
-      long: long ? long : branchInfo.long,
-      image: image ? image : branchInfo.image,
+      name: name !== undefined ? name : branchInfo.name,
+      email: email !== undefined ? email : branchInfo.email,
+      lat: lat !== undefined ? lat : branchInfo.lat,
+      long: long !== undefined ? long : branchInfo.long,
+      image: image !== undefined ? image : branchInfo.image,
     });
   };
 
@@ -85,12 +85,14 @@ const AddBranch = ({ updateStations = () => {} }) => {
             type="text"
             placeholder="Name"
             className="admin-input"
+            value={branchInfo.name}
             onChange={(e) => handleBranchInfoUpdate({ name: e.target.value })}
           />
           <input
             type="email"
             placeholder="Manager Email"
             className="admin-input"
+            value={branchInfo.email}
             onChange={(e) => handleBranchInfoUpdate({ email: e.target.value })}
           />
         </div>
@@ -120,11 +122,11 @@ const AddBranch = ({ updateStations = () => {} }) => {
               placeholder="Latitude"
               className="admin-input"
               value={branchInfo.lat}
-              onChange={(e) =>
+              onChange={(e) => {
                 handleBranchInfoUpdate({
                   lat: e.target.value,
-                })
-              }
+                });
+              }}
             />
           </div>
         </div>

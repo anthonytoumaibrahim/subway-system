@@ -1,3 +1,6 @@
+.table-container {
+  overflow-x: auto;
+}
 .stations-table {
   width: 100%;
   border-radius: 10px;
