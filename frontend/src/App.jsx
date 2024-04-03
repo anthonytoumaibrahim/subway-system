@@ -10,9 +10,10 @@ import "./styles/utilities.css";
 // components
 import UserLayout from "./pages/users/UserLayout";
 import Home from "./pages/users/Home";
-import MyRides from "./pages/users/MyRides";
+import MyRides from "./pages/users/Station";
 import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
+import Station from "./pages/users/Station";
 
 // Pages
 import Overview from "./pages/admin/Overview";
@@ -30,6 +31,10 @@ import ProtectedRoute from "./core/routes/ProtectedRoute";
 import { getLocalUser } from "./core/tools/local/user";
 import Manager from "./pages/Manager";
 
+// Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
@@ -39,10 +44,23 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Routes>
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
             <Route path="my-rides" element={<MyRides />} />
+            <Route path="station" element={<Station />} />
             <Route path="coins" element={<Coins />} />
             <Route path="chat" element={<Chat />} />
           </Route>
