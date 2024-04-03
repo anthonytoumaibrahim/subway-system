@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvitationMail;
 use App\Models\Invitation;
 use App\Models\Ride;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -59,6 +61,9 @@ class AdminController extends Controller
         $invitation->email = $email;
         $invitation->station_id = $station->id;
         $invitation->saveOrFail();
+        
+        // Send email
+        Mail::to($email)->send(new InvitationMail());
 
         return [
             'success' => true,
