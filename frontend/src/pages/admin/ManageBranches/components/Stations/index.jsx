@@ -29,8 +29,15 @@ const Stations = () => {
       </thead>
       <tbody>
         {allStations.map((station) => {
-          const { id, name, status, longtitude, latitude, manager_id } =
-            station;
+          const {
+            id,
+            name,
+            status,
+            longtitude,
+            latitude,
+            manager_id,
+            manager,
+          } = station;
           return (
             <tr key={id}>
               <td>{name}</td>
@@ -38,7 +45,7 @@ const Stations = () => {
               <td>
                 {latitude}, {longtitude}
               </td>
-              <td>{manager_id}</td>
+              <td>{manager?.username}</td>
               <td>
                 <button>Remove</button>
               </td>
