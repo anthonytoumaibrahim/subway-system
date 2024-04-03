@@ -1,5 +1,5 @@
 // React stuff
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { sendRequest } from "../../../core/tools/remote/request";
 import { toast } from "react-toastify";
 
@@ -9,15 +9,18 @@ import CoinRequestForm from "./components/CoinRequestForm";
 // Styles
 import "./styles.css";
 
-import profileImage from "../../../assets/images/header/profileImage.jpg";
+import profileImage from "../../../assets/icons/admin-icons/subway.svg";
+import { setLocalUser } from "../../../core/tools/local/user";
+import { AuthContext } from "../../../core/contexts/AuthContext";
 
 const Profile = () => {
+  const { user, setUser } = useContext(AuthContext);
   const [profileInfo, setProfileInfo] = useState({
     username: "",
     email: "",
     image_url: "",
     bank: 0,
-    last_coin_request: {}
+    last_coin_request: {},
   });
 
   const getProfile = () => {
@@ -52,6 +55,14 @@ const Profile = () => {
         setProfileInfo({
           ...profileInfo,
           image_url: image,
+        });
+        setUser({
+          ...user,
+          avatar: image,
+        });
+        setLocalUser({
+          ...user,
+          avatar: image,
         });
       })
       .catch((error) => {

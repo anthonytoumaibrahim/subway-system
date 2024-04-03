@@ -19,7 +19,7 @@ import {
   setLocalUser,
 } from "../../../../core/tools/local/user";
 
-import profileImage from "../../../../assets/images/header/profileImage.jpg";
+import profileImage from "../../../../assets/icons/admin-icons/subway.svg";
 
 // Toastify
 import { toast } from "react-toastify";
