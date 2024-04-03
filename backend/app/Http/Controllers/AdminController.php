@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvitationMail;
+use App\Models\Booking;
 use App\Models\CoinRequest;
 use App\Models\Invitation;
 use App\Models\Ride;
@@ -19,7 +20,10 @@ class AdminController extends Controller
         $users_count = User::count();
         $branches_count = Station::count();
         $rides_count = Ride::count();
-        $revenue_count = 0;
+        // $revenue_count = User::get()->map(function ($user) {
+        //     return $user->username;
+        // });
+        $revenue_count = Booking::get();
         return response()->json([
             'users_count' => $users_count,
             'branches_count' => $branches_count,
