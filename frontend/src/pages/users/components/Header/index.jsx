@@ -16,6 +16,9 @@ import { AuthContext } from "../../../../core/contexts/AuthContext";
 // Utilities
 import { setLocalUser } from "../../../../core/tools/local/user";
 
+import profileImage from "../../../../assets/images/header/profileImage.jpg"
+
+
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -217,7 +220,11 @@ const Header = () => {
 
       <div className="flex bold register-btns">
         {isLoggedIn ? (
-          ""
+          <img 
+          className="profile-image"
+          width={50}
+          src={profileImage} 
+          alt="profile" />
         ) : (
           <>
             <button

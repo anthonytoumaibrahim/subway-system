@@ -4,11 +4,13 @@ import search from "../../../../../assets/icons/home/search.svg"
 import { sendRequest } from '../../../../../core/tools/remote/request';
 import { maptiler } from "pigeon-maps/providers";
 import { Map, Marker, Overlay } from "pigeon-maps";
+import { useNavigate } from 'react-router-dom';
 import stationImage from "../../../../../assets/images/home/stationImage.jpg"
 import { requestMethods } from '../../../../../core/enums/requestMethods';
 
 const UserMap = () => {
   const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "dataviz-dark");
+  const navigate = useNavigate()
   const [center, setCenter] = useState([33.223423, 35.312312])
   const [zoom, setZoom] = useState(11)
   const [stations, setStations] = useState([])
@@ -29,7 +31,7 @@ const UserMap = () => {
   ,[])
  
 
-  const handleMpInputChange = (e) => {
+  const handleMapInputChange = (e) => {
     setSearchInput(e.target.value)
   }
 
@@ -48,7 +50,10 @@ const UserMap = () => {
           type="text" 
           placeholder='Search a station'
           value={searchInput}
-          onChange={(e)=>{handleMpInputChange(e);filterStations()}}/>
+          onChange={(e)=>{
+            handleMapInputChange(e)
+            filterStations()
+            }}/>
         </div>
 
         <div className={`flex column bg-dark-gray-col search-result ${searchInput? "" : 'hidden'} `}>
@@ -70,10 +75,10 @@ const UserMap = () => {
         height={770}
         center={center}
         zoom={zoom}
-        onBoundsChanged={({ center, zoom }) => { 
-          setCenter(center) 
-          setZoom(zoom) 
-        }}
+        // onBoundsChanged={({ center, zoom }) => { 
+        //   setCenter(center) 
+        //   setZoom(zoom) 
+        // }}
         >
 
         {stations && stations.map((station)=>{
@@ -85,10 +90,12 @@ const UserMap = () => {
             key={id}
             className='outer-marker' 
             anchor={[latitude, longtitude]} 
-            width={50} color="#d9d9d9" >
+            width={50} color="#d9d9d9" 
+            onClick={() => navigate("/station")}>
               <p className='marker-text'>{`${name}`}</p>
               <Marker width={50} color="#66b896"/>
             </Marker>
+
             )
           }
         })}
