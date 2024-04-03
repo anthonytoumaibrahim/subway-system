@@ -1,0 +1,27 @@
+.station-info-section {
+  padding: 50px 90px;
+  margin-left: 120px;
+}
+
+.station-table {
+  border-collapse: collapse;
+  width: 100%;
+
+  font-size: 18px;
+}
+
+.station-table th,
+.station-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
+}
+.station-table th {
+  background-color: #3c3c3c;
+  color: #66b896;
+}
+.station-table td {
+  background-color: #505050;
+}
+
+/* --dark-gray-col: #272727 */

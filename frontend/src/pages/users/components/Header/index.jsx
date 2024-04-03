@@ -16,7 +16,7 @@ import { AuthContext } from "../../../../core/contexts/AuthContext";
 // Utilities
 import { setLocalUser } from "../../../../core/tools/local/user";
 
-import profileImage from "../../../../assets/images/header/profileImage.jpg"
+import profileImage from "../../../../assets/images/header/profileImage.jpg";
 
 // Toastify
 import { toast } from "react-toastify";

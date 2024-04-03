@@ -2,28 +2,26 @@
   font-size: 2rem;
 }
 
-.header-nav{
+.header-nav {
   gap: 2.5rem;
 }
 
-.header-nav > a{
+.header-nav > a {
   color: #d9d9d9;
   font-size: 1.25rem;
   text-decoration: none;
-  border-bottom:  3px solid rgba(0, 0, 0, 0);
-
-
+  border-bottom: 3px solid rgba(0, 0, 0, 0);
 }
 
-.header-nav > a:hover{
+.header-nav > a:hover {
   border-bottom: 2px solid var(--primary-col);
 }
 
-.header-nav > a:not(.active){
-  transition: border-bottom .2s ease;
+.header-nav > a:not(.active) {
+  transition: border-bottom 0.2s ease;
 }
 
-.header-nav > .active{
+.header-nav > .active {
   border-bottom: 3px solid var(--primary-col) !important;
 }
 
@@ -31,27 +29,26 @@
   padding: 30px 80px;
 }
 
-.reg-btn{
+.reg-btn {
   padding: 7px 20px;
   font-size: 1.5rem;
   min-width: 8rem;
-  border-radius: 5PX ;
+  border-radius: 5px;
   border: none;
   outline: none;
   min-width: fit-content;
-
 }
 
-.reg-btn:hover{
+.reg-btn:hover {
   opacity: 0.9;
   cursor: pointer;
 }
 
-.register-btns{
+.register-btns {
   gap: 0.5rem;
 }
 
-.signup-btn{
+.signup-btn {
   border: 3px solid var(--primary-col);
   background-color: transparent;
 }
@@ -62,7 +59,7 @@
   left: -100px;
 }
 
-.profile-image:hover{
+.profile-image:hover {
   cursor: pointer;
   opacity: 0.8;
 }
