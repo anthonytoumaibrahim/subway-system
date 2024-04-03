@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./style.css"
 import StationRide from "../components/StationRide"
 import { sendRequest } from '../../../core/tools/remote/request'
@@ -7,16 +6,23 @@ import { useParams } from 'react-router-dom'
 import stationImage from "../../../assets/images/home/stationImage.png"
 import { requestMethods } from '../../../core/enums/requestMethods'
 const Station = () => {
+  const [rides, setRides] = useState([])
+  const [stationName, setStationName] = useState([])
   const [isPass, setIsPass] = useState(false)
   let {id} = useParams()
 
-  console.log(id)
-  // sendRequest(requestMethods.GET)
+  useEffect(()=>{
+    sendRequest(requestMethods.GET, `/station-rides?id=${id}`)
+    .then((response)=>{
+      setRides(response.data.stationRides)
+      setStationName(response.data.station)
+    })
+  },[])
 
   return (
     <div className=' flex column single-station-container user-container'>
       <div className='station-info' >
-        <h1>Hazmiye station</h1>
+        <h1>{`${stationName}`}</h1>
         <img className='single-station-image' src={stationImage} alt="" />
       </div>
 
@@ -35,28 +41,14 @@ const Station = () => {
       </div>
 
       <div className='flex column rides-wrapper'>
-      ()
-        <StationRide
-        destination={"saida"} 
-        departureDate={"date here"} 
-        arrivalDate={"date here"} 
-        price={45}
-        isPass={isPass}/>
-
-        <StationRide
-        destination={"saida"} 
-        departureDate={"date here"} 
-        arrivalDate={"date here"} 
-        price={45}
-        isPass={isPass}/>
-
-        <StationRide
-        destination={"saida"} 
-        departureDate={"date here"} 
-        arrivalDate={"date here"} 
-        price={45}
-        isPass={isPass}/>
-       
+        {rides.map((ride)=>(
+          <StationRide
+          destination={ride.arrival_station.name} 
+          departureDate={ride.departure_date} 
+          arrivalDate={ride.arrival_date} 
+          price={ride.price}
+          isPass={isPass}/>
+        ))}
       </div>
     </div>
   )
