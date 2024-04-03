@@ -1,5 +1,5 @@
 // React stuff
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // Icons
 import map_icon from "../../../../../assets/icons/admin-icons/map.svg";
@@ -14,11 +14,12 @@ import AdminMap from "../AdminMap";
 // Request
 import { sendRequest } from "../../../../../core/tools/remote/request";
 
+// Toastify
+import { toast } from "react-toastify";
+
 const AddBranch = ({ updateStations = () => {} }) => {
   const [showMap, setShowMap] = useState(false);
-
   const [errors, setErrors] = useState({});
-
   const [branchInfo, setBranchInfo] = useState({
     name: "",
     email: "",
@@ -26,6 +27,8 @@ const AddBranch = ({ updateStations = () => {} }) => {
     long: "",
     image: "",
   });
+
+  const buttonRef = useRef(null);
 
   const handleBranchInfoUpdate = ({
     name = null,
@@ -46,6 +49,7 @@ const AddBranch = ({ updateStations = () => {} }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     setErrors({});
+    buttonRef.current.disabled = true;
     const data = new FormData();
     data.append("name", branchInfo.name);
     data.append("email", branchInfo.email);
@@ -62,7 +66,14 @@ const AddBranch = ({ updateStations = () => {} }) => {
       })
       .catch((error) => {
         const { errors, message } = error.response.data;
-        setErrors(errors);
+        if (errors) {
+          setErrors(errors);
+          return;
+        }
+        toast.error("Sorry, something went wrong...");
+      })
+      .finally(() => {
+        buttonRef.current.removeAttribute("disabled");
       });
   };
 
@@ -131,7 +142,9 @@ const AddBranch = ({ updateStations = () => {} }) => {
             }
           />
         </div>
-        <button className="admin-button admin-button-primary">Add</button>
+        <button className="admin-button admin-button-primary" ref={buttonRef}>
+          Add
+        </button>
       </form>
       {Object.keys(errors).length > 0 && (
         <div className="error-col">

@@ -14,3 +14,10 @@
 .stations-table td {
   padding: 10px;
 }
+
+.action-button {
+  padding: 10px !important;
+}
+.action-button-delete {
+  background-color: var(--error-col) !important;
+}
