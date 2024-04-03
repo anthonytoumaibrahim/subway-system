@@ -59,7 +59,7 @@ const App = () => {
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
             <Route path="my-rides" element={<MyRides />} />
-            <Route path="station" element={<Station />} />
+            <Route path="station/:id" element={<Station />} />
             <Route path="coins" element={<Coins />} />
             <Route path="chat" element={<Chat />} />
           </Route>

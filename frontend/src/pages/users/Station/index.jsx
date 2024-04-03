@@ -2,10 +2,16 @@ import React from 'react'
 import { useState } from 'react'
 import "./style.css"
 import StationRide from "../components/StationRide"
-
+import { sendRequest } from '../../../core/tools/remote/request'
+import { useParams } from 'react-router-dom'
 import stationImage from "../../../assets/images/home/stationImage.png"
+import { requestMethods } from '../../../core/enums/requestMethods'
 const Station = () => {
   const [isPass, setIsPass] = useState(false)
+  let {id} = useParams()
+
+  console.log(id)
+  // sendRequest(requestMethods.GET)
 
   return (
     <div className=' flex column single-station-container user-container'>
@@ -29,15 +35,7 @@ const Station = () => {
       </div>
 
       <div className='flex column rides-wrapper'>
-
-        <StationRide
-        destination={"saida"} 
-        departureDate={"date here"} 
-        arrivalDate={"date here"} 
-        rides={4} 
-        price={45}
-        isPass={isPass}/>
-
+      ()
         <StationRide
         destination={"saida"} 
         departureDate={"date here"} 
@@ -49,7 +47,13 @@ const Station = () => {
         destination={"saida"} 
         departureDate={"date here"} 
         arrivalDate={"date here"} 
-        rides={4} 
+        price={45}
+        isPass={isPass}/>
+
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
         price={45}
         isPass={isPass}/>
        
