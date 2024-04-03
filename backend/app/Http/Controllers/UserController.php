@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ride;
 use App\Models\Station;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,11 +31,11 @@ class UserController extends Controller
 
     public function getStationRides(Request $req)
     {
-        $station = Station::findOrFail($req->id)->name;
-        $stationRides = Ride::with(["arrivalStation:id,name"])->where("departure_station_id", $req -> id)->get();
+        $station = Station::findOrFail($req->id);
+        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req -> id], ["departure_date", ">=", Carbon::now()->toDateTimeString()]])->orderBy("departure_date", "DESC")->get();
         return response()->json([
             "status" => "success",
-            "station" => $station,
+            "station" => ["name" => $station->name, "image" => $station->image],
             "stationRides" => $stationRides
         ]);
     }

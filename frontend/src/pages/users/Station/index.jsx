@@ -7,7 +7,10 @@ import stationImage from "../../../assets/images/home/stationImage.png"
 import { requestMethods } from '../../../core/enums/requestMethods'
 const Station = () => {
   const [rides, setRides] = useState([])
-  const [stationName, setStationName] = useState([])
+  const [stationInfo, setStationInfo] = useState({
+    name: "",
+    image: ""
+  })
   const [isPass, setIsPass] = useState(false)
   let {id} = useParams()
 
@@ -15,15 +18,15 @@ const Station = () => {
     sendRequest(requestMethods.GET, `/station-rides?id=${id}`)
     .then((response)=>{
       setRides(response.data.stationRides)
-      setStationName(response.data.station)
+      setStationInfo({...response.data.station})
     })
   },[])
 
   return (
     <div className=' flex column single-station-container user-container'>
       <div className='station-info' >
-        <h1>{`${stationName}`}</h1>
-        <img className='single-station-image' src={stationImage} alt="" />
+        <h1>{`${stationInfo.name}`}</h1>
+        <img  className='single-station-image' src={stationInfo.image} alt="Station Image" />
       </div>
 
       <div>
@@ -41,11 +44,13 @@ const Station = () => {
       </div>
 
       <div className='flex column rides-wrapper'>
+        {rides.length === 0 && <p>No Rides Availble</p>}
         {rides.map((ride)=>(
           <StationRide
+          key={ride.id}
           destination={ride.arrival_station.name} 
-          departureDate={ride.departure_date} 
-          arrivalDate={ride.arrival_date} 
+          departureDate={`Dep: ${ride.departure_date}`} 
+          arrivalDate={`Arr: ${ride.arrival_date}`} 
           price={ride.price}
           isPass={isPass}/>
         ))}
