@@ -20,8 +20,9 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->group(function () {
     Route::get('/get-statistics', [AdminController::class, 'getStatistics']);
     Route::get('/get-stations', [AdminController::class, 'getStations']);
+    Route::post('/create-station', [AdminController::class, 'createStation']);
 });
 
 Route::get('/get-stations', [UserController::class, 'getStations']);
 
-Route::get("/user-rides",[ UserController::class, "getUserRides"]);
+Route::get("/user-rides", [UserController::class, "getUserRides"]);

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitation;
 use App\Models\Ride;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -25,7 +27,7 @@ class AdminController extends Controller
 
     public function getStations()
     {
-        $stations = Station::get();
+        $stations = Station::with('manager')->get();
         return response()->json([
             'stations' => $stations
         ]);
@@ -33,8 +35,34 @@ class AdminController extends Controller
 
     public function createStation(Request $request)
     {
-        $validated = $request->validate([
-            "name" => "required"
-        ]);
+        $name = $request->input("name");
+        $email = $request->input("email");
+        $lat = $request->input("latitude");
+        $long = $request->input("longtitude");
+
+        $image_file = $request->file("image");
+
+        // Storage image
+        $fileName = $image_file->getClientOriginalName() . "." . $image_file->getClientOriginalExtension();
+        $path = "/stations/";
+        Storage::disk('public')->putFileAs($path, $image_file, $fileName);
+
+        $station = new Station();
+        $station->name = $name;
+        $station->image = config("app.url") . "/storage" . $path . $fileName;
+        $station->latitude = $lat;
+        $station->longtitude = $long;
+        $station->saveOrFail();
+
+        // Put manager email in invitations table
+        $invitation = new Invitation();
+        $invitation->email = $email;
+        $invitation->station_id = $station->id;
+        $invitation->saveOrFail();
+
+        return [
+            'success' => true,
+            'message' => 'Station saved successfully.'
+        ];
     }
 }
