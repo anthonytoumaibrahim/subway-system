@@ -207,27 +207,27 @@ const Header = () => {
       </h1>
 
       <nav className="flex header-nav">
-        <Link to="/" className={`${location.pathname === "/" ? "active" : ""}`}>
+        <Link to="/" className={`${location.pathname === "/" ? "header-active" : ""}`}>
           Home
         </Link>
 
         <Link
           to="/my-rides"
-          className={`${location.pathname === "/my-rides" ? "active" : ""}`}
+          className={`${location.pathname === "/my-rides" ? "header-active" : ""}`}
         >
           My Rides
         </Link>
 
         <Link
           to="/coins"
-          className={`${location.pathname === "/coins" ? "active" : ""}`}
+          className={`${location.pathname === "/coins" ? "header-active" : ""}`}
         >
           Coins
         </Link>
 
         <Link
           to="/chat"
-          className={`${location.pathname === "/chat" ? "active" : ""}`}
+          className={`${location.pathname === "/chat" ? "header-active" : ""}`}
         >
           Chat
         </Link>

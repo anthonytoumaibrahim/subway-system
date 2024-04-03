@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+
+    protected $fillable =[
+       "create_date",
+        "expire_date"
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function ride()
+    {
+        return $this->belongsTo(Ride::class);
+    }
 }

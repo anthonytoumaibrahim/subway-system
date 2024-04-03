@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoinRequest;
+use App\Models\Booking;
 use App\Models\Ride;
 use App\Models\Station;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CoinRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -79,20 +82,19 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getUserRides(Request $req)
-    {
-        $userRides = Ride::where('user_id', $req->id);
-        return response()->json([
-            'status' => "sucsess",
-            'userRides' => $userRides
-        ], 200);
+    public function getUserRides()
+    {   
+        // $id = Auth::id();
+        // $ride_id = Booking::with();
     }
 
     public function getStationRides(Request $req)
     {
-        $stationRides = Ride::with("arrivalStation:id,name")->where("departure_station_id", $req->id)->get();
+        $station = Station::findOrFail($req->id);
+        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req -> id], ["departure_date", ">=", Carbon::now()->toDateTimeString()]])->orderBy("departure_date", "DESC")->get();
         return response()->json([
             "status" => "success",
+            "station" => ["name" => $station->name, "image" => $station->image],
             "stationRides" => $stationRides
         ]);
     }
