@@ -14,8 +14,10 @@ import AdminMap from "../AdminMap";
 // Request
 import { sendRequest } from "../../../../../core/tools/remote/request";
 
-const AddBranch = () => {
+const AddBranch = ({ updateStations = () => {} }) => {
   const [showMap, setShowMap] = useState(false);
+
+  const [errors, setErrors] = useState({});
 
   const [branchInfo, setBranchInfo] = useState({
     name: "",
@@ -43,7 +45,7 @@ const AddBranch = () => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-
+    setErrors({});
     const data = new FormData();
     data.append("name", branchInfo.name);
     data.append("email", branchInfo.email);
@@ -51,9 +53,17 @@ const AddBranch = () => {
     data.append("longtitude", branchInfo.long);
     data.append("image", branchInfo.image);
 
-    sendRequest("POST", "/admin/create-station", data).then((response) =>
-      console.log(response.data)
-    );
+    sendRequest("POST", "/admin/create-station", data)
+      .then((response) => {
+        const { success, message, station } = response.data;
+        if (success === true) {
+          updateStations(station);
+        }
+      })
+      .catch((error) => {
+        const { errors, message } = error.response.data;
+        setErrors(errors);
+      });
   };
 
   return (
@@ -123,6 +133,18 @@ const AddBranch = () => {
         </div>
         <button className="admin-button admin-button-primary">Add</button>
       </form>
+      {Object.keys(errors).length > 0 && (
+        <div className="error-col">
+          <p>
+            You have errors in your form, please fix them before submitting.
+          </p>
+          <ul>
+            {Object.keys(errors).map((error, index) => (
+              <li key={index}>{errors[error][0]}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {showMap && (
         <Modal title="Select Location" handleClose={() => setShowMap(false)}>

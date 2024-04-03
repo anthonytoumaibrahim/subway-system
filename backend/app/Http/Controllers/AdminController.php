@@ -86,4 +86,19 @@ class AdminController extends Controller
             'station' => $station->with('manager')->find($station->id)
         ];
     }
+
+    public function deleteStation(Request $request)
+    {
+        $id = $request->station_id;
+        $station = Station::find($id);
+        if ($station) {
+            $station->deleteOrFail();
+            return [
+                "success" => true
+            ];
+        }
+        return [
+            "success" => false
+        ];
+    }
 }
