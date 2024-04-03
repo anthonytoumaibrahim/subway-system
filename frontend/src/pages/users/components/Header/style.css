@@ -28,7 +28,7 @@
 }
 
 .header{
-  padding: 20px 80px;
+  padding: 30px 80px;
 }
 
 .reg-btn{
@@ -57,11 +57,17 @@
 }
 
 .profile-image{
-  border-radius: 25px;
-
+  border-radius: 35px;
+  position: absolute;
+  left: -100px;
 }
 
 .profile-image:hover{
   cursor: pointer;
   opacity: 0.8;
+}
+
+.profile-logout{
+  gap: 30px;
+  position: relative;
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import "./style.css"
+import StationRide from "../components/StationRide"
 
-import Button from '../../../components/Button'
 import stationImage from "../../../assets/images/home/stationImage.png"
 const Station = () => {
   const [isPass, setIsPass] = useState(false)
@@ -29,74 +29,30 @@ const Station = () => {
       </div>
 
       <div className='flex column rides-wrapper'>
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
 
-          <p>destination</p>
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        rides={4} 
+        price={45}
+        isPass={isPass}/>
 
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        price={45}
+        isPass={isPass}/>
 
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
-
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
-
-          <p>destination</p>
-
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
-
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
-
-        <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
-
-          <p>destination</p>
-
-          <div>
-            <p>departure date</p>
-            <p>arrival date</p>
-          </div>
-
-          <div>
-            <p>rides</p>
-            <p>price</p>
-          </div>
-
-          <div className='purchase-btn-wrapper'>
-            <Button
-            className="purchase-btn"
-            name={"Purchase"}
-            />
-          </div>
-
-        </div>
+        <StationRide
+        destination={"saida"} 
+        departureDate={"date here"} 
+        arrivalDate={"date here"} 
+        rides={4} 
+        price={45}
+        isPass={isPass}/>
+       
       </div>
     </div>
   )

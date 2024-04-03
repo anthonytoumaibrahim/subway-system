@@ -10,7 +10,7 @@ import "./styles/utilities.css";
 // components
 import UserLayout from "./pages/users/UserLayout";
 import Home from "./pages/users/Home";
-import MyRides from "./pages/users/Station";
+import MyRides from "./pages/users/MyRides";
 import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
 import Station from "./pages/users/Station";
