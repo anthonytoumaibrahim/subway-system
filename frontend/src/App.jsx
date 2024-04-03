@@ -14,6 +14,7 @@ import MyRides from "./pages/users/Station";
 import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
 import Station from "./pages/users/Station";
+// import Rides from "./pages/Manager/components/Rides";
 
 // Pages
 import Overview from "./pages/admin/Overview";
@@ -34,6 +35,7 @@ import Manager from "./pages/Manager";
 // Toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Rides from "./pages/Manager/components/Rides";
 
 const App = () => {
   const localUser = getLocalUser();
@@ -77,8 +79,11 @@ const App = () => {
             <Route path="coin-requests" element={<CoinRequests />} />
           </Route>
 
-          <Route path="/manager" element={<Manager/>}/>
-          
+          <Route path="/manager" >
+            <Route index element={<Manager/>}/>
+            <Route path='Rides' element={<Rides/>}/>
+             
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

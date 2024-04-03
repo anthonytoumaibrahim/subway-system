@@ -13,9 +13,8 @@ class ManagerController extends Controller
 {
     public function getStationInfo(Request $req){
     
-    {
-        $station = Station::where('name', $name)->first();
-
+        $id=$req->id;
+        $station = Station::with('facilities:id,name')->find($id);
         if (!$station) {
             return response()->json([
                 'error' => true,
@@ -23,19 +22,17 @@ class ManagerController extends Controller
             ], 404);
         }
 
-        
+        $name = $station->name;
         $opening = $station->opening;
         $closing = $station->closing;
-
         $status = $station->status;
-        $facilityName = Facility::find($station->id)->name;
+
+     
 
         return response()->json([
-            'station_name' => $name,
-            'opening' => $opening,
-            'closing' => $closing,
-            'status' => $status,
-            'facility_name' => $facilityName
+            'success'=> true,
+            'station'=> $station
+          
         ]);
-    }}
+    }
 }
