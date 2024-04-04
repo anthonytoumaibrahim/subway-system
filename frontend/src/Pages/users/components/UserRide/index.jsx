@@ -4,7 +4,7 @@ import Button from '../../../../components/Button'
 const UserRide = ({ station, stationImage, destination, departureDate, arrivalDate, handleAddReviewClick }) => {
   return (
     <div className='flex center ride-wrapper space-between  bg-dark-gray-col'> 
-        <img className='station-image' height={70} src={stationImage} alt="station Image" />
+        <img className='station-image' height={70} width={170} src={stationImage} alt="station Image" />
       
           <div className='ride-info'>
             <p>{station}</p>

@@ -85,20 +85,16 @@ class UserController extends Controller
     public function getUserRides()
     {
         $user = User::findOrFail(Auth::id());
-        
+
         $bookings = $user->bookings()->with(['ride.departureStation:id,name,image', 'ride.arrivalStation:id,name'])->get();
-        
+
         // Extract ride details with departure station
-        $rides = $bookings->map(function ($booking) {
-            return [
-                'ride' => $booking->ride,
-            ];
-        });
+        $rides = $bookings->map->ride;
 
         return response()->json([
             'status' => 'success',
             'rides' => $rides
-        ]);
+]);
     }
 
     public function getStationRides(Request $req)

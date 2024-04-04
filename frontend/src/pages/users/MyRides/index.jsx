@@ -9,8 +9,9 @@ import { requestMethods } from '../../../core/enums/requestMethods'
 
 
 const MyRides = () => {
+  const [rideId, setRideId] = useState("")
   const [isOpen, setIsOpen] = useState(false)
-  const [userRides, setUserRides] = useState()
+  const [userRides, setUserRides] = useState([])
 
   useEffect(() => {
     sendRequest(requestMethods.GET, "/user-rides")
@@ -20,14 +21,16 @@ const MyRides = () => {
     })
   }, [])
 
-  const handleCncelClick = () => {
+  const handleCancelClick = () => {
     setIsOpen(false)
   }
-  const handleAddReviewClick = () => {
+  const handleAddReviewClick = (id) => {
     setIsOpen(true)
+    setRideId(id)
   }
 
   console .log(userRides)
+
 
   return (
     <div className='flex column center my-rides-container user-container'>
@@ -39,9 +42,15 @@ const MyRides = () => {
           <textarea className='bg-gray-col white' placeholder='Your Review' />
 
           <div className='flex space-between'>
-            <Button name={"Confirm"}/>
-            <Button name={"Cancel"}
-            handleClick={handleCncelClick}/>
+            <Button 
+            name={"Confirm"}
+        
+            />
+
+            <Button 
+            name={"Cancel"}
+            handleClick={handleCancelClick}
+            />
           </div>
 
         </div>
@@ -49,12 +58,13 @@ const MyRides = () => {
 
       {userRides && userRides.map((ride)=>(
         <UserRide
+        key={ride.id}
         station={ride.departure_station.name}
         stationImage={ride.departure_station.image}
         destination={ride.arrival_station.name}
         departureDate={ride.departure_date}
         arrivalDate={ride.arrival_date}
-        handleClick={handleAddReviewClick}
+        handleAddReviewClick={()=>handleAddReviewClick(ride.id)}
         />
       ))}
 
@@ -75,7 +85,7 @@ const MyRides = () => {
           <div>
             <Button
             name={"Add Review"}
-            handleClick={handleAddReviewClick}
+            handleClick={()=>handleAddReviewClick(ride.id)}
             />
           </div>
      
@@ -94,7 +104,7 @@ const MyRides = () => {
           <div>
             <Button
             name={"Add Review"}
-            handleClick={handleAddReviewClick}
+            handleClick={()=>handleAddReviewClick(ride.id)}
             />
           </div>
      
