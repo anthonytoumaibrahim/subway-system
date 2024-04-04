@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\ManagerAuth;
@@ -18,6 +19,10 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
     Route::post('/send-coin-request', 'sendCoinRequest');
+    Route::prefix('/chat')->controller(ChatController::class)->group(function () {
+        Route::get('/get-stations', 'getStations');
+        Route::post('/get-chats', 'getChats');
+    });
 });
 
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->controller(AdminController::class)->group(function () {

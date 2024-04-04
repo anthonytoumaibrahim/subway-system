@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StationSeeder::class);
         $this->call(RideSeeder::class);
         $this->call(CoinRequestSeeder::class);
+        $this->call(ChatSeeder::class);
         // User::factory(10)->create();
 
         // User::factory()->create([

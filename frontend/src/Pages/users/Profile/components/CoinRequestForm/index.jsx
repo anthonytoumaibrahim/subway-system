@@ -24,7 +24,8 @@ const CoinRequestForm = () => {
         toast.success("Sent request successfully.");
       })
       .catch((error) => {
-        toast.error("Sorry, something went wrong.");
+        const { message } = error.response.data;
+        toast.error(message ?? "Sorry, something went wrong.");
       })
       .finally(() => {
         buttonRef.current.disabled = false;
