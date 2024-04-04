@@ -3,9 +3,25 @@ import React from "react";
 import "./components/Rides";
 import Sidebar from './components/Sidebar';
 import './station.css';
-import { useState } from 'react';
+import { useState,useEffect } from "react";
+import axios from "axios";
+import { sendRequest } from "../../../../../core/tools/remote/request";
 
 const Manager = () =>{
+    // const [stationData, setStationData] = useState(null);
+    // const ApiURL= 'http://localhost:8000/api/get-stationInfo?id=1';
+    // const getStationInfo=async()=>{
+    //     try{
+    //         const response = await axios.get(ApiURL);
+    //         setStationData(response.data);
+    //         console.log(response.data);
+    //       } catch (error) {
+    //         console.error(error);
+    //       }
+    //     };
+    
+    
+
    return(
     <><div className='Station-container flex '>
         

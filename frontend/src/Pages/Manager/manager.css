@@ -117,7 +117,7 @@
  }
 
 
- .logout{
+ .logout ,.Add-btn{
     width: 80px;
     height: 30px;
     align-self: center;
@@ -136,6 +136,7 @@ body{
     background-color: #272727;
 }
 
-.active {
-    background-color:#66b896}
+input{
+  background-color: #959595;
+}
 

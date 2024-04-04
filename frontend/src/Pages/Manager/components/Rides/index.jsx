@@ -2,27 +2,33 @@ import React from "react";
 import "../../manager.css"
 import Sidebar from '../Sidebar';
 import '../../station.css';
+import './style.css';
+import { useState,useEffect } from "react";
 
 const Rides = () => {
+  
+  
+
+      
    return ( 
      <div className='Station-container flex'>
        <Sidebar /> 
-       <div className='station-info-section flex column'>
+       <div className='station-info-section flex column  gap-50'>
          <h4 className='station-name text-center text-primary'>Station name</h4>
-         <div className="ride-inputs flex">
-           <div className="ride-info flex column">
+         <div className="ride-inputs flex gap-20">
+           <div className="ride-info flex column space-between">
              <input type="text" name="destination" placeholder="Destination" />
              <input type="text" name="price" placeholder="Price" />
            </div>
-           <div className="Departure flex column">
+           <div className="Departure flex column space-between gap-10">
              <input type="date" name="departure date" placeholder="Departure date" />
              <input type="time" name="departure time" placeholder="Departure time" />
            </div>
-           <div className="Arrival flex column">
+           <div className="Arrival flex column space-between">
              <input type="date" name="arrival date" placeholder="Arrival date" />
              <input type="time" name="arrival time" placeholder="Arrival time" />
            </div>
-           <button type="submit">Add</button>
+           <button className="Add-btn bg-primary" type="submit">Add</button>
          </div>
          <table className="ride-table white">
            <thead>
@@ -38,7 +44,7 @@ const Rides = () => {
                <td>46</td>
                <td>11:00 AM</td>
                <td>20:00 PM</td>
-               <td><img src="./manager-icons/edit.icon.png" alt="edit" /></td>
+               <td><img src="../manager-icons/edit-icon.png" alt="edit" /></td>
              </tr>
            </tbody>
          </table>
