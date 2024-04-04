@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
@@ -42,6 +43,23 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->cont
     Route::post('/update-coin-request', 'updateCoinRequest');
 });
 
-Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->group(function () {
-    Route::get('/get-stationInfo', [AdminController::class, 'getStationInfo']);
+
+Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->group(function(){
+    Route::get('/get-stationInfo',[ManagerController::class,'getStationInfo']);
 });
+Route::get('/get-stationInfo',[ManagerController::class,'getStationInfo']);
+Route::get('/get-rides',[ManagerController::class,'getRideInfo']);
+Route::post('/update-stationInfo',[ManagerController::class,'updateStationInfo']);
+Route::post('/update-rides',[ManagerController::class,'updateRideInfo']);
+Route::post('/create-rides',[ManagerController::class,'createRide']);
+
+
+
+
+
+
+
+
+
+Route::get('/get-stations', [UserController::class, 'getStations']);
+Route::get("/user-rides", [UserController::class, "getUserRides"]);
