@@ -3,6 +3,8 @@ import "./style.css"
 import UserReview from '../../../components/UserReview'
 const Reviews = () => {
   return (
+    
+
     <div class="flex column center reviews-container white user-container">
       <h1>Let Our Customers Speak for Us</h1>
       <div class="flex  reviews-wrapper">

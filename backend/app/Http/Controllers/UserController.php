@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CoinRequest;
 use App\Models\Review;
 use App\Models\User;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -159,10 +160,26 @@ class UserController extends Controller
         $review->ride_id = $rideId;
         $review->rating = $rating;
         $review->text = $text;
+        $review->save();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Review successful.'
+        ]);
+    }
+
+    public function getReviews(Request $req){
+
+        $limit = $req ? $req -> limit : null;
+        if ($limit){
+            $reviews = Review::orderBy('rating', 'DESC')->limit(6)->get(); 
+        }
+        else{
+            $reviews = Review::all();
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => $reviews
         ]);
     }
 
