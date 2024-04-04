@@ -80,4 +80,22 @@
   .chat {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+
+  .chat-users{
+    max-height: 344px;
+    overflow: scroll;
+  }
+
+  ::-webkit-scrollbar{
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .chat-button{
+    padding: 10px;
+  }
+
+  .message-form{
+    flex-direction: column;
+  }
 }
