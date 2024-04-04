@@ -4,7 +4,7 @@ const Button = ({ handleClick, name }) => {
   return (
     <button
       className="reg-btn bg-primary font-bold white"
-      onClick={handleClick}
+      onClick={() => handleClick()}
     >{`${name}`}</button>
   );
 };
