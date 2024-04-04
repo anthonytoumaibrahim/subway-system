@@ -1,5 +1,6 @@
 .overview-container {
   display: flex;
+  gap: 40px;
 }
 .overview-container .charts {
   width: 60%;
@@ -8,4 +9,16 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .overview-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .overview-container .charts {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
