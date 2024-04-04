@@ -8,32 +8,14 @@ import { useNavigate } from "react-router-dom";
 import stationImage from "../../../../../assets/images/home/stationImage.jpg";
 import { requestMethods } from "../../../../../core/enums/requestMethods";
 
-const UserMap = () => {
+const UserMap = ({ stations }) => {
   const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "dataviz-dark");
   const navigate = useNavigate();
   const [center, setCenter] = useState([33.85348976858829, 35.53530658599391]);
   const [zoom, setZoom] = useState(9);
-  const [stations, setStations] = useState([]);
   const [filteredStations, setFilteredStations] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-
-  const getStations = () => {
-    sendRequest(requestMethods.GET, "/get-stations")
-      .then((response) => {
-        const data = response.data;
-        if (data.status === "success") {
-          setStations(data.stations);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching stations:", error);
-      });
-  };
-
-  useEffect(() => {
-    getStations();
-  }, []);
-
+  
   const handleMapInputChange = (e) => {
     setSearchInput(e.target.value);
   };
