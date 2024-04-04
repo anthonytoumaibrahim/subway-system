@@ -36,6 +36,7 @@ const Home = () => {
       <div className="separator-div"></div>
       <NearestStations stations={stations} />
       <UserMap stations={stations} />
+
       <Guidline />
       {/* <Reviews/> */}
     </div>
