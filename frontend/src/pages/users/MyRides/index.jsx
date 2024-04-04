@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../../../components/Button'
 import "./style.css"
+import UserRide from '../components/UserRide'
 import stationImage from "../../../assets/images/home/stationImage.png"
 import { sendRequest } from '../../../core/tools/remote/request'
 import { requestMethods } from '../../../core/enums/requestMethods'
 
 
+
 const MyRides = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [userRides, setUserRides] = useState()
+
   useEffect(() => {
     sendRequest(requestMethods.GET, "/user-rides")
     .then((response)=> {
@@ -24,6 +27,7 @@ const MyRides = () => {
     setIsOpen(true)
   }
 
+  console .log(userRides)
 
   return (
     <div className='flex column center my-rides-container user-container'>
@@ -42,6 +46,21 @@ const MyRides = () => {
 
         </div>
       </div>}
+
+      {userRides && userRides.map((ride)=>(
+        <UserRide
+        station={ride.departure_station.name}
+        stationImage={ride.departure_station.image}
+        destination={ride.arrival_station.name}
+        departureDate={ride.departure_date}
+        arrivalDate={ride.arrival_date}
+        handleClick={handleAddReviewClick}
+        />
+      ))}
+
+      
+
+
       <div className='flex center ride-wrapper space-between  bg-dark-gray-col'> 
         <img className='station-image' height={70} src={stationImage} alt="station Image" />
       
