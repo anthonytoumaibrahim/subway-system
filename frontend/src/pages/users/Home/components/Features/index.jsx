@@ -11,7 +11,7 @@ const Features = () => {
     <div className='flex column features-container user-container'>
 
       <h1>Why Metro<span className='text-primary'>Hub</span>?</h1>
-      <div className='flex space-between features-wrapper'>
+      <div className='flex features-wrapper'>
         <FeatureCard
         icon={hub}
         heading={"Seamless Connectivity"}

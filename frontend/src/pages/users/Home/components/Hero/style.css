@@ -10,7 +10,7 @@
 
 .hero-text{
   width: 45%;
-  min-width: 450px;
+  min-width: 300px;
   gap: 100px;
   height: 100%;
   z-index: 1;
@@ -30,3 +30,37 @@
   right: 0;
   bottom: 0;
 }
+
+@media screen and (max-width: 1024px) {
+  .metro-image{
+    display: none;
+  }
+
+  .hero-text{
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .hero-text > h1{
+    font-size: var(--font-size-4xl);
+
+  }
+  
+  .hero-text > p{
+    font-size: var(--font-size-base);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-text > h1{
+    font-size: var(--font-size-4xl);
+
+  }
+  
+  .hero-text > p{
+    font-size: var(--font-size-base);
+  }
+}
+

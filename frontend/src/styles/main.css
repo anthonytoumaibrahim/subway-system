@@ -85,13 +85,29 @@ a:hover {
 }
 
 /* Responsiveness */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    
+  }
+  
+  .user-container {
+    padding: 20px 60px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     max-width: 768px;
   }
+
+  .user-container {
+    padding: 20px 40px;
+  }
 }
-@media (max-width: 1024px) {
-  .container {
-    max-width: 1024px;
+
+@media (max-width: 480px){
+  .user-container {
+    padding: 20px;
   }
 }
