@@ -1,8 +1,11 @@
 .map-container{
   border-right:  1px solid black;
   border-left:  1px solid black;
-  padding-bottom: 50px;
-  padding-top: 50px;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 80px;
   position: relative;
 }
 
@@ -62,4 +65,26 @@
   /* background-color: white; */
   border-radius: 10px;
   gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  .map-container {
+    padding: 50px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    padding: 50px 40px;
+  }
+}
+
+@media (max-width: 480px){
+  .map-container {
+    padding: 50px 0;
+  }
+
+  .map-search-wrapper{
+    left: -70px;
+  }
 }

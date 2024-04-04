@@ -7,12 +7,12 @@ const UserRide = ({ station, stationImage, destination, departureDate, arrivalDa
         <img className='station-image' height={70} width={170} src={stationImage} alt="station Image" />
       
           <div className='ride-info'>
-            <p>{station}</p>
-            <p>{destination}</p>
+            <p>{`From: ${station}`}</p>
+            <p>{`To: ${destination}`}</p>
           </div>
           <div className='ride-info'>
-            <p>{departureDate}</p>
-            <p>{arrivalDate}</p>
+            <p>{`Departure: ${departureDate}`}</p>
+            <p>{`Arrival: ${arrivalDate}`}</p>
           </div>
           <div>
             <Button

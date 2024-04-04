@@ -135,7 +135,7 @@ const Chat = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
               />
               <button
-                className="admin-button admin-button-primary"
+                className="chat-button admin-button admin-button-primary"
                 ref={btnRef}
               >
                 Send

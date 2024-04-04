@@ -1,8 +1,10 @@
 import React from 'react'
 import "./style.css"
+
 import Button from '../../../../../components/Button'
-import heroBg from "../../../../../assets/images/home/beirut_bg.jpg"
 import metro from "../../../../../assets/images/home/metro.png"
+
+
 const Hero = () => {
   return (
     <div className='flex align-center hero-container user-container'>

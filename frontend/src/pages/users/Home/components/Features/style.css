@@ -14,7 +14,15 @@
 
 .features-wrapper{
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 25px;
+}
+
+
+@media (max-width: 921px){
+  .features-wrapper{
+    justify-content: space-around;
+  }
 }
 
 
