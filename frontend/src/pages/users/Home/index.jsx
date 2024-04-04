@@ -14,7 +14,7 @@ const Home = () => {
       <div className="separator-div"></div>
       <UserMap />
       <Guidline />
-      {/* <Reviews/> */}
+      <Reviews/>
     </div>
   );
 };

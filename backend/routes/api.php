@@ -25,6 +25,7 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::get("/user-rides", "getUserRides");
     Route::post("/book-ride", "bookRide");
     Route::post('/send-coin-request', 'sendCoinRequest');
+    Route::post("/add-review", "addReview");
     Route::prefix('/chat')->controller(ChatController::class)->group(function () {
         Route::get('/get-stations', 'getStations');
         Route::post('/get-chats', 'getChats');

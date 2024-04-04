@@ -1,0 +1,32 @@
+.reviews-container{
+  border: 1px solid black;
+}
+
+.reviews-container h1{
+  margin: 20px 0 40px 0;
+
+}
+
+.reviews-wrapper{
+  overflow-x: hidden;
+  width: calc(100% + 160px);
+}
+
+@media (max-width: 1024px){
+  .reviews-wrapper{
+    width: calc(100% + 120px);
+  }
+}
+
+@media (max-width: 1024px){
+  .reviews-wrapper{
+    width: calc(100% + 80px);
+  }
+}
+
+@media (max-width: 1024px){
+  .reviews-wrapper{
+    width: calc(100% + 40px);
+  }
+}
+  

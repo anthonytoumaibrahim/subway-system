@@ -8,6 +8,7 @@ use App\Models\Station;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CoinRequest;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -145,4 +146,24 @@ class UserController extends Controller
             'message' => 'Booking successful.'
         ]);
     }
+
+    public function addReview(Request $req){
+
+        $userId = Auth::id();
+        $rideId = $req->ride_id;
+        $rating = $req->rating;
+        $text = $req->text;
+
+        $review = new Review();
+        $review->user_id = $userId;
+        $review->ride_id = $rideId;
+        $review->rating = $rating;
+        $review->text = $text;
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Review successful.'
+        ]);
+    }
+
 }
