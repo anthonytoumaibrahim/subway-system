@@ -80,14 +80,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="chat"
-              element={
-                <ProtectedRoute role={1}>
-                  <Chat />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="chat" element={<Chat />} />
             <Route
               path="profile"
               element={
@@ -113,7 +106,7 @@ const App = () => {
           <Route path="/manager">
             <Route index element={<Manager />} />
             <Route path="Rides" element={<Rides />} />
-            {/* <Route path='Chats' element={<Chats/>}/> */}
+            <Route path="Chats" element={<Chats />} />
             <Route path="ManagerReviews" element={<ManagerReviews />} />
           </Route>
         </Routes>
