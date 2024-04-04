@@ -39,7 +39,7 @@ class ChatController extends Controller
             if ($chat->sender != $user_id) {
                 $chat->reply = true;
             }
-            $chat->time = Carbon::parse($chat->created_at)->toTimeString('minute');
+            $chat->time = Carbon::parse($chat->created_at)->format('h:i A');
         })->groupBy(function ($chat) {
             return $chat->created_at->toDateString();
         });
