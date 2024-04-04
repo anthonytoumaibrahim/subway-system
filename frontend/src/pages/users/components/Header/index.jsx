@@ -219,15 +219,6 @@ const Header = () => {
           </Link>
 
           <Link
-            to="/coins"
-            className={`${
-              location.pathname === "/coins" ? "header-active" : ""
-            }`}
-          >
-            Coins
-          </Link>
-
-          <Link
             to="/chat"
             className={`${
               location.pathname === "/chat" ? "header-active" : ""

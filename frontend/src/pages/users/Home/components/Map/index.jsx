@@ -8,14 +8,54 @@ import { useNavigate } from "react-router-dom";
 import stationImage from "../../../../../assets/images/home/stationImage.jpg";
 import { requestMethods } from "../../../../../core/enums/requestMethods";
 
-const UserMap = ({ stations }) => {
+// geolib
+import { useGeolocation } from "@uidotdev/usehooks";
+import { findNearest } from "geolib";
+
+import close_icon from "../../../../../assets/icons/admin-icons/close.svg";
+import Button from "../../../../../components/Button";
+
+const UserMap = () => {
   const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "dataviz-dark");
   const navigate = useNavigate();
   const [center, setCenter] = useState([33.85348976858829, 35.53530658599391]);
   const [zoom, setZoom] = useState(9);
   const [filteredStations, setFilteredStations] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  
+
+  const geoState = useGeolocation();
+
+  const [nearestStation, setNearestStation] = useState(null);
+  const [showNearest, setShowNearest] = useState(true);
+  const [stations, setStations] = useState([]);
+
+  const getStations = () => {
+    sendRequest("GET", "/get-stations")
+      .then((response) => {
+        const data = response.data;
+        if (data.status === "success") {
+          setStations(data.stations);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching stations:", error);
+      });
+  };
+
+  useEffect(() => {
+    getStations();
+  }, []);
+
+  useEffect(() => {
+    if (stations.length > 0 && !geoState.loading && !geoState.error) {
+      const nearest = findNearest(
+        { latitude: geoState.latitude, longitude: geoState.longitude },
+        stations
+      );
+      setNearestStation(nearest);
+    }
+  }, [stations, geoState.loading]);
+
   const handleMapInputChange = (e) => {
     setSearchInput(e.target.value);
   };
@@ -29,6 +69,32 @@ const UserMap = ({ stations }) => {
 
   return (
     <div className="map-container user-container">
+      {!geoState.loading && !geoState.error && showNearest && (
+        <div className="nearest-station">
+          <img
+            src={close_icon}
+            alt="Close"
+            className="close-icon"
+            onClick={() => setShowNearest(false)}
+          />
+          <img src={nearestStation?.image} alt="Station" />
+          <div className="content">
+            <h2>{nearestStation?.name}</h2>
+            <p>Nearest to you</p>
+            <Button
+              name="Check out"
+              handleClick={() => {
+                setCenter([
+                  nearestStation?.latitude,
+                  nearestStation?.longtitude,
+                ]);
+                setZoom(14);
+                setShowNearest(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
       <div className="map-search-wrapper">
         <div className="map-search">
           <img className="search-icon" src={search} alt="search" />
