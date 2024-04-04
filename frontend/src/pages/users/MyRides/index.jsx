@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../../../components/Button'
 import "./style.css"
+
+import Button from '../../../components/Button'
 import UserRide from '../components/UserRide'
 import stationImage from "../../../assets/images/home/stationImage.png"
+
 import { sendRequest } from '../../../core/tools/remote/request'
 import { requestMethods } from '../../../core/enums/requestMethods'
 
@@ -44,7 +46,7 @@ const MyRides = () => {
           <div className='flex space-between'>
             <Button 
             name={"Confirm"}
-        
+            
             />
 
             <Button 
@@ -68,47 +70,6 @@ const MyRides = () => {
         />
       ))}
 
-      
-
-
-      <div className='flex center ride-wrapper space-between  bg-dark-gray-col'> 
-        <img className='station-image' height={70} src={stationImage} alt="station Image" />
-      
-          <div className='ride-info'>
-            <p>station</p>
-            <p>destination</p>
-          </div>
-          <div className='ride-info'>
-            <p>departuredate</p>
-            <p>arrival date</p>
-          </div>
-          <div>
-            <Button
-            name={"Add Review"}
-            handleClick={()=>handleAddReviewClick(ride.id)}
-            />
-          </div>
-     
-      </div>
-      <div className='flex center ride-wrapper space-between  bg-dark-gray-col'> 
-        <img className='station-image' height={70} src={stationImage} alt="station Image" />
-      
-          <div className='ride-info'>
-            <p>station</p>
-            <p>destination</p>
-          </div>
-          <div className='ride-info'>
-            <p>departuredate</p>
-            <p>arrival date</p>
-          </div>
-          <div>
-            <Button
-            name={"Add Review"}
-            handleClick={()=>handleAddReviewClick(ride.id)}
-            />
-          </div>
-     
-      </div>
     </div>
   )
 }
