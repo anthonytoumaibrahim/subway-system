@@ -1,14 +1,14 @@
-.popup-container{
+.popup-container {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6) ;
-  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
 }
 
-.popup-wrapper{
+.popup-wrapper {
   padding: 40px 20px;
   gap: 1rem;
   border-radius: 10px;
@@ -18,11 +18,11 @@
   max-width: 400px;
 }
 
-.error-div{
+.error-div {
   width: 100%;
 }
 
-.reg-switch:hover{
+.reg-switch:hover {
   opacity: 0.9;
 
   cursor: pointer;

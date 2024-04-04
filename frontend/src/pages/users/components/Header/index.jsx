@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Login from "../Login";
 import Signup from "../Signup";
@@ -14,12 +14,10 @@ import { requestMethods } from "../../../../core/enums/requestMethods";
 import { AuthContext } from "../../../../core/contexts/AuthContext";
 
 // Utilities
-import {
-  removeLocalUser,
-  setLocalUser,
-} from "../../../../core/tools/local/user";
+import { setLocalUser } from "../../../../core/tools/local/user";
 
 import profileImage from "../../../../assets/icons/admin-icons/subway.svg";
+import hamburger from "../../../../assets/icons/admin-icons/sidebar-hamburger.svg";
 
 // Toastify
 import { toast } from "react-toastify";
@@ -169,8 +167,10 @@ const Header = () => {
       });
   };
 
+  const navRef = useRef(null);
+
   return (
-    <div className="flex align-center space-between header bg-dark-gray-col">
+    <header className="site-header">
       {isSignup && (
         <Signup
           credentials={credentials}
@@ -200,70 +200,83 @@ const Header = () => {
         Metro<span className="logo text-primary">Hub</span>
       </h1>
 
-      <nav className="flex header-nav">
-        <Link
-          to="/"
-          className={`${location.pathname === "/" ? "header-active" : ""}`}
-        >
-          Home
-        </Link>
+      <nav className="header-nav" ref={navRef}>
+        <div className="links">
+          <Link
+            to="/"
+            className={`${location.pathname === "/" ? "header-active" : ""}`}
+          >
+            Home
+          </Link>
 
-        <Link
-          to="/my-rides"
-          className={`${
-            location.pathname === "/my-rides" ? "header-active" : ""
-          }`}
-        >
-          My Rides
-        </Link>
+          <Link
+            to="/my-rides"
+            className={`${
+              location.pathname === "/my-rides" ? "header-active" : ""
+            }`}
+          >
+            My Rides
+          </Link>
 
-        <Link
-          to="/coins"
-          className={`${location.pathname === "/coins" ? "header-active" : ""}`}
-        >
-          Coins
-        </Link>
+          <Link
+            to="/coins"
+            className={`${
+              location.pathname === "/coins" ? "header-active" : ""
+            }`}
+          >
+            Coins
+          </Link>
 
-        <Link
-          to="/chat"
-          className={`${location.pathname === "/chat" ? "header-active" : ""}`}
-        >
-          Chat
-        </Link>
+          <Link
+            to="/chat"
+            className={`${
+              location.pathname === "/chat" ? "header-active" : ""
+            }`}
+          >
+            Chat
+          </Link>
+        </div>
+
+        <div className="register-btns">
+          {isLoggedIn ? (
+            <div className="flex center profile-logout">
+              <Link to="/profile" className="profile-image-link">
+                <img
+                  className="profile-image"
+                  width={70}
+                  src={user.avatar ?? profileImage}
+                  alt="profile"
+                />
+              </Link>
+
+              <Button name={"Logout"} handleClick={logout} />
+            </div>
+          ) : (
+            <>
+              <button
+                className="reg-btn bg-primary font-bold white"
+                onClick={handleLoginClick}
+              >
+                Login
+              </button>
+              <button
+                className="reg-btn signup-btn text-primary font-bold"
+                onClick={handleSignupClick}
+              >
+                Signup
+              </button>
+            </>
+          )}
+        </div>
       </nav>
 
-      <div className="flex bold register-btns">
-        {isLoggedIn ? (
-          <div className="flex center profile-logout">
-            <Link to="/profile" className="profile-image-link">
-              <img
-                className="profile-image"
-                width={70}
-                src={user.avatar ?? profileImage}
-                alt="profile"
-              />
-            </Link>
-
-            <Button name={"Logout"} handleClick={logout} />
-          </div>
-        ) : (
-          <>
-            <button
-              className="reg-btn bg-primary font-bold white"
-              onClick={handleLoginClick}
-            >
-              Login
-            </button>
-            <button
-              className="reg-btn signup-btn text-primary font-bold"
-              onClick={handleSignupClick}
-            >
-              Signup
-            </button>
-          </>
-        )}
-      </div>
-    </div>
+      <img
+        src={hamburger}
+        alt="Menu"
+        className="hamburger-btn"
+        onClick={() => navRef.current.classList.toggle("flex")}
+      />
+    </header>
   );
 };
 

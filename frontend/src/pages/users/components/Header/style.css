@@ -1,32 +1,57 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 80px;
+  background-color: var(--dark-gray-col);
+  position: relative;
+}
+
+.site-header .hamburger-btn {
+  width: 40px;
+  filter: invert();
+  display: none;
+  cursor: pointer;
+}
+.site-header .hamburger-btn:hover {
+  opacity: 0.5;
+}
+
 .logo {
   font-size: 2rem;
 }
 
 .header-nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-nav .links {
+  margin: auto;
+  display: flex;
   gap: 2.5rem;
 }
 
-.header-nav > a {
+.header-nav .links > a {
   color: #d9d9d9;
   font-size: 1.25rem;
   text-decoration: none;
   border-bottom: 3px solid rgba(0, 0, 0, 0);
 }
 
-.header-nav > a:hover {
+.header-nav .links > a:hover {
   border-bottom: 2px solid var(--primary-col);
 }
 
-.header-nav > a:not(.header-active) {
+.header-nav .links > a:not(.header-active) {
   transition: border-bottom 0.2s ease;
 }
 
-.header-nav > .header-active {
+.header-nav .links > .header-active {
   border-bottom: 3px solid var(--primary-col) !important;
-}
-
-.header {
-  padding: 30px 80px;
 }
 
 .reg-btn {
@@ -45,6 +70,7 @@
 }
 
 .register-btns {
+  display: flex;
   gap: 0.5rem;
 }
 
@@ -74,4 +100,36 @@
 .profile-logout {
   gap: 30px;
   position: relative;
+}
+
+@media (max-width: 1024px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: black;
+    padding: 20px;
+    flex-direction: column;
+    z-index: 5;
+  }
+  .header-nav .links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+  .profile-image-link {
+    position: unset;
+  }
+  .profile-logout {
+    flex-direction: column;
+  }
 }
