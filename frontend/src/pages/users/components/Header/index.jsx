@@ -143,6 +143,7 @@ const Header = () => {
           const { image_url, role_id } = response.data.user;
           const userObject = {
             token: token,
+            role_id: role_id,
             avatar: image_url,
           };
           setUser(userObject);

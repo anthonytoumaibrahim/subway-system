@@ -40,6 +40,7 @@ const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
     token: localUser.token ?? "",
+    role_id: localUser.role_id ?? null,
     avatar: localUser.avatar ?? null,
   });
 
@@ -70,7 +71,7 @@ const App = () => {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute user={user}>
+              <ProtectedRoute role={3}>
                 <AdminLayout />
               </ProtectedRoute>
             }
