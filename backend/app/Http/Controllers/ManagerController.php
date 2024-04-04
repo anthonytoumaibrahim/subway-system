@@ -23,19 +23,9 @@ class ManagerController extends Controller
             ], 404);
         }
 
-        // $name = $station->name;
-        // $opening = $station->opening;
-        // $closing = $station->closing;
-        // $status = $station->status;
-        // $facilities= $station->facility->where;
-
-        
-        
         return response()->json([
             'success'=> true,
             'station'=> $station,
-            
-
           
         ]);
     }
@@ -46,7 +36,8 @@ class ManagerController extends Controller
         $station->update([
             'opening' =>$req ->opening,
             'closing' =>$req->closing,
-            'status'=>$req -> status
+            'status'=>$req -> status,
+            'facility_name'=>$req -> name,
     
         ]);
 
@@ -73,7 +64,7 @@ class ManagerController extends Controller
             "departure_date" => $req -> departure_date,
             "arrival_date" => $req-> arrival_date,
             "price" => $req -> price,
-            "destination"=> $req -> $destination
+            "destination"=> $destination
 
         ]);
         return response()->json([
