@@ -3,7 +3,6 @@ import "./style.css"
 
 import Button from '../../../components/Button'
 import UserRide from '../components/UserRide'
-import stationImage from "../../../assets/images/home/stationImage.png"
 
 import { sendRequest } from '../../../core/tools/remote/request'
 import { requestMethods } from '../../../core/enums/requestMethods'
@@ -46,7 +45,7 @@ const MyRides = () => {
           <div className='flex space-between'>
             <Button 
             name={"Confirm"}
-            
+
             />
 
             <Button 

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import "./style.css"
-import StationRide from "../components/StationRide"
-import { sendRequest } from '../../../core/tools/remote/request'
 import { useParams } from 'react-router-dom'
-import stationImage from "../../../assets/images/home/stationImage.png"
+import "./style.css"
+
+import StationRide from "../components/StationRide"
+
+import { sendRequest } from '../../../core/tools/remote/request'
 import { requestMethods } from '../../../core/enums/requestMethods'
+import { toast } from 'react-toastify'
+
+
 const Station = () => {
   const [rides, setRides] = useState([])
   const [stationInfo, setStationInfo] = useState({
@@ -21,6 +25,20 @@ const Station = () => {
       setStationInfo({...response.data.station})
     })
   },[])
+
+  const handleBooking = (rideId) => {
+    sendRequest(requestMethods.POST, "/book-ride", {
+      ride_id: rideId,
+      is_pass: isPass
+    })
+    .then((response) => {
+      if(response.data.status === "success"){
+        toast.success("Purchase successful.")
+      }
+    }).catch((error) => {
+      toast.error("Insufficient Balance")
+    })
+  }
 
   return (
     <div className=' flex column single-station-container user-container'>
@@ -52,7 +70,10 @@ const Station = () => {
           departureDate={`Dep: ${ride.departure_date}`} 
           arrivalDate={`Arr: ${ride.arrival_date}`} 
           price={ride.price}
-          isPass={isPass}/>
+          isPass={isPass}
+          handleBooking={() => handleBooking(ride.id)}
+          />
+          
         ))}
       </div>
     </div>

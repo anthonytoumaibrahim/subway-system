@@ -14,10 +14,7 @@ import { requestMethods } from "../../../../core/enums/requestMethods";
 import { AuthContext } from "../../../../core/contexts/AuthContext";
 
 // Utilities
-import {
-  removeLocalUser,
-  setLocalUser,
-} from "../../../../core/tools/local/user";
+import { removeLocalUser, setLocalUser } from "../../../../core/tools/local/user";
 
 import profileImage from "../../../../assets/icons/admin-icons/subway.svg";
 
