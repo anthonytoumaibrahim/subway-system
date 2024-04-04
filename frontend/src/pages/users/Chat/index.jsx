@@ -96,7 +96,7 @@ const Chat = () => {
         </div>
 
         <div className="chat-messages">
-          {Object.keys(chatLog).length === 0 && (
+          {selectedStation && Object.keys(chatLog).length === 0 && (
             <p>You have no chats with this station. Send a message now!</p>
           )}
           {Object.keys(chatLog).map((date) => {
@@ -121,18 +121,27 @@ const Chat = () => {
             );
           })}
 
-          <form action="" className="message-form" onSubmit={handleFormSubmit}>
-            <input
-              type="text"
-              className="message-input"
-              placeholder="Enter your message..."
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-            />
-            <button className="admin-button admin-button-primary" ref={btnRef}>
-              Send
-            </button>
-          </form>
+          {selectedStation && (
+            <form
+              action=""
+              className="message-form"
+              onSubmit={handleFormSubmit}
+            >
+              <input
+                type="text"
+                className="message-input"
+                placeholder="Enter your message..."
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+              />
+              <button
+                className="admin-button admin-button-primary"
+                ref={btnRef}
+              >
+                Send
+              </button>
+            </form>
+          )}
         </div>
       </section>
     </div>
