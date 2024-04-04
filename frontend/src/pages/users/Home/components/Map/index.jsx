@@ -11,8 +11,8 @@ import { requestMethods } from '../../../../../core/enums/requestMethods';
 const UserMap = () => {
   const maptilerProvider = maptiler("Zj9yrH5JXUOIXO4Zsxqu", "dataviz-dark");
   const navigate = useNavigate()
-  const [center, setCenter] = useState([33.223423, 35.312312])
-  const [zoom, setZoom] = useState(11)
+  const [center, setCenter] = useState([33.85348976858829, 35.53530658599391])
+  const [zoom, setZoom] = useState(9)
   const [stations, setStations] = useState([])
   const [filteredStations, setFilteredStations] = useState([])
   const [searchInput, setSearchInput] = useState("")

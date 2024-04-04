@@ -15,7 +15,7 @@
 .map-search-wrapper{
   position: absolute;
   top: 85px;
-  right: 50%;
+  left: 0;
   transform: translateX(50%);
   z-index: 1;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../../../../components/Button'
-const StationRide = ({destination, departureDate, arrivalDate, price, isPass,}) => {
+const StationRide = ({destination, departureDate, arrivalDate, price, isPass, handleBooking}) => {
   return (
     <div className='flex space-between center bg-dark-gray-col ride-wrapper'>
 
@@ -20,6 +20,7 @@ const StationRide = ({destination, departureDate, arrivalDate, price, isPass,}) 
         <Button
         className="purchase-btn"
         name={"Purchase"}
+        handleClick={handleBooking}
         />
       </div>
 

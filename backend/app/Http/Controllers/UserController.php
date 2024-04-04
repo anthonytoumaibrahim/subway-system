@@ -84,8 +84,17 @@ class UserController extends Controller
 
     public function getUserRides()
     {
-        // $id = Auth::id();
-        // $ride_id = Booking::with();
+        $user = User::findOrFail(Auth::id());
+
+        $bookings = $user->bookings()->with(['ride.departureStation:id,name,image', 'ride.arrivalStation:id,name'])->get();
+
+        // Extract ride details with departure station
+        $rides = $bookings->map->ride;
+
+        return response()->json([
+            'status' => 'success',
+            'rides' => $rides
+]);
     }
 
     public function getStationRides(Request $req)
@@ -97,6 +106,43 @@ class UserController extends Controller
             "status" => "success",
             "station" => ["name" => $station->name, "image" => $station->image],
             "stationRides" => $stationRides
+        ]);
+    }
+
+    public function bookRide(Request $req)
+    {   
+        $user = User::findOrFail(Auth::id());
+        $rideId = $req->ride_id;
+        $isPass = $req->is_pass;
+
+        $ride = Ride::findOrFail($rideId);
+
+        // Calculate the price based on pass or ticket
+        $price = $isPass ? ($ride->price * 4) : $ride->price;
+
+        // Check if user has sufficient balance
+        if ($user->bank < $price) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Insufficient balance.'
+            ], 400);
+        }
+
+        // Deduct the amount from user balance
+        $user->bank -= $price;
+        $user->save();
+
+        // Create booking
+        $booking = new Booking();
+        $booking->user_id = $user->id;
+        $booking->ride_id = $rideId;
+        $booking->create_date = now(); // For ticket, purchase time
+        $booking->expire_date = $isPass ? now()->addHours(5) : $ride->arrival_date; // For pass, expire in 5 hours, for ticket, expire on arrival date
+        $booking->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Booking successful.'
         ]);
     }
 }
