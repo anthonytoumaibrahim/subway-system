@@ -22,7 +22,9 @@
   justify-content: space-between;
   border-radius: 10px;
 }
+.chat-users .card:hover,
 .chat-users .card-active {
+  cursor: pointer;
   background-color: var(--primary-col);
 }
 .chat-messages {

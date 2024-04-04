@@ -14,6 +14,7 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 });
 
 Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
     Route::post('/send-coin-request', 'sendCoinRequest');
