@@ -10,6 +10,11 @@
 .single-station-image{
   width: 100%;
   margin-bottom: 50px;
+  min-width: 170px;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center;
+
 }
 
 .purshace-btn{
@@ -24,6 +29,8 @@
 .ride-wrapper{
   padding: 10px;
   border-radius: 10px;
+  flex-wrap: wrap;
+  min-width: 170px;
 
 }
 
@@ -50,3 +57,4 @@
 .ticket-type-switch{
   margin-bottom: 15px;
 }
+

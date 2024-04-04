@@ -47,6 +47,7 @@ const Signup = ({
 
         <Input
           id="password"
+          type="password"
           placeholder={"*******"}
           label={"Password"}
           handleInputChange={handleInputChange}
@@ -58,6 +59,7 @@ const Signup = ({
         <div className="error-div">
           <Input
             id="confirm_password"
+            type="password"
             placeholder={"*******"}
             label={"Confirm Password"}
             handleInputChange={handleInputChange}

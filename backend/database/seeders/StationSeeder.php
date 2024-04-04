@@ -35,10 +35,8 @@ class StationSeeder extends Seeder
             "name" => "Tyre Station",
             "image" => "https://unsplash.com/photos/qZ6if8WXl7E/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bWV0cm98ZW58MHx8fHwxNzEyMDk0NDYyfDA&force=true&w=640",
             "status" => "active",
-            "longtitude" => 35.2100835053628,
-            "latitude" => 33.26608751357015,
-            "latitude" => 33.85529828408344,
-            "longtitude" => 35.53719215453546,
+            "latitude" => 33.267521368965554,
+            "longtitude" => 35.20837161696531,
             "manager_id" => 2
         ]);
     }

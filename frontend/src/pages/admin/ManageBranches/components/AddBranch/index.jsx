@@ -18,31 +18,32 @@ import { sendRequest } from "../../../../../core/tools/remote/request";
 import { toast } from "react-toastify";
 
 const AddBranch = ({ updateStations = () => {} }) => {
-  const [showMap, setShowMap] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [branchInfo, setBranchInfo] = useState({
+  const initialBranchInfoState = {
     name: "",
     email: "",
     lat: "",
     long: "",
     image: "",
-  });
+  };
+  const [showMap, setShowMap] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [branchInfo, setBranchInfo] = useState(initialBranchInfoState);
 
   const buttonRef = useRef(null);
 
   const handleBranchInfoUpdate = ({
-    name = null,
-    email = null,
-    lat = null,
-    long = null,
-    image = null,
+    name = undefined,
+    email = undefined,
+    lat = undefined,
+    long = undefined,
+    image = undefined,
   }) => {
     setBranchInfo({
-      name: name ? name : branchInfo.name,
-      email: email ? email : branchInfo.email,
-      lat: lat ? lat : branchInfo.lat,
-      long: long ? long : branchInfo.long,
-      image: image ? image : branchInfo.image,
+      name: name !== undefined ? name : branchInfo.name,
+      email: email !== undefined ? email : branchInfo.email,
+      lat: lat !== undefined ? lat : branchInfo.lat,
+      long: long !== undefined ? long : branchInfo.long,
+      image: image !== undefined ? image : branchInfo.image,
     });
   };
 
@@ -62,7 +63,10 @@ const AddBranch = ({ updateStations = () => {} }) => {
         const { success, message, station } = response.data;
         if (success === true) {
           updateStations(station);
+          setBranchInfo(initialBranchInfoState);
+          return;
         }
+        toast.error(message ?? "Sorry, something went wrong.");
       })
       .catch((error) => {
         const { errors, message } = error.response.data;
@@ -85,12 +89,14 @@ const AddBranch = ({ updateStations = () => {} }) => {
             type="text"
             placeholder="Name"
             className="admin-input"
+            value={branchInfo.name}
             onChange={(e) => handleBranchInfoUpdate({ name: e.target.value })}
           />
           <input
             type="email"
             placeholder="Manager Email"
             className="admin-input"
+            value={branchInfo.email}
             onChange={(e) => handleBranchInfoUpdate({ email: e.target.value })}
           />
         </div>
@@ -120,11 +126,11 @@ const AddBranch = ({ updateStations = () => {} }) => {
               placeholder="Latitude"
               className="admin-input"
               value={branchInfo.lat}
-              onChange={(e) =>
+              onChange={(e) => {
                 handleBranchInfoUpdate({
                   lat: e.target.value,
-                })
-              }
+                });
+              }}
             />
           </div>
         </div>

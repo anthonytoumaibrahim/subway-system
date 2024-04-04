@@ -1,67 +1,135 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 80px;
+  background-color: var(--dark-gray-col);
+  position: relative;
+}
+
+.site-header .hamburger-btn {
+  width: 40px;
+  filter: invert();
+  display: none;
+  cursor: pointer;
+}
+.site-header .hamburger-btn:hover {
+  opacity: 0.5;
+}
+
 .logo {
   font-size: 2rem;
 }
 
-.header-nav{
+.header-nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-nav .links {
+  margin: auto;
+  display: flex;
   gap: 2.5rem;
 }
 
-.header-nav > a{
+.header-nav .links > a {
   color: #d9d9d9;
   font-size: 1.25rem;
   text-decoration: none;
-  border-bottom:  3px solid rgba(0, 0, 0, 0);
-
-
+  border-bottom: 3px solid rgba(0, 0, 0, 0);
 }
 
-.header-nav > a:hover{
+.header-nav .links > a:hover {
   border-bottom: 2px solid var(--primary-col);
 }
 
-.header-nav > a:not(.active){
-  transition: border-bottom .2s ease;
+.header-nav .links > a:not(.header-active) {
+  transition: border-bottom 0.2s ease;
 }
 
-.header-nav > .active{
+.header-nav .links > .header-active {
   border-bottom: 3px solid var(--primary-col) !important;
 }
 
-.header{
-  padding: 20px 80px;
-}
-
-.reg-btn{
+.reg-btn {
   padding: 7px 20px;
   font-size: 1.5rem;
   min-width: 8rem;
-  border-radius: 5PX ;
+  border-radius: 5px;
   border: none;
   outline: none;
   min-width: fit-content;
-
 }
 
-.reg-btn:hover{
+.reg-btn:hover {
   opacity: 0.9;
   cursor: pointer;
 }
 
-.register-btns{
+.register-btns {
+  display: flex;
   gap: 0.5rem;
 }
 
-.signup-btn{
+.signup-btn {
   border: 3px solid var(--primary-col);
   background-color: transparent;
 }
-
-.profile-image{
-  border-radius: 25px;
-
+.profile-image-link {
+  position: absolute;
+  left: -100px;
+  line-height: 0;
+}
+.profile-image-link .profile-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+.profile-image {
+  border-radius: 100px;
 }
 
-.profile-image:hover{
+.profile-image:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.profile-logout {
+  gap: 30px;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: black;
+    padding: 20px;
+    flex-direction: column;
+    z-index: 5;
+  }
+  .header-nav .links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+  .profile-image-link {
+    position: unset;
+  }
+  .profile-logout {
+    flex-direction: column;
+  }
 }
