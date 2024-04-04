@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(StationSeeder::class);
+        $this->call(FacilitySeeder::class);
         $this->call(RideSeeder::class);
         $this->call(CoinRequestSeeder::class);
         $this->call(ChatSeeder::class);
