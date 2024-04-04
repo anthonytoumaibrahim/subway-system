@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger("ride_id");
-            $table->foreign("ride_id")->references("id")->on("stations")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign("ride_id")->references("id")->on("rides")->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

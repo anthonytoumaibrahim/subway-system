@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         $user = User::find(Auth::id());
         $request->validate([
-            "image" => "required"
+            "image" => "required|image"
         ]);
         $image_file = $request->file("image");
         // Store image

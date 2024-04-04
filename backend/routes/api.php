@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\ManagerAuth;
@@ -14,6 +15,7 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 });
 
 Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
     Route::get('/get-stations', 'getStations');
@@ -22,6 +24,11 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::get("/user-rides", "getUserRides");
     Route::post("/book-ride", "bookRide");
     Route::post('/send-coin-request', 'sendCoinRequest');
+    Route::prefix('/chat')->controller(ChatController::class)->group(function () {
+        Route::get('/get-stations', 'getStations');
+        Route::post('/get-chats', 'getChats');
+        Route::post('/send-message', 'sendMessage');
+    });
 });
 
 Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->controller(AdminController::class)->group(function () {

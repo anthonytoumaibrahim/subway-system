@@ -20,10 +20,12 @@ const CoinRequestForm = () => {
           toast.error(message);
           return;
         }
+        setAmount("");
         toast.success("Sent request successfully.");
       })
       .catch((error) => {
-        toast.error("Sorry, something went wrong.");
+        const { message } = error.response.data;
+        toast.error(message ?? "Sorry, something went wrong.");
       })
       .finally(() => {
         buttonRef.current.disabled = false;
@@ -41,10 +43,7 @@ const CoinRequestForm = () => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <button
-        className="reg-btn bg-primary font-bold white text-center"
-        ref={buttonRef}
-      >
+      <button className="admin-button admin-button-primary" ref={buttonRef}>
         Submit
       </button>
     </form>

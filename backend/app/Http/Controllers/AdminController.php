@@ -9,6 +9,7 @@ use App\Models\Invitation;
 use App\Models\Ride;
 use App\Models\Station;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -20,15 +21,45 @@ class AdminController extends Controller
         $users_count = User::count();
         $branches_count = Station::count();
         $rides_count = Ride::count();
-        // $revenue_count = User::get()->map(function ($user) {
-        //     return $user->username;
-        // });
-        $revenue_count = Booking::get();
+        $bookings = Booking::with('ride')->get();
+        $revenue_count = $bookings->sum(function ($booking) {
+            return $booking->ride->price;
+        });
+
+        $chart_revenue = Booking::with('ride')->limit(10)->get()->groupBy(function ($booking) {
+            return Carbon::parse($booking->create_date)->format('Y-m-d');
+        })->map(function ($date) {
+            return $date->sum(function ($booking) {
+                return $booking->ride->price;
+            });
+        });
+
+        // Get last 10 days for React Charts labels
+        $dates = [];
+        for ($i = 9; $i >= 0; $i--) {
+            array_push($dates, Carbon::now()->subDays($i)->toDateString());
+        }
+
+        $users = User::limit(10)->get()->groupBy(function ($user) {
+            return Carbon::parse($user->created_at)->format('Y-m-d');
+        })->map(function ($date) {
+            return $date->count(function ($user) {
+                return $user;
+            });
+        });;
+
         return response()->json([
-            'users_count' => $users_count,
-            'branches_count' => $branches_count,
-            'rides_count' => $rides_count,
-            'revenue_count' => $revenue_count
+            'counts' => [
+                'users' => $users_count,
+                'branches' => $branches_count,
+                'rides' => $rides_count,
+                'revenue' => $revenue_count
+            ],
+            'chart_data' => [
+                'labels' => $dates,
+                'revenue' => $chart_revenue,
+                'users' => $users
+            ]
         ]);
     }
 
@@ -47,7 +78,7 @@ class AdminController extends Controller
             "email" => "required|email",
             "latitude" => "required",
             "longtitude" => "required",
-            "image" => "required"
+            "image" => "required|image"
         ]);
         $name = $request->input("name");
         $email = $request->input("email");
