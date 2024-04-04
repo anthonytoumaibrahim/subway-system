@@ -17,8 +17,8 @@ return new class extends Migration
             $table->dateTime("expire_date");
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger("station_id");
-            $table->foreign("station_id")->references("id")->on("stations")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger("ride_id");
+            $table->foreign("ride_id")->references("id")->on("rides")->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
