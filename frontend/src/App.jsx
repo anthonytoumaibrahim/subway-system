@@ -10,7 +10,6 @@ import "./styles/utilities.css";
 // User Pages
 import Home from "./pages/users/Home";
 import MyRides from "./pages/users/MyRides";
-import Coins from "./pages/users/Coins";
 import Chat from "./pages/users/Chat";
 import Station from "./pages/users/Station";
 import Profile from "./pages/users/Profile";
@@ -65,11 +64,38 @@ const App = () => {
         <Routes>
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
-            <Route path="my-rides" element={<MyRides />} />
-            <Route path="station/:id" element={<Station />} />
-            <Route path="coins" element={<Coins />} />
-            <Route path="chat" element={<Chat />} />
-            <Route path="profile" element={<Profile />} />
+            <Route
+              path="my-rides"
+              element={
+                <ProtectedRoute role={1}>
+                  <MyRides />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="station/:id"
+              element={
+                <ProtectedRoute role={1}>
+                  <Station />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="chat"
+              element={
+                <ProtectedRoute role={1}>
+                  <Chat />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute role={1}>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route
             path="/admin"
