@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function getStations()
     {
-        $stations = Station::get();
+        $stations = Station::where("status", "active")->get();
         return response()->json([
             "status" => "success",
             "stations" => $stations
@@ -94,7 +94,7 @@ class UserController extends Controller
         return response()->json([
             'status' => 'success',
             'rides' => $rides
-]);
+        ]);
     }
 
     public function getStationRides(Request $req)
@@ -110,7 +110,7 @@ class UserController extends Controller
     }
 
     public function bookRide(Request $req)
-    {   
+    {
         $user = User::findOrFail(Auth::id());
         $rideId = $req->ride_id;
         $isPass = $req->is_pass;
