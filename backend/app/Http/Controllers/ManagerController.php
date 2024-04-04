@@ -14,7 +14,7 @@ class ManagerController extends Controller
     public function getStationInfo(Request $req){
     
         $id=$req->id;
-        $station = Station::with('facilities:id,name')->find($id);
+        $station = Station::with('Facilities:id,name')->find($id);
         if (!$station) {
             return response()->json([
                 'error' => true,
@@ -35,4 +35,13 @@ class ManagerController extends Controller
           
         ]);
     }
+    public function updateStationInfo(Request $req){
+
+
+        
+    }
+
+
+
+
 }
