@@ -87,7 +87,8 @@ class ManagerController extends Controller
             "departure_date" => $req->departure_date,
             "arrival_date" => $req->arrival_date,
             "price" => $req->price,
-            "destination" => $req->$destination
+            "departure_station_id" => $req->$destination,
+            "arrival_station_id" => $req->$destination
 
         ]);
         return response()->json([

@@ -60,9 +60,12 @@ class ChatController extends Controller
         $message = $request->message;
         $station_id = $request->station_id;
 
+        $station = Station::findOrFail($station_id);
+
         $chat = new Chat();
         $chat->message = $message;
         $chat->sender = $user_id;
+        $chat->receiver = $station->manager_id;
         $chat->station_id = $station_id;
         $chat->saveOrFail();
 
