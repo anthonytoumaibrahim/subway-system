@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('message');
             $table->unsignedBigInteger('station_id');
             $table->unsignedBigInteger('sender');
-            $table->unsignedBigInteger('receiver');
+            $table->unsignedBigInteger('receiver')->nullable();
             $table->timestamps();
 
             $table->foreign('station_id')->references('id')->on('stations')->cascadeOnDelete()->cascadeOnUpdate();

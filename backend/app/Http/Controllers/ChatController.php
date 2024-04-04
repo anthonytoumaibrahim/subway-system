@@ -48,4 +48,27 @@ class ChatController extends Controller
             'chats' => $mergedChats
         ]);
     }
+
+    public function sendMessage(Request $request)
+    {
+        $request->validate([
+            'message' => 'required|max:600',
+            'station_id' => 'required|exists:stations,id'
+        ]);
+
+        $user_id = Auth::id();
+        $message = $request->message;
+        $station_id = $request->station_id;
+
+        $chat = new Chat();
+        $chat->message = $message;
+        $chat->sender = $user_id;
+        $chat->station_id = $station_id;
+        $chat->saveOrFail();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Chat has been sent successfully."
+        ]);
+    }
 }

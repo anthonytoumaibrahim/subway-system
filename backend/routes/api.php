@@ -22,6 +22,7 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::prefix('/chat')->controller(ChatController::class)->group(function () {
         Route::get('/get-stations', 'getStations');
         Route::post('/get-chats', 'getChats');
+        Route::post('/send-message', 'sendMessage');
     });
 });
 
