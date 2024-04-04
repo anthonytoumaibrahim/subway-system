@@ -31,7 +31,19 @@ Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->
     Route::get('/get-stationInfo',[ManagerController::class,'getStationInfo']);
 });
 Route::get('/get-stationInfo',[ManagerController::class,'getStationInfo']);
+Route::get('/get-rides',[ManagerController::class,'getRideInfo']);
+Route::post('/update-stationInfo',[ManagerController::class,'updateStationInfo']);
+Route::post('/update-rides',[ManagerController::class,'updateRideInfo']);
+Route::post('/create-rides',[ManagerController::class,'createRide']);
+
+
+
+
+
+
+
+
 
 Route::get('/get-stations', [UserController::class, 'getStations']);
-
 Route::get("/user-rides", [UserController::class, "getUserRides"]);
+

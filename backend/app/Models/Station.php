@@ -16,7 +16,6 @@ class Station extends Model
     public function manager()
     {
         return $this->hasOne(User::class, 'id', 'manager_id');
-    
     }
 
     public function facilities()
