@@ -20,6 +20,7 @@ const CoinRequestForm = () => {
           toast.error(message);
           return;
         }
+        setAmount("");
         toast.success("Sent request successfully.");
       })
       .catch((error) => {
@@ -41,10 +42,7 @@ const CoinRequestForm = () => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <button
-        className="reg-btn bg-primary font-bold white text-center"
-        ref={buttonRef}
-      >
+      <button className="admin-button admin-button-primary" ref={buttonRef}>
         Submit
       </button>
     </form>

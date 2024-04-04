@@ -18,15 +18,16 @@ import { sendRequest } from "../../../../../core/tools/remote/request";
 import { toast } from "react-toastify";
 
 const AddBranch = ({ updateStations = () => {} }) => {
-  const [showMap, setShowMap] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [branchInfo, setBranchInfo] = useState({
+  const initialBranchInfoState = {
     name: "",
     email: "",
     lat: "",
     long: "",
     image: "",
-  });
+  };
+  const [showMap, setShowMap] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [branchInfo, setBranchInfo] = useState(initialBranchInfoState);
 
   const buttonRef = useRef(null);
 
@@ -62,7 +63,10 @@ const AddBranch = ({ updateStations = () => {} }) => {
         const { success, message, station } = response.data;
         if (success === true) {
           updateStations(station);
+          setBranchInfo(initialBranchInfoState);
+          return;
         }
+        toast.error(message ?? "Sorry, something went wrong.");
       })
       .catch((error) => {
         const { errors, message } = error.response.data;
