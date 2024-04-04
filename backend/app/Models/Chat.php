@@ -12,22 +12,23 @@ class Chat extends Model
     protected $fillable = [
         "message",
         "sender",
+        "receiver",
         "station_id",
         "created_at"
     ];
 
     public function station()
     {
-        return $this->belongsTo(Station::class, 'id', 'station_id');
+        return $this->belongsTo(Station::class, 'station_id', 'id');
     }
 
     public function sender()
     {
-        return $this->belongsTo(User::class, 'id', 'sender');
+        return $this->belongsTo(User::class, 'sender', 'id');
     }
 
     public function receiver()
     {
-        return $this->belongsTo(User::class, 'id', 'receiver');
+        return $this->belongsTo(User::class, 'receiver', 'id');
     }
 }

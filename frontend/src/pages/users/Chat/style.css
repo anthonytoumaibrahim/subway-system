@@ -58,7 +58,8 @@
   padding: 5px 15px;
   border-radius: 10px;
   background-color: #212121;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 0.875rem;
 }
 .message-form {
