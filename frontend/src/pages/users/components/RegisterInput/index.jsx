@@ -3,6 +3,7 @@ import "./style.css";
 
 const Input = ({
   id,
+  type = "text",
   value,
   field,
   placeholder,
@@ -18,7 +19,7 @@ const Input = ({
         className={`bg-dark-gray-col ${
           error ? "red-border" : "black-border"
         } white`}
-        type="text"
+        type={type}
         placeholder={`${placeholder}`}
         id={`${id}`}
         onChange={(e) => handleInputChange(e.target.value, field)}

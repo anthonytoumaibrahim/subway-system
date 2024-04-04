@@ -18,7 +18,7 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
-    Route::get('/get-stations', 'getStations');
+    Route::get('/get-stations', 'getStations')->withoutMiddleware('auth:api');
     Route::get("/user-rides", "getUserRides");
     Route::get("/station-rides", "getStationRides");
     Route::get("/user-rides", "getUserRides");

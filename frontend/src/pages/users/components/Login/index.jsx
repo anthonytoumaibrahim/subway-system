@@ -37,6 +37,7 @@ const Login = ({
         <div className="error-div">
           <Input
             id="password"
+            type="password"
             placeholder={"*******"}
             label={"Password"}
             handleInputChange={handleInputChange}
