@@ -16,6 +16,11 @@ Route::prefix('/auth')->middleware('api')->group(function () {
 Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group(function () {
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
+    Route::get('/get-stations', 'getStations');
+    Route::get("/user-rides", "getUserRides");
+    Route::get("/station-rides", "getStationRides");
+    Route::get("/user-rides", "getUserRides");
+    Route::post("/book-ride", "bookRide");
     Route::post('/send-coin-request', 'sendCoinRequest');
 });
 
@@ -32,13 +37,3 @@ Route::prefix('/admin')->middleware(['api', 'auth:api', AdminAuth::class])->cont
 Route::prefix('/manager')->middleware(['api', 'auth:api', ManagerAuth::class])->group(function () {
     Route::get('/get-stationInfo', [AdminController::class, 'getStationInfo']);
 });
-
-Route::get('/get-stations', [UserController::class, 'getStations']);
-
-Route::get("/user-rides", [UserController::class, "getUserRides"]);
-
-Route::get("/station-rides", [UserController::class, "getStationRides"]);
-
-Route::get("/user-rides", [UserController::class, "getUserRides"]);
-
-Route::post("/book-ride", [UserController::class, "bookRide"]);
