@@ -38,7 +38,7 @@ const Home = () => {
       <UserMap stations={stations} />
 
       <Guidline />
-      {/* <Reviews/> */}
+      <Reviews/>
     </div>
   );
 };
