@@ -1,9 +1,7 @@
 // React stuff
-import { forwardRef, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../../core/contexts/AuthContext";
-import { removeLocalUser } from "../../../../core/tools/local/user";
-import { toast } from "react-toastify";
+import { forwardRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useUser } from "../../../../core/hooks/useUser";
 
 // Styles
 import "./styles.css";
@@ -12,17 +10,8 @@ import "./styles.css";
 import close_icon from "../../../../assets/icons/admin-icons/close.svg";
 
 const Sidebar = forwardRef((props, ref) => {
-  const { user, setUser } = useContext(AuthContext);
+  const { logout } = useUser();
   const location = useLocation();
-  const navigate = useNavigate();
-  const logout = () => {
-    removeLocalUser();
-    setUser({
-      token: "",
-    });
-    toast.success("You have been logged out successfully.");
-    navigate("/");
-  };
   return (
     <aside className="admin-aside slideInLeft" id="admin-sidebar" ref={ref}>
       <img

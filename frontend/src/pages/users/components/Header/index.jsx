@@ -28,7 +28,7 @@ import Button from "../../../../components/Button";
 const Header = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn, logout } = useUser();
   const initialCredentials = {
     username: "",
     email: "",
@@ -166,14 +166,6 @@ const Header = () => {
         const { errors, message } = error.response.data;
         setErrorMessage(message ?? "Sorry, something went wrong.");
       });
-  };
-
-  const logout = () => {
-    removeLocalUser();
-    setUser({
-      token: "",
-    });
-    navigate("/");
   };
 
   return (

@@ -12,8 +12,13 @@ class Chat extends Model
     protected $fillable = [
         "message",
         "sender",
-        "receiver"
+        "station_id"
     ];
+
+    public function station()
+    {
+        return $this->belongsTo(Station::class, 'id', 'station_id');
+    }
 
     public function sender()
     {

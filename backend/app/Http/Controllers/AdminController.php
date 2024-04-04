@@ -47,7 +47,7 @@ class AdminController extends Controller
             "email" => "required|email",
             "latitude" => "required",
             "longtitude" => "required",
-            "image" => "required"
+            "image" => "required|image"
         ]);
         $name = $request->input("name");
         $email = $request->input("email");

@@ -1,5 +1,5 @@
 // React stuff
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { sendRequest } from "../../../core/tools/remote/request";
 import { toast } from "react-toastify";
 
@@ -44,13 +44,15 @@ const Profile = () => {
   };
 
   const handleImageUpload = (file) => {
+    uploadBtnRef.current.classList.add("hidden");
     const data = new FormData();
     data.append("image", file);
     sendRequest("POST", "/upload-pfp", data)
       .then((response) => {
-        const { success, image } = response.data;
+        const { success, message, image } = response.data;
         if (!success) {
-          throw new Error("Failed to upload image.");
+          toast.error("Sorry, something went wrong: " + message);
+          return;
         }
         setProfileInfo({
           ...profileInfo,
@@ -66,9 +68,15 @@ const Profile = () => {
         });
       })
       .catch((error) => {
-        toast.error("Sorry, something went wrong: " + error);
+        const { message, errors } = error.response.data;
+        toast.error("Sorry, something went wrong: " + message);
+      })
+      .finally(() => {
+        uploadBtnRef.current.classList.remove("hidden");
       });
   };
+
+  const uploadBtnRef = useRef(null);
 
   useEffect(() => {
     getProfile();
@@ -88,6 +96,7 @@ const Profile = () => {
           <label
             htmlFor="upload_image"
             className="reg-btn bg-primary font-bold white text-center"
+            ref={uploadBtnRef}
           >
             Upload Image
           </label>
