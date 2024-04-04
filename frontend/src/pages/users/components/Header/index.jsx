@@ -19,7 +19,7 @@ import {
   setLocalUser,
 } from "../../../../core/tools/local/user";
 
-import profileImage from "../../../../assets/images/header/profileImage.jpg";
+import profileImage from "../../../../assets/icons/admin-icons/subway.svg";
 
 // Toastify
 import { toast } from "react-toastify";
@@ -140,9 +140,10 @@ const Header = () => {
         if (status === "success") {
           toast.success("You have been logged in successfully.");
           const token = response.data.authorization.token;
-          const { role_id } = response.data.user;
+          const { image_url, role_id } = response.data.user;
           const userObject = {
             token: token,
+            avatar: image_url,
           };
           setUser(userObject);
           setLocalUser(userObject);
@@ -207,13 +208,18 @@ const Header = () => {
       </h1>
 
       <nav className="flex header-nav">
-        <Link to="/" className={`${location.pathname === "/" ? "header-active" : ""}`}>
+        <Link
+          to="/"
+          className={`${location.pathname === "/" ? "header-active" : ""}`}
+        >
           Home
         </Link>
 
         <Link
           to="/my-rides"
-          className={`${location.pathname === "/my-rides" ? "header-active" : ""}`}
+          className={`${
+            location.pathname === "/my-rides" ? "header-active" : ""
+          }`}
         >
           My Rides
         </Link>
@@ -240,7 +246,7 @@ const Header = () => {
               <img
                 className="profile-image"
                 width={70}
-                src={profileImage}
+                src={user.avatar ?? profileImage}
                 alt="profile"
               />
             </Link>

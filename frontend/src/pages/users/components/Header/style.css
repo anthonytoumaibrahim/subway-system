@@ -57,6 +57,11 @@
   left: -100px;
   line-height: 0;
 }
+.profile-image-link .profile-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
 .profile-image {
   border-radius: 100px;
 }

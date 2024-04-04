@@ -40,6 +40,7 @@ const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
     token: localUser.token ?? "",
+    avatar: localUser.avatar ?? null,
   });
 
   return (

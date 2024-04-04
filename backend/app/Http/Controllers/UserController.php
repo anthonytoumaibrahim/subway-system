@@ -82,18 +82,16 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getUserBookedRides(Request $req)
+    public function getUserRides()
     {
-        $user = User::findOrFail($req->id);
+        $user = User::findOrFail(Auth::id());
         
-        // Retrieve all bookings for the user
-        $bookings = $user->bookings()->with('ride.departureStation')->get();
+        $bookings = $user->bookings()->with(['ride.departureStation:id,name,image', 'ride.arrivalStation:id,name'])->get();
         
         // Extract ride details with departure station
         $rides = $bookings->map(function ($booking) {
             return [
                 'ride' => $booking->ride,
-                'departure_station' => $booking->ride->departureStation
             ];
         });
 
@@ -106,11 +104,49 @@ class UserController extends Controller
     public function getStationRides(Request $req)
     {
         $station = Station::findOrFail($req->id);
-        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req -> id], ["departure_date", ">=", Carbon::now()->toDateTimeString()]])->orderBy("departure_date", "DESC")->get();
+        $date = Carbon::now()->format('Y-m-d H:i:s');
+        $stationRides = Ride::with(["arrivalStation:id,name"])->where([["departure_station_id", $req->id], ["departure_date", ">=", $date]])->orderBy("departure_date", "DESC")->get();
         return response()->json([
             "status" => "success",
             "station" => ["name" => $station->name, "image" => $station->image],
             "stationRides" => $stationRides
+        ]);
+    }
+
+    public function bookRide(Request $req)
+    {   
+        $user = User::findOrFail(Auth::id());
+        $rideId = $req->ride_id;
+        $isPass = $req->is_pass;
+
+        $ride = Ride::findOrFail($rideId);
+
+        // Calculate the price based on pass or ticket
+        $price = $isPass ? ($ride->price * 4) : $ride->price;
+
+        // Check if user has sufficient balance
+        if ($user->bank < $price) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Insufficient balance.'
+            ], 400);
+        }
+
+        // Deduct the amount from user balance
+        $user->bank -= $price;
+        $user->save();
+
+        // Create booking
+        $booking = new Booking();
+        $booking->user_id = $user->id;
+        $booking->ride_id = $rideId;
+        $booking->create_date = now(); // For ticket, purchase time
+        $booking->expire_date = $isPass ? now()->addHours(5) : $ride->arrival_date; // For pass, expire in 5 hours, for ticket, expire on arrival date
+        $booking->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Booking successful.'
         ]);
     }
 }
