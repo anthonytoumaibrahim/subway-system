@@ -24,14 +24,6 @@ class ManagerController extends Controller
             ], 404);
         }
 
-        // $name = $station->name;
-        // $opening = $station->opening;
-        // $closing = $station->closing;
-        // $status = $station->status;
-        // $facilities= $station->facility->where;
-
-
-
         return response()->json([
             'success' => true,
             'station' => $station,
