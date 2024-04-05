@@ -1,24 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
+
+import { sendRequest } from '../../../../../core/tools/remote/request'
+
 import UserReview from '../../../components/UserReview'
+import { requestMethods } from '../../../../../core/enums/requestMethods'
+
+
 const Reviews = () => {
+
+  const [reviews, setReviews] = useState([])
+
+
+  useEffect(()=>{
+    sendRequest(requestMethods.GET, "/get-reviews?limit=6", )
+    .then((response)=>{
+      if(response.data.status === "success"){
+        setReviews(response.data.reviews)
+      }
+    })
+  },[])
+
   return (
-    <div class="flex column center reviews-container white user-container">
+
+    <div className="flex column center reviews-container white user-container">
       <h1>Let Our Customers Speak for Us</h1>
-      <div class="flex  reviews-wrapper">
+      <div className="flex  reviews-wrapper">
+      {reviews && reviews.map((review)=>(
         <UserReview
-        // key={}
-        // userName={}
-        // profileImage={} 
-        // rating={}
-        // reviewText={} 
-        // stationName={}
+        key={review.id}
+        userName={review.user.username}
+        profileImage={review.user.image_url} 
+        rating={review.rating}
+        reviewText={review.text} 
+        stationName={review.ride.departure_station.name}
         />
-        <UserReview/>
-        <UserReview/>
-        <UserReview/>
-        <UserReview/>
-        <UserReview/>
+      ))}
+
       </div>
     </div>
   )

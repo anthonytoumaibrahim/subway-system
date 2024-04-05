@@ -20,6 +20,7 @@ Route::middleware(['api', 'auth:api'])->controller(UserController::class)->group
     Route::get('/get-profile', 'getProfile');
     Route::post('/upload-pfp', 'uploadPfp');
     Route::get('/get-stations', 'getStations')->withoutMiddleware('auth:api');
+    Route::get('/get-reviews', 'getReviews')->withoutMiddleware('auth:api');
     Route::get("/user-rides", "getUserRides");
     Route::get("/station-rides", "getStationRides");
     Route::get("/user-rides", "getUserRides");

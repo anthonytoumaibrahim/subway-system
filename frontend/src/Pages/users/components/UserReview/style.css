@@ -35,13 +35,17 @@
   max-width: fit-content;
 }
 
-.review-flight{
+.review-station{
   font-size: 14px;
 }
 
 .review-card-holder{
   display: inline-block;
   animation: scroll 8s linear infinite;
+}
+
+.review-text{
+  word-break: break-all;
 }
 
 @keyframes scroll {
@@ -55,3 +59,4 @@
   }
   
 }
+
