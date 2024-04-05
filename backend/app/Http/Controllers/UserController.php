@@ -27,6 +27,8 @@ class UserController extends Controller
         ]);
     }
 
+ 
+
     public function uploadPfp(Request $request)
     {
         $user = User::find(Auth::id());
@@ -148,7 +150,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function addReview(Request $req){
+    public function addReview(Request $req)
+    {
 
         $userId = Auth::id();
         $rideId = $req->ride_id;
@@ -168,7 +171,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function getReviews(Request $req){
+    public function getReviews(Request $req)
+    {
 
 
         $limit = $req->input('limit', null);
@@ -186,5 +190,4 @@ class UserController extends Controller
             'reviews' => $reviews
         ]);
     }
-
 }

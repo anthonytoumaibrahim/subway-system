@@ -68,7 +68,7 @@ const UserMap = () => {
   };
 
   return (
-    <div className="map-container user-container">
+    <div className="map-container user-container" id="map-container">
       {!geoState.loading && !geoState.error && showNearest && (
         <div className="nearest-station">
           <img

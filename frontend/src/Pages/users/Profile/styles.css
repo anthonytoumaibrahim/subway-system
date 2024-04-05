@@ -39,9 +39,9 @@
   display: none;
 }
 .profile-image-full {
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
   object-fit: cover;
   object-position: center;
 }

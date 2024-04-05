@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RideSeeder::class);
         $this->call(CoinRequestSeeder::class);
         $this->call(ChatSeeder::class);
+        $this->call(ReviewSeeder::class);
         // User::factory(10)->create();
 
         // User::factory()->create([

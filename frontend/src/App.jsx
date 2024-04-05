@@ -80,7 +80,14 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="chat" element={<Chat />} />
+            <Route
+              path="chat"
+              element={
+                <ProtectedRoute role={1}>
+                  <Chat />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="profile"
               element={

@@ -94,7 +94,7 @@
   object-fit: cover;
 }
 .profile-image {
-  border-radius: 100px;
+  border-radius: 50%;
 }
 
 .profile-image:hover {

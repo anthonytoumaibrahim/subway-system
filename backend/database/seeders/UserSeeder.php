@@ -32,5 +32,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('anthony123'),
             'role_id' => 3
         ]);
+        User::create([
+            'username' => 'Samantha',
+            'email' => 'samantha@gmail.com',
+            'password' => Hash::make('samantha123'),
+            'role_id' => 1,
+            'image_url' => 'https://unsplash.com/photos/rDEOVtE7vOs/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8fHwxNzEyMjIzMDQ1fDA&force=true&w=640'
+        ]);
     }
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 import "./style.css"
 
-import star from "../../../../assets/icons/home/star.svg"       
+import star from "../../../../assets/icons/home/star.svg"
+
+import avatar from "../../../../assets/icons/admin-icons/subway.svg"
 
 const UserReview = ({ userName, profileImage, rating, reviewText, stationName }) => {
   return (
@@ -10,7 +12,7 @@ const UserReview = ({ userName, profileImage, rating, reviewText, stationName })
 
         <div className="flex space-between">
           <div className="flex align-center user-info">
-            <img className="profile" src={profileImage} alt="profile"/>
+            <img className="profile" src={profileImage ?? avatar} alt="profile"/>
             <p>{userName}</p>
           </div>
           <div className='flex column align-end'>
