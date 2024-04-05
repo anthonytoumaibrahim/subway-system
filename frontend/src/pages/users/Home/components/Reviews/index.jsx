@@ -5,9 +5,13 @@ import { sendRequest } from '../../../../../core/tools/remote/request'
 
 import UserReview from '../../../components/UserReview'
 import { requestMethods } from '../../../../../core/enums/requestMethods'
+
+
 const Reviews = () => {
+
   const [reviews, setReviews] = useState([])
-  console.log(reviews)
+
+
   useEffect(()=>{
     sendRequest(requestMethods.GET, "/get-reviews?limit=6", )
     .then((response)=>{

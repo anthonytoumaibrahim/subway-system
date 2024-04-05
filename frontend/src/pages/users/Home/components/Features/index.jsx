@@ -1,6 +1,8 @@
 import React from 'react'
-import FeatureCard from '../FeatureCard'
 import "./style.css"
+
+import FeatureCard from '../FeatureCard'
+
 import hub from "../../../../../assets/icons/home/hub.svg"
 import weelChair from "../../../../../assets/icons/home/weel_chair.svg"
 import eco from "../../../../../assets/icons/home/eco.svg"
