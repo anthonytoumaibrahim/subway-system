@@ -18,13 +18,13 @@
   }
 }
 
-@media (max-width: 1024px){
+@media (max-width: 768px){
   .reviews-wrapper{
     width: calc(100% + 80px);
   }
 }
 
-@media (max-width: 1024px){
+@media (max-width: 480px){
   .reviews-wrapper{
     width: calc(100% + 40px);
   }
