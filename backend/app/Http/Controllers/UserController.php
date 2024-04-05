@@ -172,7 +172,7 @@ class UserController extends Controller
 
         $limit = $req ? $req -> limit : null;
         if ($limit){
-            $reviews = Review::orderBy('rating', 'DESC')->limit(6)->get(); 
+            $reviews = Review::orderBy('rating', 'DESC')->limit($limit)->get(); 
         }
         else{
             $reviews = Review::all();
