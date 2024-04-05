@@ -1,29 +1,28 @@
 import React from 'react'
 import "./style.css"
-import ProfileImage from '../../../../assets/images/header/profileImage.jpg'
+
 import star from "../../../../assets/icons/home/star.svg"       
 
 const UserReview = ({ userName, profileImage, rating, reviewText, stationName }) => {
   return (
-    <div class="review-card-holder">
-      <div class="flex column review-card bg-dark-gray-col">
+    <div className="review-card-holder">
+      <div className="flex column review-card bg-dark-gray-col">
 
-        <div class="flex space-between">
-          <div class="flex align-center user-info">
-            <img class="profile" src={ProfileImage} alt="profile"/>
-            <p>username</p>
+        <div className="flex space-between">
+          <div className="flex align-center user-info">
+            <img className="profile" src={profileImage} alt="profile"/>
+            <p>{userName}</p>
           </div>
-          <div>
-            <div class="flex rating-wrapper-reviews" >
-              <p class="flex avg-rating"> 4.5</p>
+          <div className='flex column align-end'>
+            <div className="flex align-center rating-wrapper-reviews" >
+              <p className="flex avg-rating">{rating}</p>
               <img src={star} height={21} alt="star" />
             </div>
-            <p class="review-flight primary-color">New York</p>
+            <p className="review-station primary-color">{stationName}</p>
           </div>
         </div>
 
-        
-        <p>Smooth booking process, efficient check-in, and pleasant flight experience. Would fly again.</p>
+        <p className='review-text'>{reviewText}</p>
 
       </div>
     </div>

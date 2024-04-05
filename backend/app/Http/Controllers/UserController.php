@@ -170,16 +170,20 @@ class UserController extends Controller
 
     public function getReviews(Request $req){
 
-        $limit = $req ? $req -> limit : null;
-        if ($limit){
-            $reviews = Review::orderBy('rating', 'DESC')->limit($limit)->get(); 
+
+        $limit = $req->input('limit', null);
+
+        $query = Review::query()->with(['user', 'ride.departureStation']);
+
+        if ($limit) {
+            $reviews = $query->limit($limit)->orderByDesc('rating')->get();
+        } else {
+            $reviews = $query->get();
         }
-        else{
-            $reviews = Review::all();
-        }
+
         return response()->json([
             'status' => 'success',
-            'message' => $reviews
+            'reviews' => $reviews
         ]);
     }
 
